@@ -1,4 +1,7 @@
-### JSA Claimant Count
+The following example SPARQL query uses [SWIRRL's](http://www.swirrl.com/) PublishMyData instance: [GM Data Store](http://gmdatastore.org.uk)
+
+
+### Querying JSA claimant counts
 
 This SPARQL query obtains a count of all [Job Seekers Allowance](https://www.gov.uk/jobseekers-allowance) (JSA) claimants in June 2017 by each electoral ward within [Greater Manchester](https://github.com/traffordDataLab/boundaries/blob/master/wards.geojson).
 

@@ -5,7 +5,7 @@ This is the first iteration of the [OGI](http://www.opengovintelligence.eu/) Tra
 
 <img src="https://github.com/traffordDataLab/projects/raw/master/opengovintelligence/apps/ucjsa/screenshot.png" width="800">
 
-< br />
+<br />
 
 To run the app locally execute the following code: 
 

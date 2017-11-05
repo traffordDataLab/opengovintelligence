@@ -124,7 +124,7 @@ server <- function(input, output, session) {
     icons <- awesomeIconList(
       `Jobcentre Plus` = makeAwesomeIcon(icon = "map-marker", library = "glyphicon", markerColor = "green", iconColor = "#FFED00"))
     
-    html_legend <- "<img src='https://trafforddatalab.github.io/assets/logo/trafforddatalab_logo.svg'><svg style='width:40px;height:1px;'><small><a href=https://github.com/traffordDataLab/projects/tree/master/opengovintelligence target=_blank>Source code</a></small>"
+    html_legend <- "<img src='https://trafforddatalab.github.io/assets/logo/trafforddatalab_logo.svg'><svg style='width:40px;height:1px;'><small><a href=https://trafforddatalab.github.io/projects/opengovintelligence/apps/ucjsa_map/ target=_blank>Source code</a></small>"
     
     leafletProxy("map", data = selectedData()) %>%
       clearShapes() %>% clearControls() %>% clearMarkers() %>% 

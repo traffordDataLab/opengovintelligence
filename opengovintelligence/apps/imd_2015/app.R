@@ -121,7 +121,7 @@ server <- function(input, output, session) {
   
   observe({
     pal <- colorFactor(c("#A31A31", "#D23B33", "#EB6F4A", "#FCB562", "#F4D78D", "#D8E9EC", "#AAD1DE", "#75A8C8", "#4D77AE", "#353B91"), domain = 1:10, ordered = TRUE)
-    html_logo <- "<img src='https://trafforddatalab.github.io/assets/logo/trafforddatalab_logo.svg' style='width: 93px;'>&nbsp;<a href='https://trafforddatalab.github.io/assets/theme/leaflet/script.R' target='_blank'>
+    html_logo <- "<img src='https://trafforddatalab.github.io/assets/logo/trafforddatalab_logo.svg' style='width: 93px;'>&nbsp;<a href='https://github.com/traffordDataLab/projects/raw/master/opengovintelligence/apps/imd_2015/app.R' target='_blank'>
     <span style='color:#fc6721;' class='fa fa-code' title='View the source code'></span></a>"
     
     leafletProxy("map", data = lsoa) %>%

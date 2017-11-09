@@ -96,19 +96,19 @@ server <- function(input, output, session) {
       addTiles(urlTemplate = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
                attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://cartodb.com/attributions">CartoDB</a> | <a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2017)</a>',
                group = "CartoDB",
-               options = providerTileOptions(minZoom = 10, maxZoom = 14)) %>% 
+               options = providerTileOptions(minZoom = 10, maxZoom = 16)) %>% 
       addTiles(urlTemplate = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>  | <a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2017)</a>',
                group = "OpenStreetMap",
-               options = providerTileOptions(minZoom = 10, maxZoom = 14)) %>% 
+               options = providerTileOptions(minZoom = 10, maxZoom = 16)) %>% 
       addTiles(urlTemplate = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", 
                attribution = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community | <a href="https://www.ons.gov.uk/methodology/geography/licences"> Contains OS data © Crown copyright and database right (2017)</a>', 
                group = "Satellite",
-               options = providerTileOptions(minZoom = 10, maxZoom = 14)) %>%
+               options = providerTileOptions(minZoom = 10, maxZoom = 16)) %>%
       addTiles(urlTemplate = "", 
                attribution = '<a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2017)</a>',
                group = "No background") %>% 
-      setView(-2.28417866956407, 53.5151885751656, zoom =11) %>% 
+      setView(-2.28417866956407, 53.5151885751656, zoom = 11) %>% 
       addEasyButton(easyButton(icon='fa-home', title='Reset',
                                onClick=JS("function(btn, map){ map.setView([53.5151885751656, -2.28417866956407], 11);}"))) %>% 
       addLayersControl(position = 'topleft',

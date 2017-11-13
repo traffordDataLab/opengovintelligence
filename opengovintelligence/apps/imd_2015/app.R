@@ -35,23 +35,30 @@ la <- cbind(coords, la) %>%
 
 # Plot data ---------------------------
 
-ui <- bootstrapPage(
-  tags$head(tags$style(
-    type = "text/css",
-    "html, body {width: 100%; height: 100%}",
-    "#controls {background-color: white; padding: 0 20px 20px 20px; border-radius: 15px; opacity: 0.85;}",
-    ".legend {white-space: nowrap;}")),
-  leafletOutput("map", width = "100%", height = "100%"),
-  absolutePanel(id = "controls", class = "panel panel-default", fixed = TRUE, draggable = TRUE, top = 10, left = "auto", right = 10, bottom = "auto", width = 320, height = "auto",
-                h4("IMD (2015)"),
-                tags$p("Source:", tags$a(href="https://www.gov.uk/government/statistics/english-indices-of-deprivation-2015", "DCLG")),
-                radioButtons(inputId = "domain",
-                             label = NULL,
-                             choices = c("Index of Multiple Deprivation", "Income", "Employment", "Education, Skills and Training", 
-                                         "Health Deprivation and Disability", "Crime", "Barriers to Housing and Services", "Living Environment"),
-                             selected = "Index of Multiple Deprivation"),
-                hr(),
-                uiOutput("info")))
+ui <- navbarPage(title=div(img(src="https://trafforddatalab.github.io/assets/logo/trafforddatalab_logo.svg", height="25", width="99"),
+                           "OGI - Trafford pilot tool"),
+                 tabPanel(title = "Map",
+                          div(class="shinyContainer",
+                              tags$head(includeCSS("styles_base.css"), includeCSS("styles_shiny.css"), includeCSS("styles_map.css")),
+                              leafletOutput("map", width = "100%", height = "100%"),
+                              absolutePanel(id = "shinyControls", class = "panel panel-default controls", 
+                                            fixed = TRUE, draggable = TRUE,
+                                            h4("IMD (2015)"),
+                                            tags$p("Source:", tags$a(href="https://www.gov.uk/government/statistics/english-indices-of-deprivation-2015", "DCLG")),
+                                            radioButtons(inputId = "domain",
+                                                         label = NULL,
+                                                         choices = c("Index of Multiple Deprivation", "Income", "Employment", "Education, Skills and Training", 
+                                                                     "Health Deprivation and Disability", "Crime", "Barriers to Housing and Services", "Living Environment"),
+                                                         selected = "Index of Multiple Deprivation"),
+                                            hr(),
+                                            uiOutput("info"))
+                              )),
+                tabPanel(title = "Charts"),
+                tabPanel(title = "Data"),
+                tabPanel(title = "About",
+                         fluidRow(column(8, offset = 1, includeMarkdown("about.md"), style = "color:#212121")
+                                  ))
+)
              
 
 server <- function(input, output, session) {
@@ -92,6 +99,7 @@ server <- function(input, output, session) {
   })
   
   output$map <- renderLeaflet({
+    # hide zoom buttons: options = leafletOptions(zoomControl = FALSE)
     leaflet() %>% 
       addTiles(urlTemplate = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
                attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://cartodb.com/attributions">CartoDB</a> | <a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2017)</a>',
@@ -122,8 +130,6 @@ server <- function(input, output, session) {
   
   observe({
     pal <- colorFactor(c("#A31A31", "#D23B33", "#EB6F4A", "#FCB562", "#F4D78D", "#D8E9EC", "#AAD1DE", "#75A8C8", "#4D77AE", "#353B91"), domain = 1:10, ordered = TRUE)
-    html_logo <- "<img src='https://trafforddatalab.github.io/assets/logo/trafforddatalab_logo.svg' style='width: 93px;'>&nbsp;<a href='https://github.com/traffordDataLab/projects/raw/master/opengovintelligence/apps/imd_2015/app.R' target='_blank' style='text-decoration: none;'>
-    <span style='display: block; float: right; width: 28px; height: 28px; margin-top: 1px; text-align: center; color:#fc6721; font-size: 16px; padding-top: 4px; border: 1px solid #e0e0e0; border-radius: 5px;' class='fa fa-code' title='View the source code'></span></a>"
     
     leafletProxy("map", data = lsoa) %>%
       clearShapes() %>% clearControls() %>% clearMarkers() %>% 
@@ -138,8 +144,7 @@ server <- function(input, output, session) {
       addLegend(position = "bottomleft", 
                 colors = c("#A31A31", "#D23B33", "#EB6F4A", "#FCB562", "#F4D78D", "#D8E9EC", "#AAD1DE", "#75A8C8", "#4D77AE", "#353B91"),
                 title = "IMD Deciles (2015)",
-                labels = c("10% most deprived", "2","3","4","5","6","7","8","9", "10% least deprived"), opacity = 0.4) %>%
-      addControl(html = html_logo, position = "bottomright")
+                labels = c("10% most deprived", "2","3","4","5","6","7","8","9", "10% least deprived"), opacity = 0.4)
   })
 }
 

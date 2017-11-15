@@ -44,6 +44,11 @@ la <- st_read("https://github.com/traffordDataLab/boundaries/raw/master/local_au
 jcplus <- read_csv("https://github.com/traffordDataLab/open_data/raw/master/job_centre_plus/jobcentreplus_gm.csv") %>% 
   st_as_sf(crs = 4326, coords = c("lon", "lat"))
 
+# Gambling Premises (Gambling Commission)
+gambling <- read_csv("https://github.com/traffordDataLab/open_data/raw/master/betting_shops/bettingshops_gm.csv") %>% 
+  st_as_sf(crs = 4326, coords = c("lon", "lat"))
+
+
 # Define neighbours for LISA maps ---------------------------
 
 # Create a first order, Queen’s contiguity spatial weights matrix
@@ -206,9 +211,9 @@ server <- function(input, output, session) {
       setView(-2.28417866956407, 53.5151885751656, zoom = 11) %>% 
       addLayersControl(position = 'topleft',
                        baseGroups = c("CartoDB", "OpenStreetMap", "Satellite", "No background"),
-                       overlayGroups = c("Jobcentre Plus"), 
+                       overlayGroups = c("Jobcentre Plus", "Gambling premises"), 
                        options = layersControlOptions(collapsed = TRUE)) %>% 
-      hideGroup(c("Jobcentre Plus")) %>% 
+      hideGroup(c("Jobcentre Plus", "Gambling premises")) %>% 
       htmlwidgets::onRender(
         " function(el, t) {
         var myMap = this;
@@ -219,8 +224,9 @@ server <- function(input, output, session) {
     factpal <- colorFactor(c("#F0F0F0", "#E93F36", "#2144F5", "#9794F8", "#EF9493"),
                            levels = c("Not significant", "High-High", "Low-Low", "Low-High", "High-Low"),
                            ordered = TRUE)
-    icons <- awesomeIconList(
-      `Jobcentre Plus` = makeAwesomeIcon(icon = "map-marker", library = "glyphicon", markerColor = "green", iconColor = "#FFED00"))
+    
+    icon_jcplus <- makeAwesomeIcon(icon = "map-marker", library = "glyphicon", markerColor = "green", iconColor = "#FFED00")
+    icon_gambling <- makeAwesomeIcon(icon = "map-marker", library = "glyphicon", markerColor = "darkpurple", iconColor = "white")
     
     leafletProxy("map", data = filteredData()) %>%
       clearShapes() %>% clearControls() %>% clearMarkers() %>% 
@@ -233,7 +239,8 @@ server <- function(input, output, session) {
                                                       style = list(
                                                         "color"="white",
                                                         "text-shadow" = "-1px -1px 10px #757575, 1px -1px 10px #757575, 1px 1px 10px #757575, -1px 1px 10px #757575"))) %>%
-      addAwesomeMarkers(data = jcplus, popup = ~as.character(name), icon = icons, group = "Jobcentre Plus", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
+      addAwesomeMarkers(data = jcplus, popup = ~as.character(name), icon = icon_jcplus, group = "Jobcentre Plus", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
+      addAwesomeMarkers(data = gambling, popup = ~as.character(name), icon = icon_gambling, group = "Gambling premises", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
       addLegend(position = "bottomleft", colors = c("#F0F0F0", "#E93F36", "#2144F5", "#9794F8", "#EF9493"),
                 labels = 
                   c(paste0("Not significant (", formatC(sum(filteredData()$quad_sig == "Not significant"), format="f", big.mark = ",", digits=0), ")"),

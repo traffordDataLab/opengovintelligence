@@ -20,6 +20,8 @@ The clusters are categorised according to [Anselin 1995](http://onlinelibrary.wi
 
 By hovering over the LSOAs on the map, information such as the electoral ward and local authority it lies within, the value for the indicator chosen and deprivation data is displayed in a moveable panel.
 
+In addition to the datasets which are mapped spatially there are a number of other map options available. Hoving over the layer icon situated under the zoom control (+ - buttons) displays choices for the map backgrounds, such as a satellite and road atlas views, as well as the locations of Jobcentre Plus sites and gambling premises which can be overlayed on the map.
+
 ### Charts
 
 This section allows temporal (time series) data to be displayed and compared for electoral wards, local authorities and the Greater Manchester district as a whole. The data can be displayed for single or multiple areas (checking the multiple box), on single or separate charts (checking the facet box). Simply begin typing into the box provided to add areas and choose them from the options provided.

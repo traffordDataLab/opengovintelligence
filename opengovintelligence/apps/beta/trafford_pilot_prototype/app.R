@@ -322,7 +322,7 @@ server <- function(input, output, session) {
   
   output$downloadData <- downloadHandler(
     filename = function() {
-      paste("data_dowload.csv")
+      paste("data_download.csv")
     },
     content = function(file) {
       write.csv(area_data(), file, row.names = FALSE)

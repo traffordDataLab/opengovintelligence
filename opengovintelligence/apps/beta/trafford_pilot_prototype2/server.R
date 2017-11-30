@@ -9,6 +9,32 @@ server <- function(input, output, session) {
   
   filteredData <- reactive({
     
+    if("Greater Manchester" == input$la){
+      sub <- filter(df, measure == input$measure)
+      lsoa <- GM_lsoa
+      lsoa@data <- left_join(lsoa@data, sub, by = "lsoa11cd")
+      nb <- poly2nb(lsoa, queen = TRUE)
+      lw <- nb2listw(nb)
+      lmoran <- localmoran(lsoa$value, lw)
+      lsoa$s_value <- scale(lsoa$value)  %>% as.vector()
+      lsoa$lag_s_value <- lag.listw(lw, lsoa$s_value)
+      
+      lsoa$quad <- NA
+      lsoa[(lsoa$s_value >= 0 & lsoa$lag_s_value >= 0), "quad"] <- "High-High"
+      lsoa[(lsoa$s_value <= 0 & lsoa$lag_s_value <= 0), "quad"] <- "Low-Low"
+      lsoa[(lsoa$s_value <= 0 & lsoa$lag_s_value >= 0), "quad"] <- "Low-High"
+      lsoa[(lsoa$s_value >= 0 & lsoa$lag_s_value <= 0), "quad"] <- "High-Low"
+      
+      lsoa$quad_sig <- NA
+      lsoa[(lsoa$s_value >= 0 & lsoa$lag_s_value >= 0) & (lmoran[, 5] <= 0.01), "quad_sig"] <- "High-High"
+      lsoa[(lsoa$s_value <= 0 & lsoa$lag_s_value <= 0) & (lmoran[, 5] <= 0.01), "quad_sig"] <- "Low-Low"
+      lsoa[(lsoa$s_value <= 0 & lsoa$lag_s_value >= 0) & (lmoran[, 5] <= 0.01), "quad_sig"] <- "Low-High"
+      lsoa[(lsoa$s_value >= 0 & lsoa$lag_s_value <= 0) & (lmoran[, 5] <= 0.01), "quad_sig"] <- "High-Low"
+      lsoa@data[(lmoran[, 5] > 0.01), "quad_sig"] <- "Not significant"
+      lsoa$quad_sig <- as.factor(lsoa$quad_sig)
+      lsoa <- st_as_sf(lsoa)
+    
+    } else if ("Greater Manchester" != input$la){
     sub <- filter(df, measure == input$measure & lad16nm == input$la) %>% select(lsoa11cd, measure, value)
     lsoa <- GM_lsoa[GM_lsoa@data$lad16nm == input$la, ]
     lsoa@data <- left_join(lsoa@data, sub, by = "lsoa11cd")
@@ -32,6 +58,7 @@ server <- function(input, output, session) {
     lsoa@data[(lmoran[, 5] > 0.01), "quad_sig"] <- "Not significant"
     lsoa$quad_sig <- as.factor(lsoa$quad_sig)
     lsoa <- st_as_sf(lsoa)
+    }
   })
   
   observe({
@@ -39,11 +66,12 @@ server <- function(input, output, session) {
   })
   
   output$info <- renderUI({
+    
+    if("Greater Manchester" == input$la){
     if (is.null(values$highlight)) {
       return(tags$h4("then hover over an LSOA"))
     } else {
-      lsoa <- GM_lsoa[GM_lsoa@data$lad16nm == input$la, ]
-      lsoaCode <- filteredData()$lsoa11cd[values$highlight == lsoa$lsoa11cd]
+      lsoaCode <- filteredData()$lsoa11cd[values$highlight == GM_lsoa$lsoa11cd]
       return(tags$div(
         HTML(paste(tags$h4("LSOA: ", lsoaCode))),
         HTML(paste("in ", tags$span(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$wd16nm), " Ward, ",
@@ -96,6 +124,67 @@ server <- function(input, output, session) {
              </tr>
              </table>")
         ))
+    }
+      
+    } else if ("Greater Manchester" != input$la){
+      if (is.null(values$highlight)) {
+        return(tags$h4("then hover over an LSOA"))
+      } else {
+        lsoa <- GM_lsoa[GM_lsoa@data$lad16nm == input$la, ]
+        lsoaCode <- filteredData()$lsoa11cd[values$highlight == lsoa$lsoa11cd]
+        return(tags$div(
+          HTML(paste(tags$h4("LSOA: ", lsoaCode))),
+          HTML(paste("in ", tags$span(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$wd16nm), " Ward, ",
+                     tags$span(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$lad16nm), sep = "")),
+          br(), br(),
+          HTML(paste(tags$strong(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$measure), ":", sep = "")),
+          br(),
+          HTML(paste(tags$span(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$value), 
+                     " (", filteredData()[filteredData()$lsoa11cd == lsoaCode,]$quad, ")", sep = "")),
+          br(), hr(),
+          tags$h4("Index of Multiple Deprivation (2015)"),
+          HTML("<table class='imd' style='width: 100%' callspacing='7'>
+               <tr>
+               <th style='width: 70%'>Index/Domain</th>
+               <th style='width: 15%; text-align: right'>Rank</th>
+               <th style='width: 15%; text-align: right'>Decile</th>
+               </tr> 
+               <tr>
+               <td>", "Index of Multiple Deprivation", "</td>
+               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$rank, format="f", big.mark = ",", digits=0), "</td>
+               <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$decile, "</td>
+               </tr>
+               <td>", "Income", "</td>
+               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Income")$rank, format="f", big.mark = ",", digits=0), "</td>
+               <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Income")$decile, "</td>
+               </tr>
+               <td>", "Employment", "</td>
+               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Employment")$rank, format="f", big.mark = ",", digits=0), "</td>
+               <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Employment")$decile, "</td>
+               </tr>
+               <td>", "Education, Skills and Training", "</td>
+               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Education, Skills and Training")$rank, format="f", big.mark = ",", digits=0), "</td>
+               <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Education, Skills and Training")$decile, "</td>
+               </tr>
+               <td>", "Health Deprivation and Disability", "</td>
+               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Health Deprivation and Disability")$rank, format="f", big.mark = ",", digits=0), "</td>
+               <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Health Deprivation and Disability")$decile, "</td>
+               </tr>
+               <td>", "Crime", "</td>
+               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$rank, format="f", big.mark = ",", digits=0), "</td>
+               <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$decile, "</td>
+               </tr>
+               <td>", "Barriers to Housing and Services", "</td>
+               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Crime")$rank, format="f", big.mark = ",", digits=0), "</td>
+               <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Crime")$decile, "</td>
+               </tr>
+               <td>", "Living Environment", "</td>
+               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Living Environment")$rank, format="f", big.mark = ",", digits=0), "</td>
+               <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Living Environment")$decile, "</td>
+               </tr>
+               </table>")
+          ))
+      }
     }
     })
   

@@ -48,3 +48,7 @@ jcplus <- read_csv("https://github.com/traffordDataLab/open_data/raw/master/job_
 # Gambling Premises (Gambling Commission)
 gambling <- read_csv("https://github.com/traffordDataLab/open_data/raw/master/betting_shops/bettingshops_gm.csv") %>% 
   st_as_sf(crs = 4326, coords = c("lon", "lat"))
+
+# General Practices
+gp <- read_csv("https://github.com/traffordDataLab/open_data/raw/master/gp_practices/gp_practices.csv") %>% 
+  st_as_sf(crs = 4326, coords = c("lon", "lat"))

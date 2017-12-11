@@ -209,9 +209,9 @@ server <- function(input, output, session) {
       setView(-2.28417866956407, 53.5151885751656, zoom = 11) %>% 
       addLayersControl(position = 'topleft',
                        baseGroups = c("CartoDB", "OpenStreetMap", "Satellite", "No background"),
-                       overlayGroups = c("Jobcentre Plus", "Gambling premises"), 
+                       overlayGroups = c("Jobcentre Plus", "Gambling premises", "GPs"), 
                        options = layersControlOptions(collapsed = TRUE)) %>% 
-      hideGroup(c("Jobcentre Plus", "Gambling premises")) %>% 
+      hideGroup(c("Jobcentre Plus", "Gambling premises", "GPs")) %>% 
       htmlwidgets::onRender(
         " function(el, t) {
         var myMap = this;
@@ -223,8 +223,10 @@ server <- function(input, output, session) {
                            levels = c("Not significant", "High-High", "Low-Low", "Low-High", "High-Low"),
                            ordered = TRUE)
     
-    icon_jcplus <- makeAwesomeIcon(icon = "map-marker", library = "glyphicon", markerColor = "green", iconColor = "#FFED00")
+    icon_jcplus <- makeAwesomeIcon(icon = "map-marker", library = "glyphicon", markerColor = "green", iconColor = "white")
     icon_gambling <- makeAwesomeIcon(icon = "map-marker", library = "glyphicon", markerColor = "darkpurple", iconColor = "white")
+    icon_gp <- makeAwesomeIcon(icon = "map-marker", library = "glyphicon", markerColor = "lightred", iconColor = "white")
+    
     
     leafletProxy("map", data = filteredData()) %>%
       clearShapes() %>% clearControls() %>% clearMarkers() %>% 
@@ -239,6 +241,7 @@ server <- function(input, output, session) {
                                                         "text-shadow" = "-1px -1px 10px #757575, 1px -1px 10px #757575, 1px 1px 10px #757575, -1px 1px 10px #757575"))) %>%
       addAwesomeMarkers(data = jcplus, popup = ~as.character(name), icon = icon_jcplus, group = "Jobcentre Plus", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
       addAwesomeMarkers(data = gambling, popup = ~as.character(name), icon = icon_gambling, group = "Gambling premises", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
+      addAwesomeMarkers(data = gp, popup = ~as.character(name), icon = icon_gp, group = "GPs", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
       addLegend(position = "bottomleft", colors = c("#F0F0F0", "#E93F36", "#2144F5", "#9794F8", "#EF9493"),
                 labels = 
                   c(paste0("Not significant (", formatC(sum(filteredData()$quad_sig == "Not significant"), format="f", big.mark = ",", digits=0), ")"),

@@ -9,7 +9,7 @@ The application allows data relating to worklessness to be visualised in a varie
 
 ### Maps
 
-The maps show key indicator datasets relating to worklessness using a technique called Local Indicators of Spatial Association (LISA) which identifies clusters of hot (high worklessness) and cold (low worklessness) geographic areas. The areas are Lower-layer Super Output Areas (LSOA) which are statistically comparable geographies containing approximately 1,500 residents or 650 households.
+The maps show key indicator datasets relating to worklessness using a technique called Local Indicators of Spatial Association (LISA) which identifies clusters of hot (high worklessness) and cold (low worklessness) geographic areas. The areas are Lower-layer Super Output Areas (LSOA) which are statistically comparable geographies containing approximately 1,500 residents or 650 households on average.
 
 The clusters are categorised according to [Anselin 1995](http://onlinelibrary.wiley.com/doi/10.1111/j.1538-4632.1995.tb00338.x/abstract):
 

@@ -74,8 +74,7 @@ server <- function(input, output, session) {
       lsoaCode <- filteredData()$lsoa11cd[values$highlight == GM_lsoa$lsoa11cd]
       return(tags$div(
         HTML(paste(tags$h4("LSOA: ", lsoaCode))),
-        HTML(paste("in ", tags$span(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$wd16nm), " Ward, ",
-                   tags$span(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$lad16nm), sep = "")),
+        HTML(paste("in ", tags$span(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$wd16nm), " Ward", sep = "")),
         br(), br(),
         HTML(paste(tags$strong(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$measure), ":", sep = "")),
         br(),
@@ -134,8 +133,7 @@ server <- function(input, output, session) {
         lsoaCode <- filteredData()$lsoa11cd[values$highlight == lsoa$lsoa11cd]
         return(tags$div(
           HTML(paste(tags$h4("LSOA: ", lsoaCode))),
-          HTML(paste("in ", tags$span(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$wd16nm), " Ward, ",
-                     tags$span(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$lad16nm), sep = "")),
+          HTML(paste("in ", tags$span(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$wd16nm), " Ward", sep = "")),
           br(), br(),
           HTML(paste(tags$strong(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$measure), ":", sep = "")),
           br(),

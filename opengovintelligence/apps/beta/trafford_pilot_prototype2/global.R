@@ -4,13 +4,15 @@
 library(shiny) ; library(tidyverse) ; library(sf) ; library(spdep) ; library(leaflet) ; library(ggplot2) ; library(DT)
 
 # Load Trafford Data Lab's ggplot2 lab_theme()
-source("https://trafforddatalab.github.io/assets/theme/ggplot2/theme_lab.R")
+source("https://github.com/traffordDataLab/assets/raw/master/theme/ggplot2/theme_lab.R")
 
 # Load  data ---------------------------
 
 # 1. ONS Claimant Count by sex and age (ONS) - latest month (September 2017)
 # 2. KS107EW - Lone parent households with dependent children (Census 2011)
 # 3. LC5601EW - Highest level of qualification by economic activity (Census 2011)
+# 4. Employment and Support Allowance - May 2017 (ONS)
+# 5. Households classified as social rented (Census 2011)
 df <- read_csv("data/worklessness_data.csv", 
                col_types = cols(lsoa11cd = col_factor(NULL),
                                 lsoa11nm = col_factor(NULL),

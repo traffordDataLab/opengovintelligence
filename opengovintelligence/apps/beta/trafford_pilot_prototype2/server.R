@@ -223,9 +223,9 @@ server <- function(input, output, session) {
                            levels = c("Not significant", "High-High", "Low-Low", "Low-High", "High-Low"),
                            ordered = TRUE)
     
-    icon_jcplus <- makeAwesomeIcon(icon = "map-marker", library = "glyphicon", markerColor = "green", iconColor = "white")
-    icon_gambling <- makeAwesomeIcon(icon = "map-marker", library = "glyphicon", markerColor = "darkpurple", iconColor = "white")
-    icon_gp <- makeAwesomeIcon(icon = "map-marker", library = "glyphicon", markerColor = "lightred", iconColor = "white")
+    icon_jcplus <- makeAwesomeIcon(icon = "building-o", library = "fa", markerColor = "green", iconColor = "#fff")
+    icon_gambling <- makeAwesomeIcon(icon = "money", library = "fa", markerColor = "black", iconColor = "#fff")
+    icon_gp <- makeAwesomeIcon(icon = "stethoscope", library = "fa", markerColor = "darkpurple", iconColor = "#fff")
     
     
     leafletProxy("map", data = filteredData()) %>%

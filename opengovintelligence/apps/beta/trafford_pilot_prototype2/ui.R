@@ -3,7 +3,7 @@
 # User interface ---------------------------
 
 ui <- navbarPage(
-  title = div(img(src = "https://trafforddatalab.github.io/assets/logo/trafforddatalab_logo.svg", height="25", width="99"), 
+  title = div(img(src = "https://github.com/traffordDataLab/assets/raw/master/logo/trafforddatalab_logo.svg", height="25", width="99"), 
               "OGI - Trafford pilot prototype"), windowTitle = "OGI - Trafford pilot prototype",
   tabPanel(title = "Maps",
            div(class="shinyContainer",
@@ -21,7 +21,8 @@ ui <- navbarPage(
                                           label = NULL,
                                           choices = c("Residents claiming JSA or Universal Credit",
                                                       "Working-age adults with no qualifications",
-                                                      "Households with lone parent not in employment"),
+                                                      "Households with lone parent not in employment",
+                                                      "Social rented households"),
                                           selected = "Residents claiming JSA or Universal Credit"),
                              hr(),
                              uiOutput("info")))),

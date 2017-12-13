@@ -1,7 +1,7 @@
 ## OGI - Trafford pilot prototype ##
 
 # Load necessary packages
-library(shiny) ; library(tidyverse) ; library(sf) ; library(spdep) ; library(leaflet) ; library(ggplot2) ; library(DT)
+library(shiny) ; library(tidyverse) ; library(sf) ; library(spdep) ; library(rgeos); library(leaflet) ; library(ggplot2) ; library(DT)
 
 # Load Trafford Data Lab's ggplot2 lab_theme()
 source("https://github.com/traffordDataLab/assets/raw/master/theme/ggplot2/theme_lab.R")

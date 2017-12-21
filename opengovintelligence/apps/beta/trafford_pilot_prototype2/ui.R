@@ -3,7 +3,7 @@
 # User interface ---------------------------
 
 ui <- navbarPage(
-  title = div(img(src = "https://github.com/traffordDataLab/assets/raw/master/logo/trafforddatalab_logo.svg", height="25", width="99"), 
+  title = div(img(src = "https://trafforddatalab.github.io/assets/logo/trafforddatalab_logo.svg", height="25", width="99"), 
               "OGI - Trafford pilot prototype"), windowTitle = "OGI - Trafford pilot prototype",
   tabPanel(title = "Maps",
            div(class="shinyContainer",

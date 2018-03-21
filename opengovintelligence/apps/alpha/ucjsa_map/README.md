@@ -3,7 +3,7 @@ This is the first iteration of the [OGI](http://www.opengovintelligence.eu/) Tra
 
 <br />
 
-<img src="https://github.com/traffordDataLab/projects/raw/master/opengovintelligence/apps/ucjsa_map/screenshot.png" width="800">
+<img src="screenshot.png" width="800">
 
 <br />
 

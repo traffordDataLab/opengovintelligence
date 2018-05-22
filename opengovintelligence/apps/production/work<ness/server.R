@@ -36,7 +36,7 @@ server <- function(input, output, session) {
     
     } else if ("Greater Manchester" != input$la){
     sub <- filter(df, measure == input$measure & lad16nm == input$la) %>% select(lsoa11cd, measure, value)
-    lsoa <- GM_lsoa[GM_lsoa@data$lad16nm == input$la, ]
+    lsoa <- GM_lsoa[GM_lsoa@data$lad17nm == input$la, ]
     lsoa@data <- left_join(lsoa@data, sub, by = "lsoa11cd")
     nb <- poly2nb(lsoa, queen = TRUE)
     lw <- nb2listw(nb)
@@ -74,7 +74,7 @@ server <- function(input, output, session) {
       lsoaCode <- filteredData()$lsoa11cd[values$highlight == GM_lsoa$lsoa11cd]
       return(tags$div(
         HTML(paste(tags$h4("LSOA: ", lsoaCode))),
-        HTML(paste("in ", tags$span(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$wd16nm), " Ward", sep = "")),
+        HTML(paste("in ", tags$span(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$wd17nm), " Ward", sep = "")),
         br(), br(),
         HTML(paste(tags$strong(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$measure), ":", sep = "")),
         br(),
@@ -129,11 +129,11 @@ server <- function(input, output, session) {
       if (is.null(values$highlight)) {
         return(tags$h4("then hover over an LSOA"))
       } else {
-        lsoa <- GM_lsoa[GM_lsoa@data$lad16nm == input$la, ]
+        lsoa <- GM_lsoa[GM_lsoa@data$lad17nm == input$la, ]
         lsoaCode <- filteredData()$lsoa11cd[values$highlight == lsoa$lsoa11cd]
         return(tags$div(
           HTML(paste(tags$h4("LSOA: ", lsoaCode))),
-          HTML(paste("in ", tags$span(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$wd16nm), " Ward", sep = "")),
+          HTML(paste("in ", tags$span(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$wd17nm), " Ward", sep = "")),
           br(), br(),
           HTML(paste(tags$strong(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$measure), ":", sep = "")),
           br(),
@@ -232,7 +232,7 @@ server <- function(input, output, session) {
                   stroke = TRUE, color = "black", weight = 1, layerId = ~lsoa11cd,
                   highlight = highlightOptions(color = "#FFFF00", weight = 3, opacity = 1, bringToFront = TRUE)) %>%
       addPolylines(data = la, stroke = TRUE, weight = 3, color = "#212121", opacity = 1) %>% 
-      addLabelOnlyMarkers(data = la, lng = ~centroid_lng, lat = ~centroid_lat, label = ~as.character(lad16nm), 
+      addLabelOnlyMarkers(data = la, lng = ~centroid_lng, lat = ~centroid_lat, label = ~as.character(lad17nm), 
                           labelOptions = labelOptions(noHide = T, textOnly = T, direction = "bottom",
                                                       style = list(
                                                         "color"="white",

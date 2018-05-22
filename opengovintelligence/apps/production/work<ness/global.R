@@ -21,7 +21,8 @@ df <- read_csv("data/worklessness_data.csv",
                                 value = col_integer()))
 
 # ONS Claimant Count by sex and age (ONS) - time series
-df_ts <- read_csv("data/ucjsa_ts.csv", col_types = cols(lsoa11cd = col_factor(NULL), 
+df_ts <- read_csv("data/ucjsa_ts.csv", col_types = cols(date = col_datetime(),
+                                                        area_code = col_factor(NULL), 
                                                         area_name = col_factor(NULL),
                                                         measure = col_factor(NULL), 
                                                         value = col_double()))
@@ -30,27 +31,28 @@ df_ts <- read_csv("data/ucjsa_ts.csv", col_types = cols(lsoa11cd = col_factor(NU
 imd <- read_csv("https://github.com/traffordDataLab/open_data/raw/master/imd_2015/IMD_2015_wide.csv",
                 col_types = cols(lsoa11cd = col_factor(NULL), 
                                  index_domain = col_factor(NULL), 
-                                 decile = col_integer(), 
+                                 decile = col_factor(1:10), 
                                  rank = col_integer(), 
-                                 score = col_double())) 
+                                 score = col_double()))
 
 # GM LSOA layer (ONS Open Geography Portal)
-GM_lsoa <- st_read("https://github.com/traffordDataLab/boundaries/raw/master/lsoa.geojson") %>% 
-  st_as_sf(crs = 4326, coords = c("long", "lat")) %>% 
+GM_lsoa <- st_read("https://github.com/traffordDataLab/spatial_data/raw/master/lookups/lsoa_to_ward_best-fit_lookup.geojson") %>% 
   as('Spatial')
 
 # GM Local Authority layer (ONS Open Geography Portal)
-la <- st_read("https://github.com/traffordDataLab/boundaries/raw/master/local_authorities.geojson") %>% 
-  st_as_sf(crs = 4326, coords = c("long", "lat"))
+la <- st_read("https://github.com/traffordDataLab/spatial_data/raw/master/local_authority/2016/gm_local_authority_generalised.geojson") %>% 
+  rename(lad17cd = area_code, lad17nm = area_name) %>% 
+  mutate(centroid_lng = map_dbl(geometry, ~st_centroid(.x)[[1]]),
+         centroid_lat = map_dbl(geometry, ~st_centroid(.x)[[2]]))
 
 # GM Jobcentre Plus 
-jcplus <- read_csv("https://github.com/traffordDataLab/open_data/raw/master/job_centre_plus/jobcentreplus_gm.csv") %>% 
-  st_as_sf(crs = 4326, coords = c("lon", "lat"))
+jcplus <- st_read("https://github.com/traffordDataLab/open_data/raw/master/job_centre_plus/jobcentreplus_gm.geojson") %>% 
+  rename(lad17cd = area_code, lad17nm = area_name)
 
 # Gambling Premises (Gambling Commission)
-gambling <- read_csv("https://github.com/traffordDataLab/open_data/raw/master/betting_shops/bettingshops_gm.csv") %>% 
-  st_as_sf(crs = 4326, coords = c("lon", "lat"))
+gambling <- st_read("https://github.com/traffordDataLab/open_data/raw/master/betting_shops/bettingshops_gm.geojson") %>% 
+  rename(lad17cd = area_code, lad17nm = area_name)
 
 # General Practices
-gp <- read_csv("https://github.com/traffordDataLab/open_data/raw/master/gp_practices/gp_practices.csv") %>% 
-  st_as_sf(crs = 4326, coords = c("lon", "lat"))
+gp <- st_read("https://github.com/traffordDataLab/open_data/raw/master/general_practice/GM_general_practices.geojson") %>% 
+  rename(lad17cd = area_code, lad17nm = area_name)

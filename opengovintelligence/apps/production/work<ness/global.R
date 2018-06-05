@@ -50,7 +50,7 @@ jcplus <- st_read("https://github.com/traffordDataLab/open_data/raw/master/job_c
   rename(lad17cd = area_code, lad17nm = area_name)
 
 # Gambling Premises (Gambling Commission)
-gambling <- st_read("https://github.com/traffordDataLab/open_data/raw/master/betting_shops/bettingshops_gm.geojson") %>% 
+gambling <- st_read("https://github.com/traffordDataLab/opengovintelligence/raw/master/apps/production/work<ness/data/betting_shops/bettingshops_gm.geojson") %>% 
   rename(lad17cd = area_code, lad17nm = area_name)
 
 # General Practices

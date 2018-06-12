@@ -1,58 +1,66 @@
 ## Work<ness app ##
 
-# Load necessary packages
-library(shiny) ; library(tidyverse) ; library(sf) ; library(spdep) ; library(rgeos); library(leaflet) ; library(ggplot2) ; library(DT)
+## May/June 2018 updates:
+# added food banks and probation offices
+# queries nomis API for latest claimant count data
+# uses lisa_stats R function to create LISA cluster maps
 
-# Load Trafford Data Lab's ggplot2 lab_theme()
-source("https://github.com/traffordDataLab/assets/raw/master/theme/ggplot2/theme_lab.R")
+# load necessary packages ---------------------------
+library(shiny) ; library(tidyverse) ; library(sf) ; library(spdep) ; library(rgeos) ; 
+library(leaflet) ; library(ggplot2) ; library(DT)
 
-# Load  data ---------------------------
+# load Trafford Data Lab's ggplot2 theme ---------------------------
+source("https://www.traffordDataLab.io/assets/theme/ggplot2/theme_lab.R")
 
-# 1. ONS Claimant Count by sex and age (ONS) - latest month (September 2017)
-# 2. KS107EW - Lone parent households with dependent children (Census 2011)
-# 3. LC5601EW - Highest level of qualification by economic activity (Census 2011)
-# 4. Employment and Support Allowance - May 2017 (ONS)
-# 5. Households classified as social rented (Census 2011)
-df <- read_csv("data/worklessness_data.csv", 
-               col_types = cols(lsoa11cd = col_factor(NULL),
-                                lsoa11nm = col_factor(NULL),
-                                lad16nm = col_factor(NULL),
-                                measure = col_factor(NULL), 
-                                value = col_integer()))
+# load tabular data ---------------------------
 
-# ONS Claimant Count by sex and age (ONS) - time series
-df_ts <- read_csv("data/ucjsa_ts.csv", col_types = cols(date = col_datetime(),
-                                                        area_code = col_factor(NULL), 
-                                                        area_name = col_factor(NULL),
-                                                        measure = col_factor(NULL), 
-                                                        value = col_double()))
+# latest claimant count data from nomis
+source("data/nomis_api.R")
 
-# Index of Multiple Deprivation (DCLG, 2015)
-imd <- read_csv("https://github.com/traffordDataLab/open_data/raw/master/imd_2015/IMD_2015_wide.csv",
-                col_types = cols(lsoa11cd = col_factor(NULL), 
-                                 index_domain = col_factor(NULL), 
-                                 decile = col_factor(1:10), 
-                                 rank = col_integer(), 
+# 2011 Census data stored as a flat file
+df <- read_csv("data/worklessness_data.csv") %>%
+  bind_rows(ucjsa) %>% 
+  mutate(lsoa11cd = factor(lsoa11cd),
+         lsoa11nm = factor(lsoa11nm),
+         lad17nm = factor(lad17nm),
+         measure = factor(measure),
+         value = as.integer(value))
+
+# IMD 2015 stored as a flat file but generated using SPARQL query
+imd <- read_csv("https://www.traffordDataLab.io/open_data/imd_2015/IMD_2015_wide.csv",
+                col_types = cols(lsoa11cd = col_factor(NULL),
+                                 index_domain = col_factor(NULL),
+                                 decile = col_factor(1:10),
+                                 rank = col_integer(),
                                  score = col_double()))
 
-# GM LSOA layer (ONS Open Geography Portal)
-GM_lsoa <- st_read("https://github.com/traffordDataLab/spatial_data/raw/master/lookups/lsoa_to_ward_best-fit_lookup.geojson") %>% 
+# load geospatial data ---------------------------
+
+# Lower-layer Super Output areas in Greater Manchester
+GM_lsoa <- st_read("https://www.traffordDataLab.io/spatial_data/lookups/lsoa_to_ward_best-fit_lookup.geojson") %>% 
   as('Spatial')
 
-# GM Local Authority layer (ONS Open Geography Portal)
-la <- st_read("https://github.com/traffordDataLab/spatial_data/raw/master/local_authority/2016/gm_local_authority_generalised.geojson") %>% 
+# Local Authorities in Greater Manchester
+la <- st_read("https://www.traffordDataLab.io/spatial_data/local_authority/2016/gm_local_authority_generalised.geojson") %>% 
   rename(lad17cd = area_code, lad17nm = area_name) %>% 
   mutate(centroid_lng = map_dbl(geometry, ~st_centroid(.x)[[1]]),
          centroid_lat = map_dbl(geometry, ~st_centroid(.x)[[2]]))
 
-# GM Jobcentre Plus 
-jcplus <- st_read("https://github.com/traffordDataLab/open_data/raw/master/job_centre_plus/jobcentreplus_gm.geojson") %>% 
+# Jobcentre Plus locations in Greater Manchester
+jcplus <- st_read("https://www.traffordDataLab.io/open_data/job_centre_plus/jobcentreplus_gm.geojson") %>% 
   rename(lad17cd = area_code, lad17nm = area_name)
 
-# Gambling Premises (Gambling Commission)
-gambling <- st_read("https://github.com/traffordDataLab/opengovintelligence/raw/master/apps/production/work<ness/data/betting_shops/bettingshops_gm.geojson") %>% 
+# Betting shops in Greater Manchester
+betting <- st_read("https://github.com/traffordDataLab/projects/raw/master/opengovintelligence/apps/production/work%3Cness/data/betting_shops/bettingshops_gm.geojson") %>% 
   rename(lad17cd = area_code, lad17nm = area_name)
 
-# General Practices
-gp <- st_read("https://github.com/traffordDataLab/open_data/raw/master/general_practice/GM_general_practices.geojson") %>% 
+# General Practices in Greater Manchester
+gp <- st_read("https://www.traffordDataLab.io/open_data/general_practice/GM_general_practices.geojson") %>% 
+  rename(lad17cd = area_code, lad17nm = area_name)
+
+# Food banks in Greater Manchester
+food_bank <- st_read("https://www.traffordDataLab.io/open_data/food_banks/GM_food_banks.geojson")
+
+# Probation offices in Greater Manchester
+probation <- st_read("https://www.traffordDataLab.io/open_data/probation/GM_probation_offices.geojson") %>% 
   rename(lad17cd = area_code, lad17nm = area_name)

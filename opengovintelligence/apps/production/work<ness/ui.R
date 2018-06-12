@@ -1,11 +1,9 @@
 ## Work<ness app ##
 
-# User interface ---------------------------
-
 ui <- navbarPage(
   title = div(img(src = "https://trafforddatalab.github.io/assets/logo/trafforddatalab_logo.svg", height="25", width="99"), 
               "Work<ness app"), windowTitle = "Work<ness app",
-  tabPanel(title = "Maps",
+  tabPanel(title = "Cluster map",
            div(class="shinyContainer",
                tags$head(includeCSS("styles_base.css"), includeCSS("styles_shiny.css"), includeCSS("styles_map.css"),
                          tags$style(HTML("table.imd td:nth-child(2), table.imd td:nth-child(3) { text-align: right; }"))),
@@ -14,7 +12,7 @@ ui <- navbarPage(
                              h4("Choose a local authority"),
                              selectInput(inputId = "la",
                                          label = NULL,
-                                         choices = c("Greater Manchester", levels(df$lad16nm)),
+                                         choices = c("Greater Manchester", levels(df$lad17nm)),
                                          selected = "Greater Manchester"),
                              h4("and a measure"),
                              radioButtons(inputId = "measure",
@@ -34,7 +32,7 @@ ui <- navbarPage(
                             checkboxInput("multiple", label = "or multiple areas", value = FALSE),
                             conditionalPanel(
                               condition="input.multiple==true",
-                              h5("Output options"),
+                              h6("Output options"),
                               checkboxInput("facet", label = "Facet by area", value = FALSE))),
                mainPanel(plotOutput("ggplot_plot", width = "100%", height = "300px"),
                          br(),

@@ -1,11 +1,9 @@
 ## Work<ness app ##
 
-# User interface ---------------------------
-
 ui <- navbarPage(
   title = div(img(src = "https://trafforddatalab.github.io/assets/logo/trafforddatalab_logo.svg", height="25", width="99"), 
               "Work<ness app"), windowTitle = "Work<ness app",
-  tabPanel(title = "Maps",
+  tabPanel(title = "Cluster map",
            div(class="shinyContainer",
                tags$head(includeCSS("styles_base.css"), includeCSS("styles_shiny.css"), includeCSS("styles_map.css"),
                          tags$style(HTML("table.imd td:nth-child(2), table.imd td:nth-child(3) { text-align: right; }"))),

@@ -1,6 +1,6 @@
 ## Prototype isochrone app ##
 
-library(tidyverse) ; library(sf) ; library(rgdal) ; library(osrm) ; library(leaflet) ; library(viridis)
+library(tidyverse) ; library(sf) ; library(openrouteservice) ; library(geojsonio) ; library(leaflet)
 
 jobcentre <- st_read("https://www.traffordDataLab.io/open_data/job_centre_plus/jobcentreplus_gm.geojson")
 foodbank <- st_read("https://www.traffordDataLab.io/open_data/food_banks/GM_food_banks.geojson")
@@ -55,7 +55,7 @@ server <- function(input, output,session) {
                        overlayGroups = c("Jobcentre Plus", "Foodbanks", "Probation offices"), 
                        options = layersControlOptions(collapsed = TRUE)) %>% 
       hideGroup(c("Foodbanks", "Probation offices")) %>% 
-      addControl("<strong>Select a road location with the crosshair<br>to calculate the drive time distance from it.</strong>",
+      addControl("<h4>Select a road location with the crosshair<br>to calculate the network distance from it.</h4>",
                  position="topright") %>% 
       htmlwidgets::onRender(
         " function(el, t) {
@@ -65,32 +65,32 @@ server <- function(input, output,session) {
   
   observeEvent(input$map_click, {
     click <- input$map_click
-    withProgress(message = "Loading Drive Time Polygons (aka isochrones) ....", 
-                 value = 0, {
-                   for (i in 1:15) {
-                     incProgress(1/15)
-                     Sys.sleep(0.25)
-                   }
-                   iso <- osrmIsochrone(loc = c(click$lng, click$lat), breaks = seq(from = 0, to = 10, by = 2))
-                 })
-    
-    iso@data$drive_times <- factor(paste(iso@data$min, "to", iso@data$max, "min "))
-    
-    factpal <- colorFactor(palette = "viridis", domain = iso@data$drive_times)
+    iso <- ors_isochrones(locations = c(click$lng, click$lat), 
+                          profile = "driving-car",
+                          range_type = "distance",
+                          range = 2500, 
+                          interval = 500)
+    class(iso) <- "geo_list"
+    iso <- geojson_sf(iso) %>% arrange(desc(value))
+    factpal <- colorFactor(palette = "viridis", domain = iso$value)
     
     leafletProxy("map") %>%
       clearShapes() %>% removeControl("legend") %>% removeMarker("marker") %>% 
+      addPolylines(data = la, stroke = TRUE, weight = 3, color = "#212121", opacity = 1) %>% 
       addPolygons(data = iso,
-                  fill = TRUE, fillColor = ~factpal(iso@data$drive_times), fillOpacity = 0.3,
-                  stroke = TRUE, color = ~factpal(iso@data$drive_times), weight = 2,
-                  popup = iso@data$drive_times) %>%
+                  fill = TRUE, fillColor = ~factpal(iso$value), fillOpacity = 0.2,
+                  stroke = TRUE, color = "black", weight = 0.5,
+                  label = as.character(paste0(iso$value, "m"))) %>%
       addAwesomeMarkers(data = input$map_click, lat = ~click$lat, lng = ~click$lng,
                         icon = ~makeAwesomeIcon(icon = "times", library = "fa", iconColor = "red", markerColor = "white"),
                         layerId = "marker") %>%
-      addLegend(pal = factpal, values = iso@data$drive_time, title = "Drive time", position = "bottomleft",
+      addLegend(pal = factpal, 
+                values = iso$value, 
+                opacity = 0.2,
+                labFormat = labelFormat(suffix = "m"),
+                title = "Network distance", position = "bottomleft",
                 layerId = "legend")
   })
-  
-}
+  }
 
 shinyApp(ui, server)

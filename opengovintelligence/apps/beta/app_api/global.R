@@ -6,8 +6,8 @@
 # uses lisa_stats R function to create LISA cluster maps
 
 # load necessary packages ---------------------------
-library(shiny) ; library(tidyverse) ; library(sf) ; library(spdep) ; library(rgeos) ; 
-library(leaflet) ; library(ggplot2) ; library(DT)
+library(shiny) ; library(tidyverse) ; library(leaflet) ; library(sf) ; library(spdep) ; library(rgeos) ; 
+library(ggplot2) ; library(DT) ; library(openrouteservice) ; library(geojsonio)
 
 # load Trafford Data Lab's ggplot2 theme ---------------------------
 source("https://www.traffordDataLab.io/assets/theme/ggplot2/theme_lab.R")

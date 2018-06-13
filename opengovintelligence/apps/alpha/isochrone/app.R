@@ -8,16 +8,46 @@ probation <- st_read("https://www.traffordDataLab.io/open_data/probation/GM_prob
 la <- st_read("https://www.traffordDataLab.io/spatial_data/local_authority/2016/gm_local_authority_generalised.geojson") %>% 
   rename(lad17cd = area_code, lad17nm = area_name)
 
-ui <- bootstrapPage(
-  tags$head(tags$style(
-    type = "text/css",
-    "html, body {width:100%; height:100%}",
-    ".leaflet-container {cursor:crosshair !important;}",
-    ".shiny-notification {height:80px; width:400px; position:fixed; top:calc(50% - 25px); left:calc(50% - 200px);}")),
-  leafletOutput("map", width = "100%", height = "100%")
+ui <- navbarPage(
+  title = div(img(src = "https://trafforddatalab.github.io/assets/logo/trafforddatalab_logo.svg", height="25", width="99"), 
+              "Work<ness app"), windowTitle = "Work<ness app",
+  tabPanel(title = "Isochrone map",
+           div(class="shinyContainer",
+               tags$head(includeCSS("styles_base.css"), includeCSS("styles_shiny.css"), includeCSS("styles_map.css"),
+                         tags$style(HTML( ".leaflet-container {cursor:crosshair !important;}",
+                                          "table.imd td:nth-child(2), table.imd td:nth-child(3) { text-align: right; }"))),
+               leafletOutput("map", width = "100%", height = "100%"),
+               absolutePanel(id = "shinyControls", class = "panel panel-default controls", fixed = TRUE, draggable = TRUE,
+                             h4("Choose a measure"),
+                             radioButtons(inputId = "measure",
+                                          label = NULL,
+                                          choices = c("Distance" = "distance", "Time" = "time"),
+                                          selected = "distance"),
+                             uiOutput("switch"),
+                             br(),
+                             actionButton("reset",
+                                           label = "Clear isochrone"))))
 )
 
 server <- function(input, output,session) {
+  
+  output$switch <- renderUI({
+      if(input$measure == "time"){
+        selectInput(inputId = "mode",
+                    label = NULL,
+                    choices = c("Car" = "driving-car", 
+                                "Bike" = "cycling-regular", 
+                                "Walk" = "foot-walking"),
+                    selected = "Car")
+      }else{
+        return()
+      }
+  })
+  
+  observeEvent(input$reset,{
+    leafletProxy("map") %>%
+      clearGroup("isochrones")
+  })
   
   output$map <- renderLeaflet({
     leaflet() %>% 
@@ -55,8 +85,6 @@ server <- function(input, output,session) {
                        overlayGroups = c("Jobcentre Plus", "Foodbanks", "Probation offices"), 
                        options = layersControlOptions(collapsed = TRUE)) %>% 
       hideGroup(c("Foodbanks", "Probation offices")) %>% 
-      addControl("<h4>Select a road location with the crosshair<br>to calculate the network distance from it.</h4>",
-                 position="topright") %>% 
       htmlwidgets::onRender(
         " function(el, t) {
         var myMap = this;
@@ -66,30 +94,35 @@ server <- function(input, output,session) {
   observeEvent(input$map_click, {
     click <- input$map_click
     iso <- ors_isochrones(locations = c(click$lng, click$lat), 
-                          profile = "driving-car",
-                          range_type = "distance",
-                          range = 2500, 
-                          interval = 500)
+                          profile = input$mode,
+                          range_type = input$measure,
+                          range = if(input$measure == "time"){
+                            60*30
+                          }else{
+                            3000
+                          }, 
+                          interval = if(input$measure == "time"){
+                            60*5
+                          }else{
+                            500
+                          })
     class(iso) <- "geo_list"
     iso <- geojson_sf(iso) %>% arrange(desc(value))
     factpal <- colorFactor(palette = "viridis", domain = iso$value)
     
     leafletProxy("map") %>%
-      clearShapes() %>% removeControl("legend") %>% removeMarker("marker") %>% 
-      addPolylines(data = la, stroke = TRUE, weight = 3, color = "#212121", opacity = 1) %>% 
       addPolygons(data = iso,
                   fill = TRUE, fillColor = ~factpal(iso$value), fillOpacity = 0.2,
                   stroke = TRUE, color = "black", weight = 0.5,
-                  label = as.character(paste0(iso$value, "m"))) %>%
+                  label = if(input$measure == "time"){
+                    as.character(paste0(iso$value/60, " minutes"))
+                  }else{
+                    as.character(paste0(iso$value, "m"))
+                  },
+                  group = "isochrones") %>%
       addAwesomeMarkers(data = input$map_click, lat = ~click$lat, lng = ~click$lng,
                         icon = ~makeAwesomeIcon(icon = "times", library = "fa", iconColor = "red", markerColor = "white"),
-                        layerId = "marker") %>%
-      addLegend(pal = factpal, 
-                values = iso$value, 
-                opacity = 0.2,
-                labFormat = labelFormat(suffix = "m"),
-                title = "Network distance", position = "bottomleft",
-                layerId = "legend")
+                        group = "isochrones") 
   })
   }
 

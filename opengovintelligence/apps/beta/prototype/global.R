@@ -4,6 +4,7 @@
 # added food banks and probation offices
 # queries nomis API for latest claimant count data
 # uses lisa_stats R function to create LISA cluster maps
+# isochrone (distance and travel time) functionality
 
 # load necessary packages ---------------------------
 library(shiny) ; library(tidyverse) ; library(leaflet) ; library(sf) ; library(spdep) ; library(rgeos) ; 

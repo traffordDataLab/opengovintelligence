@@ -8,35 +8,13 @@ la <- st_read("https://www.traffordDataLab.io/spatial_data/local_authority/2016/
   mutate(centroid_lng = map_dbl(geometry, ~st_centroid(.x)[[1]]),
          centroid_lat = map_dbl(geometry, ~st_centroid(.x)[[2]]))
 
-# Jobcentre Plus locations in Greater Manchester
-jcplus <- st_read("https://www.traffordDataLab.io/open_data/job_centre_plus/jobcentreplus_gm.geojson") %>% 
-  rename(lad17cd = area_code, lad17nm = area_name)
-
-# Betting shops in Greater Manchester
-betting <- st_read("https://github.com/traffordDataLab/projects/raw/master/opengovintelligence/apps/production/work%3Cness/data/betting_shops/bettingshops_gm.geojson") %>% 
-  rename(lad17cd = area_code, lad17nm = area_name)
-
 # General Practices in Greater Manchester
 gp <- st_read("https://www.traffordDataLab.io/open_data/general_practice/GM_general_practices.geojson") %>% 
   rename(lad17cd = area_code, lad17nm = area_name)
 
-# Food banks in Greater Manchester
-food_bank <- st_read("https://www.traffordDataLab.io/open_data/food_banks/GM_food_banks.geojson")
-
-# Probation offices in Greater Manchester
-probation <- st_read("https://www.traffordDataLab.io/open_data/probation/GM_probation_offices.geojson") %>% 
-  rename(lad17cd = area_code, lad17nm = area_name)
-
-#################################################
-
-ui <- navbarPage(
-  title = div(img(src = "https://trafforddatalab.github.io/assets/logo/trafforddatalab_logo.svg", height="25", width="99"), 
-              "Work<ness app"), windowTitle = "Work<ness app",
-  tabPanel(title = "Reachable area",
-           div(class="shinyContainer",
-               tags$head(includeCSS("styles_base.css"), includeCSS("styles_shiny.css"), includeCSS("styles_map.css"),
-                         tags$style(HTML( ".leaflet-container {cursor:crosshair !important;}",
-                                          "table.imd td:nth-child(2), table.imd td:nth-child(3) { text-align: right; }"))),
+ui <- bootstrapPage(
+  tags$head(includeCSS("styles_base.css"), includeCSS("styles_shiny.css"), includeCSS("styles_map.css"),
+            tags$style(type = "text/css", "html, body {width:100%;height:100%}", ".leaflet-container {cursor:crosshair !important;}"),
                leafletOutput("map", width = "100%", height = "100%"),
                absolutePanel(id = "shinyControls", class = "panel panel-default controls", fixed = TRUE, draggable = TRUE,
                              h4("Choose an isochrone unit"),
@@ -58,7 +36,7 @@ ui <- navbarPage(
                              actionButton("reset",
                                            label = "Clear isochrones"),
                              br(),br(),
-                             tags$small("Powered by ", tags$a(href="https://openrouteservice.org/", "OpenRouteService")))))
+                             tags$small("Powered by ", tags$a(href="https://openrouteservice.org/", "OpenRouteService"))))
 )
 
 
@@ -146,16 +124,12 @@ server <- function(input, output, session) {
                                                       style = list(
                                                         "color"="white",
                                                         "text-shadow" = "-1px -1px 10px #757575, 1px -1px 10px #757575, 1px 1px 10px #757575, -1px 1px 10px #757575"))) %>%
-      addAwesomeMarkers(data = jcplus, popup = ~as.character(name), icon = ~makeAwesomeIcon(icon = "building-o", library = "fa", markerColor = "green", iconColor = "#fff"), group = "Jobcentre Plus", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
-      addAwesomeMarkers(data = probation, popup = ~as.character(name), icon = ~makeAwesomeIcon(icon = "balance-scale", library = "fa", markerColor = "black", iconColor = "#fff"), group = "Probation offices", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
       addAwesomeMarkers(data = gp, popup = ~as.character(name), icon = ~makeAwesomeIcon(icon = "stethoscope", library = "fa", markerColor = "pink", iconColor = "#fff"), group = "GPs", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
-      addAwesomeMarkers(data = food_bank, popup = ~as.character(name), icon = ~makeAwesomeIcon(icon = "fa-cutlery", library = "fa", markerColor = "orange", iconColor = "#fff"), group = "Food banks", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
-      addAwesomeMarkers(data = betting, popup = ~as.character(name), icon = ~makeAwesomeIcon(icon = "money", library = "fa", markerColor = "darkpurple", iconColor = "#fff"), group = "Betting shops", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
       addLayersControl(position = 'topleft',
                        baseGroups = c("Aerial", "Dark", "High Detail", "Low Detail", "None"),
-                       overlayGroups = c("Jobcentre Plus", "Probation offices", "GPs", "Food banks", "Betting shops"), 
+                       overlayGroups = c("GPs"), 
                        options = layersControlOptions(collapsed = TRUE)) %>% 
-      hideGroup(c("Jobcentre Plus", "Probation offices", "GPs", "Food banks", "Betting shops")) %>% 
+      hideGroup(c("GPs")) %>% 
       htmlwidgets::onRender(
         " function(el, t) {
         var myMap = this;

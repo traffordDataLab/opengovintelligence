@@ -1,6 +1,6 @@
 ## Prototype isochrone app ##
 
-library(tidyverse) ; library(sf) ; library(openrouteservice) ; library(geojsonio) ; library(leaflet)
+library(shiny); library(tidyverse) ; library(sf) ; library(openrouteservice) ; library(geojsonio) ; library(leaflet)
 
 jobcentre <- st_read("https://www.traffordDataLab.io/open_data/job_centre_plus/jobcentreplus_gm.geojson")
 foodbank <- st_read("https://www.traffordDataLab.io/open_data/food_banks/GM_food_banks.geojson")
@@ -24,27 +24,78 @@ ui <- navbarPage(
                                           choices = c("Distance" = "distance", "Time" = "time"),
                                           selected = "distance"),
                              uiOutput("switch"),
+                             uiOutput("range"),
                              br(),
                              actionButton("reset",
-                                           label = "Clear isochrone"))))
+                                           label = "Clear isochrones"))))
 )
 
 server <- function(input, output,session) {
   
   output$switch <- renderUI({
-      if(input$measure == "time"){
-        selectInput(inputId = "mode",
-                    label = NULL,
-                    choices = c("Car" = "driving-car", 
-                                "Bike" = "cycling-regular", 
-                                "Walk" = "foot-walking"),
-                    selected = "Car")
-      }else{
-        return()
-      }
+    if(input$measure == "time"){
+      selectInput(inputId = "mode",
+                  label = NULL,
+                  choices = c("Bike" = "cycling-regular",
+                              "Car" = "driving-car", 
+                              "Walk" = "foot-walking"),
+                  selected = "cycling-regular")
+    }else{
+      return()
+    }
   })
   
-  observeEvent(input$reset,{
+  output$range <- renderUI({
+    if(input$measure == "distance"){
+      sliderInput("slider", label = h5("Range (kilometres"), min = 0.5, max = 3, value = 0.5, step = 0.5, ticks = FALSE, post = " km")
+    }else{
+      sliderInput("slider", label = h5("Range (minutes)"), min = 5, max = 30, value = 5, step = 5, ticks = FALSE, post = " minutes")
+    }
+  })
+  
+  click <- eventReactive(input$map_click, {
+    click <- input$map_click
+    })
+
+  iso <- reactive({
+    iso <- ors_isochrones(locations = c(click()$lng, click()$lat), 
+                          profile = 
+                            if(input$measure == "distance"){
+                              NULL
+                          } else {
+                            input$mode
+                          },
+                          range = 
+                            if(input$measure == "distance"){
+                              input$slider
+                            } else {
+                              input$slider*60
+                            },
+                          range_type = input$measure,
+                          interval = 
+                            if(input$measure == "distance"){
+                              0.5
+                          } else {
+                            60*5
+                          },
+                          preference = 
+                            if(input$measure == "distance"){
+                              "shortest"
+                            } else {
+                              "fastest"
+                            },
+                          units = 
+                            if(input$measure == "distance"){
+                              "km"
+                            } else {
+                              NULL
+                            },
+                          geometry_simplify = FALSE)
+    class(iso) <- "geo_list"
+    iso <- geojson_sf(iso) %>% arrange(desc(value))
+  })
+
+  observeEvent(input$reset, {
     leafletProxy("map") %>%
       clearGroup("isochrones")
   })
@@ -91,39 +142,32 @@ server <- function(input, output,session) {
         myMap._container.style['background'] = '#ffffff';}")
     })
   
-  observeEvent(input$map_click, {
-    click <- input$map_click
-    iso <- ors_isochrones(locations = c(click$lng, click$lat), 
-                          profile = input$mode,
-                          range_type = input$measure,
-                          range = if(input$measure == "time"){
-                            60*30
-                          }else{
-                            3000
-                          }, 
-                          interval = if(input$measure == "time"){
-                            60*5
-                          }else{
-                            500
-                          })
-    class(iso) <- "geo_list"
-    iso <- geojson_sf(iso) %>% arrange(desc(value))
-    factpal <- colorFactor(palette = "viridis", domain = iso$value)
+  observe({
     
-    leafletProxy("map") %>%
-      addPolygons(data = iso,
-                  fill = TRUE, fillColor = ~factpal(iso$value), fillOpacity = 0.2,
-                  stroke = TRUE, color = "black", weight = 0.5,
+    req(click())
+    factpal <- colorFactor(palette = c( "#7f2704","#a63603","#d94801","#f16913","#fd8d3c","#fdae6b"), domain = iso()$value,
+                           ordered = TRUE)
+    
+    map <- leafletProxy('map') %>%
+      clearGroup("isochrones") %>% 
+      addPolygons(data = iso(),
+                  fill = TRUE, fillColor = ~factpal(iso()$value), fillOpacity = 0,
+                  stroke = TRUE, opacity = 1, color = ~factpal(iso()$value), weight = 6, 
+                  dashArray = "1,13", options = pathOptions(lineCap = "round"),
                   label = if(input$measure == "time"){
-                    as.character(paste0(iso$value/60, " minutes"))
+                    as.character(paste0(iso()$value/60, " minutes"))
                   }else{
-                    as.character(paste0(iso$value, "m"))
+                    as.character(paste0(iso()$value, "m"))
                   },
                   group = "isochrones") %>%
-      addAwesomeMarkers(data = input$map_click, lat = ~click$lat, lng = ~click$lng,
+      addAwesomeMarkers(data = click(), lat = ~lat, lng = ~lng,
                         icon = ~makeAwesomeIcon(icon = "times", library = "fa", iconColor = "red", markerColor = "white"),
-                        group = "isochrones") 
+                        group = "isochrones")
+    
   })
-  }
+  
+}
+    
+
 
 shinyApp(ui, server)

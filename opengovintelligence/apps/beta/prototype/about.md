@@ -21,6 +21,12 @@ This section allows users to compare time series data on the proportion of resid
 
 The data selected are also displayed in a table below the charts. This table can be sorted by the various headings and also downloaded as a Comma Separated Values (CSV) file via the button provided.
 
+### Isochrone map
+
+The isochrone map allows users to determine the reachable area from a specific location. Network distance or travel time by bike, car or foot are provided. 
+
+The routing data is provided by [OpenRouteService](https://openrouteservice.org/).
+
 ### Sources
 
 The following datasets were used in the application:
@@ -45,6 +51,8 @@ The app was developed using [Shiny](https://cran.r-project.org/web/packages/shin
 - [leaflet](https://cran.r-project.org/web/packages/leaflet/index.html)
 - [ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html)
 - [DT](https://cran.r-project.org/web/packages/DT/index.html)
+- [geojsonio](https://cran.r-project.org/web/packages/geojsonio/index.html)
+- [openrouteservice-r](https://giscience.github.io/openrouteservice-r/index.html)
 
 Source code is available from [here](https://github.com/traffordDataLab/projects/tree/master/opengovintelligence/apps/production/work%3Cness). 
 

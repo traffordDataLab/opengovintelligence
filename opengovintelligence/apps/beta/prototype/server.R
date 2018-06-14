@@ -153,24 +153,24 @@ server <- function(input, output, session) {
   output$cluster_map <- renderLeaflet({
     
     leaflet() %>% 
+      addTiles(urlTemplate = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", 
+               attribution = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community | <a href="https://www.ons.gov.uk/methodology/geography/licences"> Contains OS data © Crown copyright and database right (2017)</a>', 
+               group = "Aerial",
+               options = providerTileOptions(minZoom = 10, maxZoom = 16)) %>%
       addTiles(urlTemplate = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
                attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://cartodb.com/attributions">CartoDB</a> | <a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2017)</a>',
-               group = "CartoDB",
+               group = "Low Detail",
                options = providerTileOptions(minZoom = 10, maxZoom = 16)) %>% 
       addTiles(urlTemplate = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>  | <a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2017)</a>',
-               group = "OpenStreetMap",
+               group = "High Detail",
                options = providerTileOptions(minZoom = 10, maxZoom = 16)) %>% 
-      addTiles(urlTemplate = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", 
-               attribution = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community | <a href="https://www.ons.gov.uk/methodology/geography/licences"> Contains OS data © Crown copyright and database right (2017)</a>', 
-               group = "Satellite",
-               options = providerTileOptions(minZoom = 10, maxZoom = 16)) %>%
       addTiles(urlTemplate = "", 
                attribution = '<a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2018)</a>',
-               group = "No background") %>% 
+               group = "None") %>% 
       setView(-2.28417866956407, 53.5151885751656, zoom = 11) %>% 
       addLayersControl(position = 'topleft',
-                       baseGroups = c("CartoDB", "OpenStreetMap", "Satellite", "No background"),
+                       baseGroups = c("Aerial", "High Detail", "Low Detail", "None"),
                        overlayGroups = c("Jobcentre Plus", "Probation offices", "GPs", "Food banks", "Betting shops"), 
                        options = layersControlOptions(collapsed = TRUE)) %>% 
       hideGroup(c("Jobcentre Plus", "Probation offices", "GPs", "Food banks", "Betting shops")) %>% 
@@ -296,24 +296,81 @@ server <- function(input, output, session) {
   
   # Isochrone map ---------------------------   
   
+  output$range <- renderUI({
+    if(input$unit == "distance"){
+      sliderInput("distance_slider", label = h5("Range (kilometres)"), min = 0.5, max = 3, value = 0.5, step = 0.5, ticks = FALSE, post = " km")
+    }else{
+      NULL
+    }
+  })
+  
+  click <- eventReactive(input$isochrone_map_click, {
+    click <- input$isochrone_map_click
+  })
+  
+  iso <- reactive({
+    iso <- ors_isochrones(locations = c(click()$lng, click()$lat), 
+                          profile = 
+                            if(input$unit == "distance"){
+                              NULL
+                            } else {
+                              input$mode
+                            },
+                          range = 
+                            if(input$unit == "distance"){
+                              input$distance_slider
+                            } else {
+                              input$time_slider*60
+                            },
+                          range_type = input$unit,
+                          interval = 
+                            if(input$unit == "distance"){
+                              0.5
+                            } else {
+                              60*5
+                            },
+                          preference = 
+                            if(input$unit == "distance"){
+                              "shortest"
+                            } else {
+                              "fastest"
+                            },
+                          units = 
+                            if(input$unit == "distance"){
+                              "km"
+                            } else {
+                              NULL
+                            })
+    class(iso) <- "geo_list"
+    iso <- geojson_sf(iso) %>% arrange(desc(value))
+  })
+  
+  observeEvent(input$reset, {
+    leafletProxy("map") %>%
+      clearGroup("isochrones")
+  })
+  
   output$isochrone_map <- renderLeaflet({
-    
     leaflet() %>% 
+      addTiles(urlTemplate = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", 
+               attribution = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community | <a href="https://www.ons.gov.uk/methodology/geography/licences"> Contains OS data © Crown copyright and database right (2017)</a>', 
+               group = "Aerial",
+               options = providerTileOptions(minZoom = 10, maxZoom = 16)) %>%
       addTiles(urlTemplate = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
                attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://cartodb.com/attributions">CartoDB</a> | <a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2017)</a>',
-               group = "CartoDB",
+               group = "Low Detail",
                options = providerTileOptions(minZoom = 10, maxZoom = 16)) %>% 
       addTiles(urlTemplate = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>  | <a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2017)</a>',
-               group = "OpenStreetMap",
+               group = "High Detail",
                options = providerTileOptions(minZoom = 10, maxZoom = 16)) %>% 
-      addTiles(urlTemplate = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", 
-               attribution = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community | <a href="https://www.ons.gov.uk/methodology/geography/licences"> Contains OS data © Crown copyright and database right (2017)</a>', 
-               group = "Satellite",
-               options = providerTileOptions(minZoom = 10, maxZoom = 16)) %>%
+      addTiles(urlTemplate = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}{r}.png",
+               attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://cartodb.com/attributions">CartoDB</a> | <a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2017)</a>',
+               group = "Dark",
+               options = providerTileOptions(minZoom = 10, maxZoom = 16)) %>% 
       addTiles(urlTemplate = "", 
                attribution = '<a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2018)</a>',
-               group = "No background") %>% 
+               group = "None") %>% 
       setView(-2.28417866956407, 53.5151885751656, zoom = 11) %>% 
       addPolylines(data = la, stroke = TRUE, weight = 3, color = "#212121", opacity = 1) %>% 
       addLabelOnlyMarkers(data = la, lng = ~centroid_lng, lat = ~centroid_lat, label = ~as.character(lad17nm), 
@@ -327,46 +384,49 @@ server <- function(input, output, session) {
       addAwesomeMarkers(data = food_bank, popup = ~as.character(name), icon = ~makeAwesomeIcon(icon = "fa-cutlery", library = "fa", markerColor = "orange", iconColor = "#fff"), group = "Food banks", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
       addAwesomeMarkers(data = betting, popup = ~as.character(name), icon = ~makeAwesomeIcon(icon = "money", library = "fa", markerColor = "darkpurple", iconColor = "#fff"), group = "Betting shops", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
       addLayersControl(position = 'topleft',
-                       baseGroups = c("CartoDB", "OpenStreetMap", "Satellite", "No background"),
+                       baseGroups = c("Aerial", "Dark", "High Detail", "Low Detail", "None"),
                        overlayGroups = c("Jobcentre Plus", "Probation offices", "GPs", "Food banks", "Betting shops"), 
                        options = layersControlOptions(collapsed = TRUE)) %>% 
       hideGroup(c("Jobcentre Plus", "Probation offices", "GPs", "Food banks", "Betting shops")) %>% 
       htmlwidgets::onRender(
         " function(el, t) {
         var myMap = this;
-        myMap._container.style['background'] = '#ffffff';}") %>% 
-      addControl("<h4>Select a road location with the crosshair<br>to calculate the network distance from it.</h4>",
-                 position="topright")
+        myMap._container.style['background'] = '#ffffff';}")
+})
+  
+  observe({
+    
+    req(click())
+    factpal <- colorFactor(palette = c( "#7f2704","#a63603","#d94801","#f16913","#fd8d3c","#fdae6b"), domain = iso()$value,
+                           ordered = TRUE)
+    
+    map <- leafletProxy('isochrone_map') %>%
+      clearGroup("isochrones") %>% 
+      addPolygons(data = iso(),
+                  fill = TRUE, fillColor = "#ffffff", fillOpacity = 0.1,
+                  stroke = TRUE, opacity = 1, color = ~factpal(iso()$value), weight = 6, 
+                  dashArray = "1,13", options = pathOptions(lineCap = "round"),
+                  label = if(input$unit == "time"){
+                    as.character(paste0(iso()$value/60, " minutes"))
+                  }else{
+                    as.character(paste0(iso()$value/1000, "km"))
+                  },
+                  labelOptions = labelOptions(style = list("font-weight" = "normal", padding = "3px 8px"), textsize = "15px", direction = "auto"),
+                  highlight = highlightOptions(weight = 6, color = "#FFFF00", fillOpacity = 0, bringToFront = FALSE),
+                  group = "isochrones") %>%
+      addAwesomeMarkers(data = click(), lat = ~lat, lng = ~lng,
+                        icon = if(input$unit == "time" & input$mode == "cycling-regular"){
+                          ~makeAwesomeIcon(icon = "bicycle", library = "fa", iconColor = "black", markerColor = "white")
+                        } else if(input$unit == "time" & input$mode == "driving-car"){
+                          ~makeAwesomeIcon(icon = "car", library = "fa", iconColor = "black", markerColor = "white")
+                        } else if(input$unit == "time" & input$mode == "foot-walking") {
+                          ~makeAwesomeIcon(icon = "male", library = "fa", iconColor = "black", markerColor = "white")
+                        } else if(input$unit == "distance"){
+                          ~makeAwesomeIcon(icon = "road", library = "fa", iconColor = "black", markerColor = "white")
+                        } else {  
+                          return()
+                        },
+                        group = "isochrones")
   })
     
-    observeEvent(input$isochrone_map_click, {
-      click <- input$isochrone_map_click
-      iso <- ors_isochrones(locations = c(click$lng, click$lat), 
-                            profile = "driving-car",
-                            range_type = "distance",
-                            range = 2500, 
-                            interval = 500)
-      class(iso) <- "geo_list"
-      iso <- geojson_sf(iso) %>% arrange(desc(value))
-      factpal <- colorFactor(palette = "viridis", domain = iso$value)
-      
-      leafletProxy("isochrone_map") %>%
-        clearShapes() %>% removeControl("legend") %>% removeMarker("marker") %>% 
-        addPolylines(data = la, stroke = TRUE, weight = 3, color = "#212121", opacity = 1) %>% 
-        addPolygons(data = iso,
-                    fill = TRUE, fillColor = ~factpal(iso$value), fillOpacity = 0.2,
-                    stroke = TRUE, color = "black", weight = 0.5,
-                    label = as.character(paste0(iso$value, "m"))) %>%
-        addAwesomeMarkers(data = input$isochrone_map_click, lat = ~click$lat, lng = ~click$lng,
-                          icon = ~makeAwesomeIcon(icon = "times", library = "fa", iconColor = "red", markerColor = "white"),
-                          layerId = "marker") %>%
-        addLegend(pal = factpal, 
-                  values = iso$value, 
-                  opacity = 0.2,
-                  labFormat = labelFormat(suffix = "m"),
-                  title = "Network distance", position = "bottomleft",
-                  layerId = "legend")
-    })
-    
-  
 }

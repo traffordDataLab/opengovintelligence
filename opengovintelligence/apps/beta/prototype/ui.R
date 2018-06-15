@@ -65,7 +65,7 @@ ui <- navbarPage(
                              actionButton("reset",
                                           label = "Clear isochrones"),
                              br(),br(),
-                             tags$small("Powered by ", tags$a(href="https://openrouteservice.org/", "OpenRouteService"))))),
+                             tags$small("© Powered by ", tags$a(href="https://openrouteservice.org/", "openrouteservice")))),
   tabPanel(title = "About", 
            fluidRow(
              column(8, offset = 1,

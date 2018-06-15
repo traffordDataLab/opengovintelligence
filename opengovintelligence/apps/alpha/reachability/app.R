@@ -1,23 +1,28 @@
-## Prototype isochrone app ##
+## Reachability app ##
 
-library(shiny); library(tidyverse) ; library(sf) ; library(openrouteservice) ; library(geojsonio) ; library(leaflet) ; library(htmlwidgets)
+## load R packages ---------------------------
+library(shiny); library(tidyverse) ; library(httr) ; library(geojsonio) ; library(jsonlite) ; library(sf) ; library(leaflet) 
 
-# Local Authorities in Greater Manchester
-la <- st_read("https://www.traffordDataLab.io/spatial_data/local_authority/2016/gm_local_authority_generalised.geojson") %>% 
+## load data ---------------------------
+
+# Trafford boundary  ---------------------------
+la <- st_read("https://www.traffordDataLab.io/spatial_data/local_authority/2016/trafford_local_authority_generalised.geojson") %>% 
   rename(lad17cd = area_code, lad17nm = area_name) %>% 
   mutate(centroid_lng = map_dbl(geometry, ~st_centroid(.x)[[1]]),
          centroid_lat = map_dbl(geometry, ~st_centroid(.x)[[2]]))
 
-# General Practices in Greater Manchester
-gp <- st_read("https://www.traffordDataLab.io/open_data/general_practice/GM_general_practices.geojson") %>% 
-  rename(lad17cd = area_code, lad17nm = area_name)
+# General Practices
+gp <- st_read("https://www.traffordDataLab.io/open_data/general_practice/trafford_general_practices.geojson")
+
+# Pharmacies
+pharma <- st_read("https://www.traffordDataLab.io/open_data/pharmacies/trafford_pharmacies.geojson")
 
 ui <- bootstrapPage(
   tags$head(includeCSS("styles_base.css"), includeCSS("styles_shiny.css"), includeCSS("styles_map.css"),
             tags$style(type = "text/css", "html, body {width:100%;height:100%}", ".leaflet-container {cursor:crosshair !important;}"),
                leafletOutput("map", width = "100%", height = "100%"),
                absolutePanel(id = "shinyControls", class = "panel panel-default controls", fixed = TRUE, draggable = TRUE,
-                             h4("Choose an isochrone unit"),
+                             h4("Choose a measure of reachability"),
                              radioButtons(inputId = "unit",
                                           label = NULL,
                                           choices = c("Distance" = "distance", "Travel time" = "time"),
@@ -36,7 +41,7 @@ ui <- bootstrapPage(
                              actionButton("reset",
                                            label = "Clear isochrones"),
                              br(),br(),
-                             tags$small("Powered by ", tags$a(href="https://openrouteservice.org/", "OpenRouteService"))))
+                             tags$small("© Powered by ", tags$a(href="https://openrouteservice.org/", "openrouteservice"))))
 )
 
 
@@ -53,42 +58,36 @@ server <- function(input, output, session) {
   click <- eventReactive(input$map_click, {
     click <- input$map_click
     })
-
+  
   iso <- reactive({
-    iso <- ors_isochrones(locations = c(click()$lng, click()$lat), 
-                          profile = 
-                            if(input$unit == "distance"){
-                              NULL
-                          } else {
-                            input$mode
-                          },
-                          range = 
-                            if(input$unit == "distance"){
-                              input$distance_slider
-                            } else {
-                              input$time_slider*60
-                            },
-                          range_type = input$unit,
-                          interval = 
-                            if(input$unit == "distance"){
-                              0.5
-                          } else {
-                            60*5
-                          },
-                          preference = 
-                            if(input$unit == "distance"){
-                              "shortest"
-                            } else {
-                              "fastest"
-                            },
-                          units = 
-                            if(input$unit == "distance"){
-                              "km"
-                            } else {
-                              NULL
-                            })
-    class(iso) <- "geo_list"
-    iso <- geojson_sf(iso) %>% arrange(desc(value))
+    
+    if(input$unit == "distance"){
+      param_profile <- "driving-car"
+      param_range <- input$distance_slider
+      param_interval <- 0.5
+      param_units <- "km"
+    }
+    else {
+      param_profile <- input$mode
+      param_range <- input$time_slider*60
+      param_interval <- 60*5
+      param_units <- ""
+    }
+    
+    request <- GET(url = "https://api.openrouteservice.org/isochrones?",
+                   query = list(api_key = "58d904a497c67e00015b45fc6862cde0265d4fd78ec660aa83220cdb",
+                                locations = paste0(click()$lng,",",click()$lat),
+                                profile = param_profile,
+                                range_type = input$unit,
+                                range = param_range,
+                                interval = param_interval,
+                                units = param_units))
+    
+    content <- content(request, as = "text", encoding = "UTF-8")
+    results <- fromJSON(txt = content)
+    class(results) <- "geo_list"
+    request <- geojson_sf(results) %>% arrange(desc(value))
+    
   })
 
   observeEvent(input$reset, {
@@ -117,19 +116,20 @@ server <- function(input, output, session) {
       addTiles(urlTemplate = "", 
                attribution = '<a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2018)</a>',
                group = "None") %>% 
-      setView(-2.28417866956407, 53.5151885751656, zoom = 11) %>% 
+      setView(-2.35533522781156, 53.419025498197, zoom = 12) %>% 
       addPolylines(data = la, stroke = TRUE, weight = 3, color = "#212121", opacity = 1) %>% 
       addLabelOnlyMarkers(data = la, lng = ~centroid_lng, lat = ~centroid_lat, label = ~as.character(lad17nm), 
                           labelOptions = labelOptions(noHide = T, textOnly = T, direction = "bottom",
                                                       style = list(
                                                         "color"="white",
                                                         "text-shadow" = "-1px -1px 10px #757575, 1px -1px 10px #757575, 1px 1px 10px #757575, -1px 1px 10px #757575"))) %>%
-      addAwesomeMarkers(data = gp, popup = ~as.character(name), icon = ~makeAwesomeIcon(icon = "stethoscope", library = "fa", markerColor = "pink", iconColor = "#fff"), group = "GPs", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
+      addAwesomeMarkers(data = gp, popup = ~as.character(name), icon = ~makeAwesomeIcon(icon = "stethoscope", library = "fa", iconColor = "#fff", markerColor = "pink"), group = "GPs", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
+      addAwesomeMarkers(data = pharma, popup = ~as.character(provider), icon = ~makeAwesomeIcon(icon = "medkit", library = "fa", iconColor = " #000000", markerColor = "blue"), group = "Pharmacies", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
       addLayersControl(position = 'topleft',
                        baseGroups = c("Aerial", "Dark", "High Detail", "Low Detail", "None"),
-                       overlayGroups = c("GPs"), 
+                       overlayGroups = c("GPs", "Pharmacies"), 
                        options = layersControlOptions(collapsed = TRUE)) %>% 
-      hideGroup(c("GPs")) %>% 
+      hideGroup(c("GPs", "Pharmacies")) %>% 
       htmlwidgets::onRender(
         " function(el, t) {
         var myMap = this;

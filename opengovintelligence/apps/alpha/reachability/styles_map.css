@@ -1,4 +1,9 @@
 /*  */
+.leaflet-container
+{
+  background-color: white;
+}
+
 .controls
 {
   background-color: white;
@@ -7,6 +12,11 @@
   opacity: 0.85;
   width: 340px;
   right: 10px;
+}
+
+#controls a:hover
+{
+  color: #fc6721;
 }
 
 #controls

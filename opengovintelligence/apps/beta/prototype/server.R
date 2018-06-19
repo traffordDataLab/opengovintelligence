@@ -1,11 +1,9 @@
 ## Work<ness app ##
 
-source("https://www.traffordDataLab.io/assets/rfunctions/LISA/lisa_stats.R")
-
 server <- function(input, output, session) {
   values <- reactiveValues(highlight = c())
   
-  # Cluster map ---------------------------
+  # Clusters ---------------------------
   
   filteredData <- reactive({
     
@@ -216,14 +214,14 @@ server <- function(input, output, session) {
                 title = "LISA cluster map")
   })
   
-  # Charts ---------------------------   
+  # Trends ---------------------------   
   
   output$choose_area <- renderUI({
     if(input$multiple) {
-      title = "Select areas"
+      title = NULL
       options = list(maxItems = 4)
     } else {
-      title = "Select an area"
+      title = NULL
       options = NULL
     }
     selectizeInput(inputId = "GM_areas", 
@@ -239,7 +237,7 @@ server <- function(input, output, session) {
     filter(df_ts, area_name %in% input$GM_areas)
   })
   
-  output$ggplot_plot <- renderPlot({
+  output$ggplot_plot <- renderPlotly({
     if(is.null(area_data())) {
       return(NULL)
     }
@@ -251,43 +249,55 @@ server <- function(input, output, session) {
       scale_colour_brewer(palette = "Dark2") +
       theme_lab() +
       theme(panel.grid.major.y = element_blank(),
-            plot.subtitle = element_text(margin = margin(b = 12)),
+            plot.title = element_text(size = 14, colour = "#757575", face = "bold", hjust = 0.5, vjust = 5),
             axis.title = element_blank(),
             legend.position = "bottom", legend.title = element_blank())
     
     if(input$multiple) {
       if(input$facet) {
-        p + geom_line(aes(colour = area_name)) +
-          geom_point(aes(colour = area_name)) +
+        p <- p + geom_line(aes(colour = area_name)) +
+          geom_point(aes(colour = area_name, 
+                         text = paste('<br>Date: ', as.Date(date),
+                                      '<br>Proportion (%): ', value)),
+                     fill = "white", shape = 21) +
           labs(title = paste("Proportion of residents claiming JSA or Universal Credit")) +
           facet_wrap(~area_name) +
           theme(legend.position = "none") +
           theme(panel.spacing = unit(1, "lines"),
-                plot.title = element_text(size = 14, colour = "#757575", face = "bold", hjust = 0.5, vjust = 4),
                 strip.text = element_text(size = 10, vjust = 1))
+        ggplotly(p, tooltip = c("text")) %>% config(displayModeBar = F)
       } else {
-        p +  geom_line(aes(colour = area_name)) +
-          geom_point(aes(colour = area_name)) +
-          labs(title = paste("Proportion of residents claiming JSA or Universal Credit")) +
-          theme(plot.title = element_text(size = 14, colour = "#757575", face = "bold", hjust = 0.5, vjust = 4))
+        p <- p +  geom_line(aes(colour = area_name)) +
+          geom_point(aes(colour = area_name,
+                         text = paste('<br>Date: ', as.Date(date),
+                                      '<br>Proportion (%): ', value)),
+                     fill = "white", shape = 21) +
+          labs(title = paste("Proportion of residents claiming JSA or Universal Credit"))
+        ggplotly(p, tooltip = c("text")) %>% config(displayModeBar = F)
       }
     } else {
-      p + geom_line(colour = "#1b9e77") +
-        geom_point(colour = "#1b9e77") +
-        labs(title = paste("Proportion of residents claiming JSA or Universal Credit in", area_data()$area_name)) +
-        theme(plot.title = element_text(size = 14, colour = "#757575", face = "bold", hjust = 0.5, vjust = 4))
+      p <- p + geom_line(colour = "#1b9e77") +
+        geom_point(aes(text = paste('<br>Date: ', as.Date(date),
+                                    '<br>Proportion (%): ', value)), 
+                   colour = "#1b9e77", fill = "white", shape = 21) +
+        labs(title = paste("Proportion of residents claiming JSA or Universal Credit in", area_data()$area_name)) 
+      ggplotly(p, tooltip = c("text")) %>% config(displayModeBar = F)
     }
     
   })
   
-  output$area_table <- DT::renderDataTable({
-    area_data()
+  output$area_table <- renderDT({
+    area_data() 
     
-  }, rownames = FALSE, options = list(pageLength = 10, dom = 'tip',
-                                      initComplete = JS(
-                                        "function(settings, json) {",
-                                        "$(this.api().table().header()).css({'background-color': '#F5F5F5', 'color': '#212121'});",
-                                        "}")))
+  }, rownames = FALSE, 
+  colnames = c("Date", "Area code", "Area name", "Proportion (%)"), 
+  options = list(pageLength = 8, dom = 'tip'))
+  
+  output$download <- renderUI({
+    if(!is.null(area_data())) {
+      downloadButton('downloadData', 'Download CSV', style = 'padding:4px; font-size:80%')
+    }
+  })
   
   output$downloadData <- downloadHandler(
     filename = function() {
@@ -298,7 +308,7 @@ server <- function(input, output, session) {
     }
   )
   
-  # Isochrone map ---------------------------   
+  # Reachability ---------------------------   
   
   output$range <- renderUI({
     if(input$unit == "distance"){

@@ -41,7 +41,8 @@ df_ts <- ucjsa %>%
   mutate(area_name = factor(area_name),
        area_code = factor(area_code),
        measure = factor(measure),
-       value = as.double(value))
+       value = as.double(value)) %>% 
+  select(date, area_code, area_name, value)
 
 rm(ucjsa, lookup, wards)
 

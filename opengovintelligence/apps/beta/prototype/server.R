@@ -291,7 +291,7 @@ server <- function(input, output, session) {
     
   }, rownames = FALSE, 
   colnames = c("Date", "Area code", "Area name", "Proportion (%)"), 
-  options = list(pageLength = 8, dom = 'tip'))
+  options = list(pageLength = 10, dom = 'tip'))
   
   output$download <- renderUI({
     if(!is.null(area_data())) {

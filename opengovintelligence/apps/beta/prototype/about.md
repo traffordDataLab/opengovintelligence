@@ -7,7 +7,7 @@ This web application has been developed by the [Trafford Data Lab](https://www.t
 
 The application visualises data relating to worklessness in a variety of ways to help improve the understanding of the scale and extent of need.
 
-### Cluster map
+### Clusters
 
 The cluster map visualises the spatial distribution of key indicators relating to worklessness using a technique called Local Indicators of Spatial Association [(Anselin, 1995)](http://onlinelibrary.wiley.com/doi/10.1111/j.1538-4632.1995.tb00338.x/abstract). The map shows Lower-layer Super Output Areas (LSOAs) as statistically significant **spatial clusters** (High-High and Low-Low) or **spatial outliers** (Low-High and High-Low). An LSOA marked as 'High-High' exhibits positive spatial autocorrelation because it has high values of x and is surrounded by areas with similarly high values. Conversely, an LSOA marked 'High-Low' indicates negative spatial autocorrelation because it records a high value of x and is surrounded by areas with low values.
 
@@ -15,26 +15,24 @@ By hovering over the LSOAs on the map, information such as the indicator value, 
 
 There are a number of other map options available. Hovering over the layer icon situated under the zoom control (+ - buttons) displays choices for the map backgrounds, such as a satellite and road atlas views, as well as the locations of Jobcentre Plus sites, gambling premises, GP practices, food banks and probation offices which can be overlayed on the map.
 
-### Charts
+### Trends
 
 This section allows users to compare time series data on the proportion of residents claiming JSA or Universal Credit at different geographic levels: electoral wards, local authorities and combined authority. The data can be displayed for single or multiple areas (check the multiple box), on single or separate charts (check the facet box). Simply begin typing into the box provided to add areas and choose them from the options provided.
 
 The data selected are also displayed in a table below the charts. This table can be sorted by the various headings and also downloaded as a Comma Separated Values (CSV) file via the button provided.
 
-### Isochrone map
+### Reachability
 
-The isochrone map allows users to determine the reachable area from a specific location. Network distance or travel time by bike, car or foot are provided. 
-
-The routing data is provided by [OpenRouteService](https://openrouteservice.org/).
+The reachability map allows users to determine the reachable area from a given location. Network distance or travel time by bike, car or foot are provided. The equal distance / travel time polygons are provided by [OpenRouteService](https://openrouteservice.org/).
 
 ### Sources
 
 The following datasets were used in the application:
 
-- [Claimant count by sex and age](https://www.nomisweb.co.uk/datasets/ucjsa) (ONS)
-- [LC5601EW - Highest level of qualification by economic activity](https://www.nomisweb.co.uk/census/2011/lc5601ew) (Census 2011)
-- [KS107EW - Lone parent households with dependent children](https://www.nomisweb.co.uk/census/2011/KS107EW) (Census 2011)
-- [Tenure - Social rented households](https://www.nomisweb.co.uk/census/2011/ks402ew) (Census 2011)
+- [Claimant count by sex and age](https://www.nomisweb.co.uk/datasets/ucjsa) (Latest available month, ONS)
+- [LC5601EW - Highest level of qualification by economic activity](https://www.nomisweb.co.uk/census/2011/lc5601ew) (March 2011, Census 2011)
+- [KS107EW - Lone parent households with dependent children](https://www.nomisweb.co.uk/census/2011/KS107EW) (March 2011, Census 2011)
+- [Tenure - Social rented households](https://www.nomisweb.co.uk/census/2011/ks402ew) (March 2011, Census 2011)
 
 Spatial vector boundary layers were also used from the ONS' [Open Geography Portal](http://geoportal.statistics.gov.uk/).
 
@@ -51,8 +49,8 @@ The app was developed using [Shiny](https://cran.r-project.org/web/packages/shin
 - [leaflet](https://cran.r-project.org/web/packages/leaflet/index.html)
 - [ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html)
 - [DT](https://cran.r-project.org/web/packages/DT/index.html)
+- [jsonlite](https://cran.r-project.org/web/packages/jsonlite/index.html)
 - [geojsonio](https://cran.r-project.org/web/packages/geojsonio/index.html)
-- [openrouteservice-r](https://giscience.github.io/openrouteservice-r/index.html)
 
 Source code is available from [here](https://github.com/traffordDataLab/projects/tree/master/opengovintelligence/apps/production/work%3Cness). 
 

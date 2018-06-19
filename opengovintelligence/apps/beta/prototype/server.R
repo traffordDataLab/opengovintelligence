@@ -165,12 +165,16 @@ server <- function(input, output, session) {
                attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>  | <a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2017)</a>',
                group = "High Detail",
                options = providerTileOptions(minZoom = 10, maxZoom = 16)) %>% 
+      addTiles(urlTemplate = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}{r}.png",
+               attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://cartodb.com/attributions">CartoDB</a> | <a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2017)</a>',
+               group = "Dark",
+               options = providerTileOptions(minZoom = 10, maxZoom = 16)) %>% 
       addTiles(urlTemplate = "", 
                attribution = '<a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2018)</a>',
                group = "None") %>% 
       setView(-2.28417866956407, 53.5151885751656, zoom = 11) %>% 
       addLayersControl(position = 'topleft',
-                       baseGroups = c("Aerial", "High Detail", "Low Detail", "None"),
+                       baseGroups = c("Aerial", "High Detail", "Low Detail", "Dark", "None"),
                        overlayGroups = c("Jobcentre Plus", "Probation offices", "GPs", "Food banks", "Betting shops"), 
                        options = layersControlOptions(collapsed = TRUE)) %>% 
       hideGroup(c("Jobcentre Plus", "Probation offices", "GPs", "Food banks", "Betting shops")) %>% 
@@ -298,56 +302,49 @@ server <- function(input, output, session) {
   
   output$range <- renderUI({
     if(input$unit == "distance"){
-      sliderInput("distance_slider", label = h5("Range (kilometres)"), min = 0.5, max = 3, value = 0.5, step = 0.5, ticks = FALSE, post = " km")
+      sliderInput("distance_slider", 
+                  label = h5("Range (kilometres)"), min = 0.5, max = 3, value = 0.5, step = 0.5, 
+                  ticks = FALSE, post = " km")
     }else{
       NULL
     }
   })
   
-  click <- eventReactive(input$isochrone_map_click, {
-    click <- input$isochrone_map_click
+  click <- eventReactive(input$isochrone_map_click,{
+    event <- input$isochrone_map_click
   })
   
   iso <- reactive({
-    iso <- ors_isochrones(locations = c(click()$lng, click()$lat), 
-                          profile = 
-                            if(input$unit == "distance"){
-                              NULL
-                            } else {
-                              input$mode
-                            },
-                          range = 
-                            if(input$unit == "distance"){
-                              input$distance_slider
-                            } else {
-                              input$time_slider*60
-                            },
-                          range_type = input$unit,
-                          interval = 
-                            if(input$unit == "distance"){
-                              0.5
-                            } else {
-                              60*5
-                            },
-                          preference = 
-                            if(input$unit == "distance"){
-                              "shortest"
-                            } else {
-                              "fastest"
-                            },
-                          units = 
-                            if(input$unit == "distance"){
-                              "km"
-                            } else {
-                              NULL
-                            })
-    class(iso) <- "geo_list"
-    iso <- geojson_sf(iso) %>% arrange(desc(value))
+    if(input$unit == "distance"){
+      param_profile <- "driving-car"
+      param_range <- input$distance_slider
+      param_interval <- 0.5
+      param_units <- "km"
+    }
+    else {
+      param_profile <- input$mode
+      param_range <- input$time_slider*60
+      param_interval <- 60*5
+      param_units <- ""
+    }
+    
+    request <- GET(url = "https://api.openrouteservice.org/isochrones?",
+                   query = list(api_key = "58d904a497c67e00015b45fc6862cde0265d4fd78ec660aa83220cdb",
+                                locations = paste0(click()$lng,",",click()$lat),
+                                profile = param_profile,
+                                range_type = input$unit,
+                                range = param_range,
+                                interval = param_interval,
+                                units = param_units))
+    
+    content <- content(request, as = "text", encoding = "UTF-8")
+    results <- fromJSON(txt = content)
+    class(results) <- "geo_list"
+    sf <- geojson_sf(results) %>% arrange(desc(value))
   })
   
   observeEvent(input$reset, {
-    leafletProxy("map") %>%
-      clearGroup("isochrones")
+    leafletProxy("isochrone_map") %>% clearGroup("isochrones")
   })
   
   output$isochrone_map <- renderLeaflet({
@@ -384,7 +381,7 @@ server <- function(input, output, session) {
       addAwesomeMarkers(data = food_bank, popup = ~as.character(name), icon = ~makeAwesomeIcon(icon = "fa-cutlery", library = "fa", markerColor = "orange", iconColor = "#fff"), group = "Food banks", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
       addAwesomeMarkers(data = betting, popup = ~as.character(name), icon = ~makeAwesomeIcon(icon = "money", library = "fa", markerColor = "darkpurple", iconColor = "#fff"), group = "Betting shops", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
       addLayersControl(position = 'topleft',
-                       baseGroups = c("Aerial", "Dark", "High Detail", "Low Detail", "None"),
+                       baseGroups = c("Aerial", "High Detail", "Low Detail", "Dark", "None"),
                        overlayGroups = c("Jobcentre Plus", "Probation offices", "GPs", "Food banks", "Betting shops"), 
                        options = layersControlOptions(collapsed = TRUE)) %>% 
       hideGroup(c("Jobcentre Plus", "Probation offices", "GPs", "Food banks", "Betting shops")) %>% 
@@ -396,9 +393,8 @@ server <- function(input, output, session) {
   
   observe({
     
-    req(click())
-    factpal <- colorFactor(palette = c( "#7f2704","#a63603","#d94801","#f16913","#fd8d3c","#fdae6b"), domain = iso()$value,
-                           ordered = TRUE)
+    factpal <- colorFactor(palette = c( "#7f2704","#a63603","#d94801","#f16913","#fd8d3c","#fdae6b"), 
+                           levels = factor(iso()$value), ordered = TRUE)
     
     map <- leafletProxy('isochrone_map') %>%
       clearGroup("isochrones") %>% 
@@ -428,5 +424,15 @@ server <- function(input, output, session) {
                         },
                         group = "isochrones")
   })
+  
+  output$downloadGeoJSON <- downloadHandler(
+    
+    filename = function() {
+      paste("export.geojson")
+    },
+    content = function(file) {
+      st_write(iso(), file, driver = "GeoJSON")
+    }
+  )
     
 }

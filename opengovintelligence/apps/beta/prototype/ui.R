@@ -35,7 +35,7 @@ ui <- navbarPage(
                               condition="input.multiple==true",
                               h6("Output options"),
                               checkboxInput("facet", label = "Facet by area", value = FALSE))),
-               mainPanel(plotlyOutput("ggplot_plot", width = "100%", height = "400px"),
+               mainPanel(plotlyOutput("ggplot_plot", width = "100%", height = "350px"),
                          br(),
                          DTOutput("area_table"),
                          uiOutput("download"))))),

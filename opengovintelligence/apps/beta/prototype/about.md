@@ -7,7 +7,7 @@ This web application has been developed by the [Trafford Data Lab](https://www.t
 
 The application visualises data relating to worklessness in a variety of ways to help improve understanding of the scale and the extent of need.
 
-### App structure
+### Structure
 
 #### Clusters
 

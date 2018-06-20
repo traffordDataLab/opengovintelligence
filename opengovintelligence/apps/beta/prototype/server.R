@@ -379,6 +379,7 @@ server <- function(input, output, session) {
                attribution = '<a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2018)</a>',
                group = "None") %>% 
       setView(-2.28417866956407, 53.5151885751656, zoom = 11) %>% 
+      addPolylines(data = GM_lsoa, stroke = TRUE, weight = 1.2, color = "#212121", opacity = 1) %>% 
       addPolylines(data = la, stroke = TRUE, weight = 3, color = "#212121", opacity = 1) %>% 
       addLabelOnlyMarkers(data = la, lng = ~centroid_lng, lat = ~centroid_lat, label = ~as.character(lad17nm), 
                           labelOptions = labelOptions(noHide = T, textOnly = T, direction = "bottom",

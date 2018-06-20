@@ -35,7 +35,7 @@ ui <- navbarPage(
                               condition="input.multiple==true",
                               h6("Output options"),
                               checkboxInput("facet", label = "Facet by area", value = FALSE))),
-               mainPanel(plotlyOutput("ggplot_plot", width = "100%", height = "350px"),
+               mainPanel(plotlyOutput("ggplot_plot", width = "100%", height = "300px"),
                          br(),
                          DTOutput("area_table"),
                          uiOutput("download"))))),
@@ -67,6 +67,10 @@ ui <- navbarPage(
                                                                    style = 'padding:4px; font-size:80%'),
                                                     br(),
                                                     tags$small("© Powered by ", tags$a(href="https://openrouteservice.org/", "openrouteservice"))))),
+  tabPanel(title = "Suggested workflow", 
+           fluidRow(
+             column(8, offset = 1,
+                    includeMarkdown("workflow.md"), style = "color:#212121"))),
   tabPanel(title = "About", 
            fluidRow(
              column(8, offset = 1,

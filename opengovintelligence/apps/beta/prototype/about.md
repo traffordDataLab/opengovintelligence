@@ -5,23 +5,25 @@ This web application has been developed by the [Trafford Data Lab](https://www.t
 
 >The OpenGovIntelligence project aims to modernize Public Administration by connecting it to Civil Society through the innovative application of Linked Open Statistical Data (LOSD). We believe the publication of high quality public statistics can transform society, services and enterprises throughout Europe.
 
-The application visualises data relating to worklessness in a variety of ways to help improve the understanding of the scale and extent of need.
+The application visualises data relating to worklessness in a variety of ways to help improve understanding of the scale and the extent of need.
 
-### Clusters
+### App structure
 
-The cluster map visualises the spatial distribution of key indicators relating to worklessness using a technique called Local Indicators of Spatial Association [(Anselin, 1995)](http://onlinelibrary.wiley.com/doi/10.1111/j.1538-4632.1995.tb00338.x/abstract). The map shows Lower-layer Super Output Areas (LSOAs) as statistically significant **spatial clusters** (High-High and Low-Low) or **spatial outliers** (Low-High and High-Low). An LSOA marked as 'High-High' exhibits positive spatial autocorrelation because it has high values of x and is surrounded by areas with similarly high values. Conversely, an LSOA marked 'High-Low' indicates negative spatial autocorrelation because it records a high value of x and is surrounded by areas with low values.
+#### Clusters
 
-By hovering over the LSOAs on the map, information such as the indicator value, electoral ward and local authority it lies within, the value for the indicator chosen and deprivation data are displayed in a moveable panel.
+The cluster map visualises the spatial distribution of key indicators relating to worklessness using a technique called Local Indicators of Spatial Association [(Anselin, 1995)](http://onlinelibrary.wiley.com/doi/10.1111/j.1538-4632.1995.tb00338.x/abstract). The map shows Lower-layer Super Output Areas (LSOAs) which have 400 households or around 1,500 residents as statistically significant **spatial clusters** (High-High and Low-Low) or **spatial outliers** (Low-High and High-Low). An LSOA marked 'High-High' exhibits positive spatial autocorrelation because it has high values of x and is surrounded by areas with similarly high values. Conversely, an LSOA marked 'High-Low' indicates negative spatial autocorrelation because it records a high value of x and is surrounded by areas with low values.
+
+By hovering over the LSOAs on the map, information such as the indicator value, electoral ward and deprivation data are displayed in a moveable panel.
 
 There are a number of other map options available. Hovering over the layer icon situated under the zoom control (+ - buttons) displays choices for the map backgrounds, such as a satellite and road atlas views, as well as the locations of Jobcentre Plus sites, gambling premises, GP practices, food banks and probation offices which can be overlayed on the map.
 
-### Trends
+#### Trends
 
 This section allows users to compare time series data on the proportion of residents claiming JSA or Universal Credit at different geographic levels: electoral wards, local authorities and combined authority. The data can be displayed for single or multiple areas (check the multiple box), on single or separate charts (check the facet box). Simply begin typing into the box provided to add areas and choose them from the options provided.
 
 The data selected are also displayed in a table below the charts. This table can be sorted by the various headings and also downloaded as a Comma Separated Values (CSV) file via the button provided.
 
-### Reachability
+#### Reachability
 
 The reachability map allows users to determine the reachable area from a given location. Network distance or travel time by bike, car or foot are provided. The equal distance / travel time polygons are provided by [OpenRouteService](https://openrouteservice.org/).
 
@@ -33,8 +35,9 @@ The following datasets were used in the application:
 - [LC5601EW - Highest level of qualification by economic activity](https://www.nomisweb.co.uk/census/2011/lc5601ew) (March 2011, Census 2011)
 - [KS107EW - Lone parent households with dependent children](https://www.nomisweb.co.uk/census/2011/KS107EW) (March 2011, Census 2011)
 - [Tenure - Social rented households](https://www.nomisweb.co.uk/census/2011/ks402ew) (March 2011, Census 2011)
+- [Indices of Multiple Deprivation](https://www.gov.uk/government/statistics/english-indices-of-deprivation-2015) (2015, MHCLG)
 
-Spatial vector boundary layers were also used from the ONS' [Open Geography Portal](http://geoportal.statistics.gov.uk/).
+Spatial vector boundary layers were provided by the ONS' [Open Geography Portal](http://geoportal.statistics.gov.uk/).
 
 ### Credits
 For more information about Local Indicators of Spatial Association see [Anselin (1995)](http://onlinelibrary.wiley.com/doi/10.1111/j.1538-4632.1995.tb00338.x/abstract)
@@ -48,6 +51,7 @@ The app was developed using [Shiny](https://cran.r-project.org/web/packages/shin
 - [spdep](https://cran.r-project.org/web/packages/spdep/index.html) 
 - [leaflet](https://cran.r-project.org/web/packages/leaflet/index.html)
 - [ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html)
+- [plotly](https://cran.r-project.org/web/packages/plotly/index.html)
 - [DT](https://cran.r-project.org/web/packages/DT/index.html)
 - [jsonlite](https://cran.r-project.org/web/packages/jsonlite/index.html)
 - [geojsonio](https://cran.r-project.org/web/packages/geojsonio/index.html)

@@ -3,7 +3,7 @@
 # load necessary packages ---------------------------
 library(shiny) ; library(tidyverse) ; library(leaflet) ; library(sf) ; library(spdep) ; library(rgeos) ; 
 library(ggplot2) ; library(plotly) ; library(DT) ; 
-library(openrouteservice) ; library(httr) ; library(geojsonio) ; library(jsonlite) 
+library(httr) ; library(geojsonio) ; library(jsonlite) 
 
 # load Trafford Data Lab's ggplot2 theme ---------------------------
 source("https://www.traffordDataLab.io/assets/theme/ggplot2/theme_lab.R")

@@ -25,7 +25,7 @@ The data selected are also displayed in a table below the charts. This table can
 
 #### Reachability
 
-The reachability map allows users to determine the reachable area from a given location. Network distance or travel time by bike, car or foot are provided. The equal distance / travel time polygons are provided by [OpenRouteService](https://openrouteservice.org/).
+The reachability map allows users to determine the reachable area from a given location. Network distance or travel time by bike, car or foot are provided. The equal distance / travel time polygons are provided by [OpenRouteService](https://openrouteservice.org/). Users can download the generated polygons countours as a GeoJSON file which can be used in many Geographical Information Systems (GIS).
 
 ### Sources
 

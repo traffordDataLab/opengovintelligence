@@ -31,7 +31,7 @@ server <- function(input, output, session) {
     
     if("Greater Manchester" == input$la){
     if (is.null(values$highlight)) {
-      return(tags$h4("then hover over an LSOA"))
+      return(tags$h4("Hover over a neighbourhood for more information"))
     } else {
       lsoaCode <- filteredData()$lsoa11cd[values$highlight == GM_lsoa$lsoa11cd]
       return(tags$div(
@@ -251,7 +251,7 @@ server <- function(input, output, session) {
       theme(panel.grid.major.y = element_blank(),
             plot.title = element_text(size = 14, colour = "#757575", face = "bold", hjust = 0.5, vjust = 5),
             axis.title = element_blank(),
-            legend.position = "bottom", legend.title = element_blank())
+            legend.title = element_blank())
     
     if(input$multiple) {
       if(input$facet) {
@@ -265,7 +265,7 @@ server <- function(input, output, session) {
           theme(legend.position = "none") +
           theme(panel.spacing = unit(1, "lines"),
                 strip.text = element_text(size = 10, vjust = 1))
-        ggplotly(p, tooltip = c("text")) %>% config(displayModeBar = F)
+        ggplotly(p, tooltip = c("text")) # %>% config(displayModeBar = F, showLink = F)
       } else {
         p <- p +  geom_line(aes(colour = area_name)) +
           geom_point(aes(colour = area_name,
@@ -273,7 +273,7 @@ server <- function(input, output, session) {
                                       '<br>Proportion (%): ', value)),
                      fill = "white", shape = 21) +
           labs(title = paste("Proportion of residents claiming JSA or Universal Credit"))
-        ggplotly(p, tooltip = c("text")) %>% config(displayModeBar = F)
+        ggplotly(p, tooltip = c("text")) # %>% config(displayModeBar = F)
       }
     } else {
       p <- p + geom_line(colour = "#1b9e77") +
@@ -281,7 +281,7 @@ server <- function(input, output, session) {
                                     '<br>Proportion (%): ', value)), 
                    colour = "#1b9e77", fill = "white", shape = 21) +
         labs(title = paste("Proportion of residents claiming JSA or Universal Credit in", area_data()$area_name)) 
-      ggplotly(p, tooltip = c("text")) %>% config(displayModeBar = F)
+      ggplotly(p, tooltip = c("text")) # %>% config(displayModeBar = F)
     }
     
   })

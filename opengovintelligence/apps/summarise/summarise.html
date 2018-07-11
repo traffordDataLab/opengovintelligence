@@ -6,14 +6,29 @@
   <meta charset="UTF-8"/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto"/>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://www.trafforddatalab.io/css/labBase.css"/>
-  <link rel="stylesheet" href="https://www.trafforddatalab.io/css/labWebsite.css"/>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
   integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
   crossorigin=""/>
   <style>
-  body {
+  html, body{
     padding: 0 20px 5em 12px;
+    margin: 0;
+    height: 100%;
+    font-family: 'Open Sans', sans-serif;
+    color: #212121;
+  }
+  a{
+    color: #e24a90;
+    text-decoration: none;
+  }
+  a:hover{
+    text-decoration: underline;
+  }
+
+  h1, h2
+  {
+    font-family: 'Roboto', sans-serif;
+    color: #757575;
   }
   .double div{
     float: left;
@@ -51,7 +66,7 @@
     padding-left: 10px;
     margin-left: 3px;
     border-style: none none none solid;
-    border-color: coral;
+    border-color: #e24a90;
     border-width: 1px;
   }
   #tableDiv{
@@ -59,17 +74,28 @@
     padding-bottom: 40px;
   }
   .circleLegend{
+    border:1px solid black;
     border-radius: 50%;
-    height: 10px;
-    width: 10px;
+    height: 8px;
+    width: 8px;
     opacity: 0.8;
+    margin-right: 5px;
   }
   #tableTitle{
     font-size: 20px;
   }
   .bar{
-    background-color: #1c9099;
+    background-color: #e24a90;
     height: 15px;
+  }
+  #OGIfooter{
+    clear:both;
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
+  }
+  .svg_holder{
+  float: left;
+  margin-right: 12px;
   }
   @media (max-width:800px)
   {
@@ -123,16 +149,26 @@
       <p id="tableTitle"></p>
       <table id='BRtable'></table>
     </div>
-    <div id='bussinessComm' class="comment"></div>
+    <div id="bussinessComm" class="comment"></div>
   </div>
-
+  <div id="OGIfooter">
+    <div class="svg_holder">
+      <svg width="81" height="54">
+  	     <desc>European flag</desc>
+  	     <g transform="scale(0.1)">
+  	     <defs><g id="s"><g id="c"><path id="t" d="M0,0v1h0.5z" transform="translate(0,-1)rotate(18)"/><use xlink:href="#t" transform="scale(-1,1)"/></g><g id="a"><use xlink:href="#c" transform="rotate(72)"/><use xlink:href="#c" transform="rotate(144)"/></g><use xlink:href="#a" transform="scale(-1,1)"/></g></defs>
+  	     <rect fill="#039" width="810" height="540"/><g fill="#fc0" transform="scale(30)translate(13.5,9)"><use xlink:href="#s" y="-6"/><use xlink:href="#s" y="6"/><g id="l"><use xlink:href="#s" x="-6"/><use xlink:href="#s" transform="rotate(150)translate(0,6)rotate(66)"/><use xlink:href="#s" transform="rotate(120)translate(0,6)rotate(24)"/><use xlink:href="#s" transform="rotate(60)translate(0,6)rotate(12)"/><use xlink:href="#s" transform="rotate(30)translate(0,6)rotate(42)"/></g><use xlink:href="#l" transform="scale(-1,1)"/></g></g>
+      </svg>
+    </div>
+    <p>This project has received funding from the European Union's Horizon 2020 research and innovation programme under grant agreement No 693849.</p>
+  </div>
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script src="https://www.trafforddatalab.io/assets/javascript/labError.js"></script>
   <script src="https://www.trafforddatalab.io/assets/javascript/labAjax.js"></script>
   <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
   integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
   crossorigin=""></script>
-  <script src="https://www.trafforddatalab.io/assets/d3/timeSeries.js"></script>
+  <script src="http://www.trafforddatalab.io/assets/d3/timeSeries.js"></script>
   <script>
 
   var endpoint = 'http://gmdatastore.org.uk/sparql.json';
@@ -216,7 +252,7 @@
       //Map
       d3.json("http://gmdatastore.org.uk/boundaries/"+area_code+".json", function(error, geoData) {
 
-        boundary = L.geoJSON(geoData,{style:{"color":"pink"}})
+        boundary = L.geoJSON(geoData,{style:{"color":"#e24a90"}})
         .addTo(leafletMap);
         leafletMap.fitBounds(boundary.getBounds()); // adjust the zoom to fit the boundary to the screen size
 
@@ -228,12 +264,13 @@
           //Plot circles
           var circles=[];
           bindings.forEach(function(bspoint) {
-            var circle=L.circle([bspoint.lat.value, bspoint.lon.value], {
-              color: 'red',
-              opacity: 0,
-              fillColor: 'red',
-              fillOpacity: 0.5,
-              radius: 30
+            var circle=L.circleMarker([bspoint.lat.value, bspoint.lon.value], {
+              color: 'black',
+              opacity: 0.8,
+              weight: 1,
+              fillColor: 'white',
+              fillOpacity: 0.8,
+              radius: 5
             })
             circles.push(circle)
           })
@@ -242,7 +279,7 @@
             document.getElementById('countPoints').getElementsByTagName('p')[0].innerHTML="";
             document.getElementById('countPoints').style.opacity=0;
           }else{
-            document.getElementById('countPoints').getElementsByTagName('p')[0].innerHTML="<div class='circleLegend' style=\"background:red\"></div>   BettingShops: "+bindings.length;
+            document.getElementById('countPoints').getElementsByTagName('p')[0].innerHTML="<div class='circleLegend' style=\"background:white\"></div>BettingShops: "+bindings.length;
             document.getElementById('countPoints').style.opacity=0.8;
           }
 
@@ -258,7 +295,8 @@
 
         document.getElementById('statComm').innerHTML ="Select an area for information related to unemployment.";
         if(count.length>0){
-          document.getElementById('statComm').innerHTML =  area_name + " Population (Census 2011): " + count[0]["count"]["value"];
+          var numFormat = d3.format(",");
+          document.getElementById('statComm').innerHTML =  area_name + " Population (Census 2011): " + numFormat(count[0]["count"]["value"]);
         }
       })
 
@@ -300,7 +338,7 @@
           title:"Proportion of people claiming unemployment related benefits ",
           ytitle:"Percent",
           source:"Claimant Count, DWP",
-          palette:["#fdbe85","#fd8d3c","#e6550d"],
+          palette:['#fbc7d9','#f18db4','#e24a90'],//['#f7a9c6','#ee7dab','#e24a90']
         }
         var svg=timeSeries(plotParams)
 
@@ -366,7 +404,7 @@
             }
           }
           document.getElementById('bussinessComm').innerHTML =  "The industry with the largest number of employees working in " + area_name + " is: " + industry +".";
-          document.getElementById('bussinessComm').style.borderColor = "coral";
+          document.getElementById('bussinessComm').style.borderColor = "#e24a90";
         }else{
           document.getElementById('bussinessComm').style.borderColor = "white";
         }

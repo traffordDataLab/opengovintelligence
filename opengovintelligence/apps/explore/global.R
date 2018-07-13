@@ -50,7 +50,7 @@ jcplus <- st_read("https://www.traffordDataLab.io/open_data/job_centre_plus/jobc
   rename(lad17cd = area_code, lad17nm = area_name)
 
 # Betting shops in Greater Manchester
-betting <- st_read("https://github.com/traffordDataLab/projects/raw/master/opengovintelligence/apps/production/work%3Cness/data/betting_shops/bettingshops_gm.geojson") %>% 
+betting <- st_read("https://github.com/traffordDataLab/projects/raw/master/opengovintelligence/apps/explore/data/betting_shops/bettingshops_gm.geojson") %>% 
   rename(lad17cd = area_code, lad17nm = area_name)
 
 # General Practices in Greater Manchester

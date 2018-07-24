@@ -1,4 +1,4 @@
-### Data for preparation  
+### Data for transformation into LOSD on GM DataStore  
 
 #### Tabular data
 - [Indices of Multiple Deprivation](https://www.traffordDataLab.io/open_data/imd_2015/IMD_2015_wide.csv)

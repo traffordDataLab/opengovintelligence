@@ -137,8 +137,8 @@
     <div id="statComm" class="comment">Select an area for information related to unemployment.</div>
   </div>
   <div class="double">
-    <div id='selectLA'></div>
-    <div id='selectWard'></div>
+    <div id='Local Authority'></div>
+    <div id='Ward'></div>
   </div>
   <div class="double">
     <div id='timeLine'></div>
@@ -186,7 +186,7 @@
   plotReport(keyObj);// plot report for GM
 
   var query1 = 'SELECT ?area_name ?area_code WHERE { ?metcty <http://www.w3.org/2000/01/rdf-schema#label> "E11000001" . ?district <http://publishmydata.com/def/ontology/spatial/within> ?metcty . ?district <http://statistics.data.gov.uk/def/statistical-geography#officialname> ?area_name . ?district <http://www.w3.org/2000/01/rdf-schema#label> ?area_code }'
-  postQuery(query1,endpoint,function(d){popSelect(d,"selectLA","loadWardList")});//populate the first dropdown
+  postQuery(query1,endpoint,function(d){popSelect(d,"Local Authority","loadWardList")});//populate the first dropdown
 
   function postQuery(query, url, callback){
     query="query="+encodeURIComponent(query)
@@ -195,7 +195,7 @@
 
   function popSelect(data,container,onChangeFun){
     var laNames = data.results.bindings;
-    var laSelect = '<select name="frmLAnames" onChange="' + onChangeFun + '(this.value)" class="datasetSelect"><option value="{}">Select a local authority</option>';
+    var laSelect = '<select name="frmLAnames" onChange="' + onChangeFun + '(this.value)" class="datasetSelect"><option value="{}">Select a ' + container + '</option>';
 
     for (var i = 0; i < laNames.length; i++) {
       laSelect += '<option value="{£area_name£:£' + laNames[i]["area_name"]["value"] + '£,£area_code£:£' + laNames[i]["area_code"]["value"] + '£}"';
@@ -213,7 +213,7 @@
     if(LAkey=="{}"){
       LAkey = '{"area_name":"Greater Manchester", "area_code":"E11000001"}';
 
-      document.getElementById('selectWard').innerHTML = "";
+      document.getElementById('Ward').innerHTML = "";
       dataSeries=[]
       plotReport(LAkey)
     }else{
@@ -226,7 +226,7 @@
 
       //ward list
       var query = 'SELECT ?area_name ?area_code WHERE {?district <http://www.w3.org/2000/01/rdf-schema#label> "'+ area_code +'" . ?indistrict <http://publishmydata.com/def/ontology/spatial/within> ?district . ?indistrict <http://statistics.data.gov.uk/def/statistical-entity#code> <http://statistics.data.gov.uk/id/statistical-entity/E05> . ?indistrict <http://statistics.data.gov.uk/def/statistical-geography#officialname> ?area_name . ?indistrict <http://www.w3.org/2000/01/rdf-schema#label> ?area_code . }'
-      postQuery(query,endpoint,function(d){popSelect(d,"selectWard","plotReport")});
+      postQuery(query,endpoint,function(d){popSelect(d,"Ward","plotReport")});
     }
 
   }

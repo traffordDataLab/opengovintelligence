@@ -1,230 +1,4 @@
 date,area_name,area_code,measure,value
-2015-06-01,Greater Manchester,E47000001,Claimants as a proportion of residents aged 16-64,2.5
-2015-06-01,Bolton,E08000001,Claimants as a proportion of residents aged 16-64,2.9
-2015-06-01,Bury,E08000002,Claimants as a proportion of residents aged 16-64,2.4
-2015-06-01,Manchester,E08000003,Claimants as a proportion of residents aged 16-64,2.7
-2015-06-01,Oldham,E08000004,Claimants as a proportion of residents aged 16-64,2.9
-2015-06-01,Rochdale,E08000005,Claimants as a proportion of residents aged 16-64,2.7
-2015-06-01,Salford,E08000006,Claimants as a proportion of residents aged 16-64,2.6
-2015-06-01,Stockport,E08000007,Claimants as a proportion of residents aged 16-64,1.9
-2015-06-01,Tameside,E08000008,Claimants as a proportion of residents aged 16-64,2.6
-2015-06-01,Trafford,E08000009,Claimants as a proportion of residents aged 16-64,1.5
-2015-06-01,Wigan,E08000010,Claimants as a proportion of residents aged 16-64,2.4
-2015-06-01,Astley Bridge,E05000650,Claimants as a proportion of residents aged 16-64,1.7
-2015-06-01,Bradshaw,E05000651,Claimants as a proportion of residents aged 16-64,2.2
-2015-06-01,Breightmet,E05000652,Claimants as a proportion of residents aged 16-64,4.1
-2015-06-01,Bromley Cross,E05000653,Claimants as a proportion of residents aged 16-64,0.9
-2015-06-01,Crompton,E05000654,Claimants as a proportion of residents aged 16-64,4
-2015-06-01,Farnworth,E05000655,Claimants as a proportion of residents aged 16-64,4.1
-2015-06-01,Great Lever,E05000656,Claimants as a proportion of residents aged 16-64,4.4
-2015-06-01,Halliwell,E05000657,Claimants as a proportion of residents aged 16-64,6.1
-2015-06-01,Harper Green,E05000658,Claimants as a proportion of residents aged 16-64,3.5
-2015-06-01,Heaton and Lostock,E05000659,Claimants as a proportion of residents aged 16-64,0.8
-2015-06-01,Horwich and Blackrod,E05000660,Claimants as a proportion of residents aged 16-64,1.5
-2015-06-01,Horwich North East,E05000661,Claimants as a proportion of residents aged 16-64,1.8
-2015-06-01,Hulton,E05000662,Claimants as a proportion of residents aged 16-64,2.5
-2015-06-01,Kearsley,E05000663,Claimants as a proportion of residents aged 16-64,2
-2015-06-01,Little Lever and Darcy Lever,E05000664,Claimants as a proportion of residents aged 16-64,2
-2015-06-01,Rumworth,E05000665,Claimants as a proportion of residents aged 16-64,4.8
-2015-06-01,Smithills,E05000666,Claimants as a proportion of residents aged 16-64,2.5
-2015-06-01,Tonge with the Haulgh,E05000667,Claimants as a proportion of residents aged 16-64,4.5
-2015-06-01,Westhoughton North and Chew Moor,E05000668,Claimants as a proportion of residents aged 16-64,1.2
-2015-06-01,Westhoughton South,E05000669,Claimants as a proportion of residents aged 16-64,1.7
-2015-06-01,Besses,E05000670,Claimants as a proportion of residents aged 16-64,3
-2015-06-01,Church,E05000671,Claimants as a proportion of residents aged 16-64,1.8
-2015-06-01,East,E05000672,Claimants as a proportion of residents aged 16-64,4.6
-2015-06-01,Elton,E05000673,Claimants as a proportion of residents aged 16-64,2.2
-2015-06-01,Holyrood,E05000674,Claimants as a proportion of residents aged 16-64,1.9
-2015-06-01,Moorside,E05000675,Claimants as a proportion of residents aged 16-64,4.3
-2015-06-01,North Manor,E05000676,Claimants as a proportion of residents aged 16-64,0.9
-2015-06-01,Pilkington Park,E05000677,Claimants as a proportion of residents aged 16-64,1.2
-2015-06-01,Radcliffe East,E05000678,Claimants as a proportion of residents aged 16-64,3
-2015-06-01,Radcliffe North,E05000679,Claimants as a proportion of residents aged 16-64,2.1
-2015-06-01,Radcliffe West,E05000680,Claimants as a proportion of residents aged 16-64,2.8
-2015-06-01,Ramsbottom,E05000681,Claimants as a proportion of residents aged 16-64,1.3
-2015-06-01,Redvales,E05000682,Claimants as a proportion of residents aged 16-64,2.9
-2015-06-01,St Mary's,E05000683,Claimants as a proportion of residents aged 16-64,2.2
-2015-06-01,Sedgley,E05000684,Claimants as a proportion of residents aged 16-64,1.9
-2015-06-01,Tottington,E05000685,Claimants as a proportion of residents aged 16-64,1.2
-2015-06-01,Unsworth,E05000686,Claimants as a proportion of residents aged 16-64,2
-2015-06-01,Ancoats and Clayton,E05000687,Claimants as a proportion of residents aged 16-64,2.2
-2015-06-01,Ardwick,E05000688,Claimants as a proportion of residents aged 16-64,3
-2015-06-01,Baguley,E05000689,Claimants as a proportion of residents aged 16-64,3.3
-2015-06-01,Bradford,E05000690,Claimants as a proportion of residents aged 16-64,3.1
-2015-06-01,Brooklands,E05000691,Claimants as a proportion of residents aged 16-64,2.4
-2015-06-01,Burnage,E05000692,Claimants as a proportion of residents aged 16-64,2.2
-2015-06-01,Charlestown,E05000693,Claimants as a proportion of residents aged 16-64,3.5
-2015-06-01,Cheetham,E05000694,Claimants as a proportion of residents aged 16-64,2.6
-2015-06-01,Chorlton,E05000695,Claimants as a proportion of residents aged 16-64,1.4
-2015-06-01,Chorlton Park,E05000696,Claimants as a proportion of residents aged 16-64,1.9
-2015-06-01,City Centre,E05000697,Claimants as a proportion of residents aged 16-64,0.3
-2015-06-01,Crumpsall,E05000698,Claimants as a proportion of residents aged 16-64,3.7
-2015-06-01,Didsbury East,E05000699,Claimants as a proportion of residents aged 16-64,1.2
-2015-06-01,Didsbury West,E05000700,Claimants as a proportion of residents aged 16-64,1.3
-2015-06-01,Fallowfield,E05000701,Claimants as a proportion of residents aged 16-64,2.1
-2015-06-01,Gorton North,E05000702,Claimants as a proportion of residents aged 16-64,3.9
-2015-06-01,Gorton South,E05000703,Claimants as a proportion of residents aged 16-64,3.3
-2015-06-01,Harpurhey,E05000704,Claimants as a proportion of residents aged 16-64,4.8
-2015-06-01,Higher Blackley,E05000705,Claimants as a proportion of residents aged 16-64,3.3
-2015-06-01,Hulme,E05000706,Claimants as a proportion of residents aged 16-64,2.3
-2015-06-01,Levenshulme,E05000707,Claimants as a proportion of residents aged 16-64,1.8
-2015-06-01,Longsight,E05000708,Claimants as a proportion of residents aged 16-64,3.1
-2015-06-01,Miles Platting and Newton Heath,E05000709,Claimants as a proportion of residents aged 16-64,4.7
-2015-06-01,Moss Side,E05000710,Claimants as a proportion of residents aged 16-64,4.2
-2015-06-01,Moston,E05000711,Claimants as a proportion of residents aged 16-64,2.9
-2015-06-01,Northenden,E05000712,Claimants as a proportion of residents aged 16-64,2.8
-2015-06-01,Old Moat,E05000713,Claimants as a proportion of residents aged 16-64,2.7
-2015-06-01,Rusholme,E05000714,Claimants as a proportion of residents aged 16-64,3.2
-2015-06-01,Sharston,E05000715,Claimants as a proportion of residents aged 16-64,3.5
-2015-06-01,Whalley Range,E05000716,Claimants as a proportion of residents aged 16-64,3.1
-2015-06-01,Withington,E05000717,Claimants as a proportion of residents aged 16-64,1.4
-2015-06-01,Woodhouse Park,E05000718,Claimants as a proportion of residents aged 16-64,3.7
-2015-06-01,Alexandra,E05000719,Claimants as a proportion of residents aged 16-64,5.2
-2015-06-01,Chadderton Central,E05000720,Claimants as a proportion of residents aged 16-64,1.9
-2015-06-01,Chadderton North,E05000721,Claimants as a proportion of residents aged 16-64,2
-2015-06-01,Chadderton South,E05000722,Claimants as a proportion of residents aged 16-64,2.5
-2015-06-01,Coldhurst,E05000723,Claimants as a proportion of residents aged 16-64,6.3
-2015-06-01,Crompton,E05000724,Claimants as a proportion of residents aged 16-64,1.3
-2015-06-01,Failsworth East,E05000725,Claimants as a proportion of residents aged 16-64,1.9
-2015-06-01,Failsworth West,E05000726,Claimants as a proportion of residents aged 16-64,2.6
-2015-06-01,Hollinwood,E05000727,Claimants as a proportion of residents aged 16-64,3.5
-2015-06-01,Medlock Vale,E05000728,Claimants as a proportion of residents aged 16-64,3.2
-2015-06-01,Royton North,E05000729,Claimants as a proportion of residents aged 16-64,1.9
-2015-06-01,Royton South,E05000730,Claimants as a proportion of residents aged 16-64,1.7
-2015-06-01,Saddleworth North,E05000731,Claimants as a proportion of residents aged 16-64,1.1
-2015-06-01,Saddleworth South,E05000732,Claimants as a proportion of residents aged 16-64,0.9
-2015-06-01,Saddleworth West and Lees,E05000733,Claimants as a proportion of residents aged 16-64,1.2
-2015-06-01,St James',E05000734,Claimants as a proportion of residents aged 16-64,2.7
-2015-06-01,St Mary's,E05000735,Claimants as a proportion of residents aged 16-64,4.7
-2015-06-01,Shaw,E05000736,Claimants as a proportion of residents aged 16-64,2.1
-2015-06-01,Waterhead,E05000737,Claimants as a proportion of residents aged 16-64,3.2
-2015-06-01,Werneth,E05000738,Claimants as a proportion of residents aged 16-64,4.3
-2015-06-01,Balderstone and Kirkholt,E05000739,Claimants as a proportion of residents aged 16-64,3.5
-2015-06-01,Bamford,E05000740,Claimants as a proportion of residents aged 16-64,1.6
-2015-06-01,Castleton,E05000741,Claimants as a proportion of residents aged 16-64,2.6
-2015-06-01,Central Rochdale,E05000742,Claimants as a proportion of residents aged 16-64,5.9
-2015-06-01,East Middleton,E05000743,Claimants as a proportion of residents aged 16-64,2.3
-2015-06-01,Healey,E05000744,Claimants as a proportion of residents aged 16-64,1.5
-2015-06-01,Hopwood Hall,E05000745,Claimants as a proportion of residents aged 16-64,3.1
-2015-06-01,Kingsway,E05000746,Claimants as a proportion of residents aged 16-64,3.4
-2015-06-01,Littleborough Lakeside,E05000747,Claimants as a proportion of residents aged 16-64,1.3
-2015-06-01,Milkstone and Deeplish,E05000748,Claimants as a proportion of residents aged 16-64,4.9
-2015-06-01,Milnrow and Newhey,E05000749,Claimants as a proportion of residents aged 16-64,1.4
-2015-06-01,Norden,E05000750,Claimants as a proportion of residents aged 16-64,0.6
-2015-06-01,North Heywood,E05000751,Claimants as a proportion of residents aged 16-64,3.2
-2015-06-01,North Middleton,E05000752,Claimants as a proportion of residents aged 16-64,2.1
-2015-06-01,Smallbridge and Firgrove,E05000753,Claimants as a proportion of residents aged 16-64,3.9
-2015-06-01,South Middleton,E05000754,Claimants as a proportion of residents aged 16-64,1.8
-2015-06-01,Spotland and Falinge,E05000755,Claimants as a proportion of residents aged 16-64,2.5
-2015-06-01,Wardle and West Littleborough,E05000756,Claimants as a proportion of residents aged 16-64,0.9
-2015-06-01,West Heywood,E05000757,Claimants as a proportion of residents aged 16-64,2.9
-2015-06-01,West Middleton,E05000758,Claimants as a proportion of residents aged 16-64,3.2
-2015-06-01,Barton,E05000759,Claimants as a proportion of residents aged 16-64,2.9
-2015-06-01,Boothstown and Ellenbrook,E05000760,Claimants as a proportion of residents aged 16-64,0.8
-2015-06-01,Broughton,E05000761,Claimants as a proportion of residents aged 16-64,5.2
-2015-06-01,Cadishead,E05000762,Claimants as a proportion of residents aged 16-64,1.7
-2015-06-01,Claremont,E05000763,Claimants as a proportion of residents aged 16-64,1
-2015-06-01,Eccles,E05000764,Claimants as a proportion of residents aged 16-64,2.1
-2015-06-01,Irlam,E05000765,Claimants as a proportion of residents aged 16-64,1.8
-2015-06-01,Irwell Riverside,E05000766,Claimants as a proportion of residents aged 16-64,2.7
-2015-06-01,Kersal,E05000767,Claimants as a proportion of residents aged 16-64,2
-2015-06-01,Langworthy,E05000768,Claimants as a proportion of residents aged 16-64,3.9
-2015-06-01,Little Hulton,E05000769,Claimants as a proportion of residents aged 16-64,5
-2015-06-01,Ordsall,E05000770,Claimants as a proportion of residents aged 16-64,1.7
-2015-06-01,Pendlebury,E05000771,Claimants as a proportion of residents aged 16-64,1.9
-2015-06-01,Swinton North,E05000772,Claimants as a proportion of residents aged 16-64,2.4
-2015-06-01,Swinton South,E05000773,Claimants as a proportion of residents aged 16-64,2.1
-2015-06-01,Walkden North,E05000774,Claimants as a proportion of residents aged 16-64,3.9
-2015-06-01,Walkden South,E05000775,Claimants as a proportion of residents aged 16-64,1.8
-2015-06-01,Weaste and Seedley,E05000776,Claimants as a proportion of residents aged 16-64,2.7
-2015-06-01,Winton,E05000777,Claimants as a proportion of residents aged 16-64,2.9
-2015-06-01,Worsley,E05000778,Claimants as a proportion of residents aged 16-64,0.7
-2015-06-01,Bramhall North,E05000779,Claimants as a proportion of residents aged 16-64,0.9
-2015-06-01,Bramhall South and Woodford,E05000780,Claimants as a proportion of residents aged 16-64,0.5
-2015-06-01,Bredbury and Woodley,E05000781,Claimants as a proportion of residents aged 16-64,1.6
-2015-06-01,Bredbury Green and Romiley,E05000782,Claimants as a proportion of residents aged 16-64,2.4
-2015-06-01,Brinnington and Central,E05000783,Claimants as a proportion of residents aged 16-64,6
-2015-06-01,Cheadle and Gatley,E05000784,Claimants as a proportion of residents aged 16-64,1.3
-2015-06-01,Cheadle Hulme North,E05000785,Claimants as a proportion of residents aged 16-64,1.7
-2015-06-01,Cheadle Hulme South,E05000786,Claimants as a proportion of residents aged 16-64,0.9
-2015-06-01,Davenport and Cale Green,E05000787,Claimants as a proportion of residents aged 16-64,2.7
-2015-06-01,Edgeley and Cheadle Heath,E05000788,Claimants as a proportion of residents aged 16-64,2.3
-2015-06-01,Hazel Grove,E05000789,Claimants as a proportion of residents aged 16-64,1.2
-2015-06-01,Heald Green,E05000790,Claimants as a proportion of residents aged 16-64,1.1
-2015-06-01,Heatons North,E05000791,Claimants as a proportion of residents aged 16-64,1.7
-2015-06-01,Heatons South,E05000792,Claimants as a proportion of residents aged 16-64,1.9
-2015-06-01,Manor,E05000793,Claimants as a proportion of residents aged 16-64,2
-2015-06-01,Marple North,E05000794,Claimants as a proportion of residents aged 16-64,0.9
-2015-06-01,Marple South,E05000795,Claimants as a proportion of residents aged 16-64,1.2
-2015-06-01,Offerton,E05000796,Claimants as a proportion of residents aged 16-64,2
-2015-06-01,Reddish North,E05000797,Claimants as a proportion of residents aged 16-64,2.3
-2015-06-01,Reddish South,E05000798,Claimants as a proportion of residents aged 16-64,2.4
-2015-06-01,Stepping Hill,E05000799,Claimants as a proportion of residents aged 16-64,1.1
-2015-06-01,Ashton Hurst,E05000800,Claimants as a proportion of residents aged 16-64,2.6
-2015-06-01,Ashton St Michael's,E05000801,Claimants as a proportion of residents aged 16-64,2.9
-2015-06-01,Ashton Waterloo,E05000802,Claimants as a proportion of residents aged 16-64,2.4
-2015-06-01,Audenshaw,E05000803,Claimants as a proportion of residents aged 16-64,1.9
-2015-06-01,Denton North East,E05000804,Claimants as a proportion of residents aged 16-64,2.3
-2015-06-01,Denton South,E05000805,Claimants as a proportion of residents aged 16-64,2.8
-2015-06-01,Denton West,E05000806,Claimants as a proportion of residents aged 16-64,1.3
-2015-06-01,Droylsden East,E05000807,Claimants as a proportion of residents aged 16-64,2.1
-2015-06-01,Droylsden West,E05000808,Claimants as a proportion of residents aged 16-64,1.9
-2015-06-01,Dukinfield,E05000809,Claimants as a proportion of residents aged 16-64,3
-2015-06-01,Dukinfield Stalybridge,E05000810,Claimants as a proportion of residents aged 16-64,2.1
-2015-06-01,Hyde Godley,E05000811,Claimants as a proportion of residents aged 16-64,2.8
-2015-06-01,Hyde Newton,E05000812,Claimants as a proportion of residents aged 16-64,2.8
-2015-06-01,Hyde Werneth,E05000813,Claimants as a proportion of residents aged 16-64,1.9
-2015-06-01,Longdendale,E05000814,Claimants as a proportion of residents aged 16-64,2.7
-2015-06-01,Mossley,E05000815,Claimants as a proportion of residents aged 16-64,2.2
-2015-06-01,St Peter's,E05000816,Claimants as a proportion of residents aged 16-64,4.5
-2015-06-01,Stalybridge North,E05000817,Claimants as a proportion of residents aged 16-64,3.4
-2015-06-01,Stalybridge South,E05000818,Claimants as a proportion of residents aged 16-64,2.7
-2015-06-01,Altrincham,E05000819,Claimants as a proportion of residents aged 16-64,0.9
-2015-06-01,Ashton upon Mersey,E05000820,Claimants as a proportion of residents aged 16-64,1
-2015-06-01,Bowdon,E05000821,Claimants as a proportion of residents aged 16-64,0.9
-2015-06-01,Broadheath,E05000822,Claimants as a proportion of residents aged 16-64,1.1
-2015-06-01,Brooklands,E05000823,Claimants as a proportion of residents aged 16-64,0.6
-2015-06-01,Bucklow-St Martins,E05000824,Claimants as a proportion of residents aged 16-64,3.5
-2015-06-01,Clifford,E05000825,Claimants as a proportion of residents aged 16-64,3.8
-2015-06-01,Davyhulme East,E05000826,Claimants as a proportion of residents aged 16-64,1.3
-2015-06-01,Davyhulme West,E05000827,Claimants as a proportion of residents aged 16-64,1.3
-2015-06-01,Flixton,E05000828,Claimants as a proportion of residents aged 16-64,1
-2015-06-01,Gorse Hill,E05000829,Claimants as a proportion of residents aged 16-64,2.2
-2015-06-01,Hale Barns,E05000830,Claimants as a proportion of residents aged 16-64,0.7
-2015-06-01,Hale Central,E05000831,Claimants as a proportion of residents aged 16-64,0.5
-2015-06-01,Longford,E05000832,Claimants as a proportion of residents aged 16-64,2.2
-2015-06-01,Priory,E05000833,Claimants as a proportion of residents aged 16-64,1
-2015-06-01,St Mary's,E05000834,Claimants as a proportion of residents aged 16-64,2.1
-2015-06-01,Sale Moor,E05000835,Claimants as a proportion of residents aged 16-64,1.8
-2015-06-01,Stretford,E05000836,Claimants as a proportion of residents aged 16-64,2.1
-2015-06-01,Timperley,E05000837,Claimants as a proportion of residents aged 16-64,0.5
-2015-06-01,Urmston,E05000838,Claimants as a proportion of residents aged 16-64,1.2
-2015-06-01,Village,E05000839,Claimants as a proportion of residents aged 16-64,1.6
-2015-06-01,Abram,E05000840,Claimants as a proportion of residents aged 16-64,3
-2015-06-01,Ashton,E05000841,Claimants as a proportion of residents aged 16-64,1.9
-2015-06-01,Aspull New Springs Whelley,E05000842,Claimants as a proportion of residents aged 16-64,1.6
-2015-06-01,Astley Mosley Common,E05000843,Claimants as a proportion of residents aged 16-64,1.4
-2015-06-01,Atherleigh,E05000844,Claimants as a proportion of residents aged 16-64,2.2
-2015-06-01,Atherton,E05000845,Claimants as a proportion of residents aged 16-64,3.4
-2015-06-01,Bryn,E05000846,Claimants as a proportion of residents aged 16-64,2
-2015-06-01,Douglas,E05000847,Claimants as a proportion of residents aged 16-64,3.5
-2015-06-01,Golborne and Lowton West,E05000848,Claimants as a proportion of residents aged 16-64,2.3
-2015-06-01,Hindley,E05000849,Claimants as a proportion of residents aged 16-64,2.8
-2015-06-01,Hindley Green,E05000850,Claimants as a proportion of residents aged 16-64,1.2
-2015-06-01,Ince,E05000851,Claimants as a proportion of residents aged 16-64,4
-2015-06-01,Leigh East,E05000852,Claimants as a proportion of residents aged 16-64,2.8
-2015-06-01,Leigh South,E05000853,Claimants as a proportion of residents aged 16-64,2.5
-2015-06-01,Leigh West,E05000854,Claimants as a proportion of residents aged 16-64,4.2
-2015-06-01,Lowton East,E05000855,Claimants as a proportion of residents aged 16-64,1
-2015-06-01,Orrell,E05000856,Claimants as a proportion of residents aged 16-64,1.1
-2015-06-01,Pemberton,E05000857,Claimants as a proportion of residents aged 16-64,3.7
-2015-06-01,Shevington with Lower Ground,E05000858,Claimants as a proportion of residents aged 16-64,1.2
-2015-06-01,Standish with Langtree,E05000859,Claimants as a proportion of residents aged 16-64,1.5
-2015-06-01,Tyldesley,E05000860,Claimants as a proportion of residents aged 16-64,2.4
-2015-06-01,Wigan Central,E05000861,Claimants as a proportion of residents aged 16-64,2.9
-2015-06-01,Wigan West,E05000862,Claimants as a proportion of residents aged 16-64,2.4
-2015-06-01,Winstanley,E05000863,Claimants as a proportion of residents aged 16-64,0.8
-2015-06-01,Worsley Mesnes,E05000864,Claimants as a proportion of residents aged 16-64,2.6
 2015-07-01,Greater Manchester,E47000001,Claimants as a proportion of residents aged 16-64,2.5
 2015-07-01,Bolton,E08000001,Claimants as a proportion of residents aged 16-64,2.9
 2015-07-01,Bury,E08000002,Claimants as a proportion of residents aged 16-64,2.4
@@ -8140,40 +7914,40 @@ date,area_name,area_code,measure,value
 2018-06-01,Bury,E08000002,Claimants as a proportion of residents aged 16-64,2.5
 2018-06-01,Manchester,E08000003,Claimants as a proportion of residents aged 16-64,3.2
 2018-06-01,Oldham,E08000004,Claimants as a proportion of residents aged 16-64,4.4
-2018-06-01,Rochdale,E08000005,Claimants as a proportion of residents aged 16-64,2.9
+2018-06-01,Rochdale,E08000005,Claimants as a proportion of residents aged 16-64,3
 2018-06-01,Salford,E08000006,Claimants as a proportion of residents aged 16-64,2.9
 2018-06-01,Stockport,E08000007,Claimants as a proportion of residents aged 16-64,1.9
 2018-06-01,Tameside,E08000008,Claimants as a proportion of residents aged 16-64,3.1
-2018-06-01,Trafford,E08000009,Claimants as a proportion of residents aged 16-64,2.1
-2018-06-01,Wigan,E08000010,Claimants as a proportion of residents aged 16-64,2.8
+2018-06-01,Trafford,E08000009,Claimants as a proportion of residents aged 16-64,2.2
+2018-06-01,Wigan,E08000010,Claimants as a proportion of residents aged 16-64,2.9
 2018-06-01,Astley Bridge,E05000650,Claimants as a proportion of residents aged 16-64,2.2
-2018-06-01,Bradshaw,E05000651,Claimants as a proportion of residents aged 16-64,2.4
+2018-06-01,Bradshaw,E05000651,Claimants as a proportion of residents aged 16-64,2.5
 2018-06-01,Breightmet,E05000652,Claimants as a proportion of residents aged 16-64,5.1
 2018-06-01,Bromley Cross,E05000653,Claimants as a proportion of residents aged 16-64,0.9
 2018-06-01,Crompton,E05000654,Claimants as a proportion of residents aged 16-64,4.7
-2018-06-01,Farnworth,E05000655,Claimants as a proportion of residents aged 16-64,5.3
+2018-06-01,Farnworth,E05000655,Claimants as a proportion of residents aged 16-64,5.4
 2018-06-01,Great Lever,E05000656,Claimants as a proportion of residents aged 16-64,4.6
 2018-06-01,Halliwell,E05000657,Claimants as a proportion of residents aged 16-64,7.5
 2018-06-01,Harper Green,E05000658,Claimants as a proportion of residents aged 16-64,4
-2018-06-01,Heaton and Lostock,E05000659,Claimants as a proportion of residents aged 16-64,1
+2018-06-01,Heaton and Lostock,E05000659,Claimants as a proportion of residents aged 16-64,0.9
 2018-06-01,Horwich and Blackrod,E05000660,Claimants as a proportion of residents aged 16-64,1.7
 2018-06-01,Horwich North East,E05000661,Claimants as a proportion of residents aged 16-64,2
-2018-06-01,Hulton,E05000662,Claimants as a proportion of residents aged 16-64,2.8
+2018-06-01,Hulton,E05000662,Claimants as a proportion of residents aged 16-64,2.9
 2018-06-01,Kearsley,E05000663,Claimants as a proportion of residents aged 16-64,2.3
-2018-06-01,Little Lever and Darcy Lever,E05000664,Claimants as a proportion of residents aged 16-64,2.2
+2018-06-01,Little Lever and Darcy Lever,E05000664,Claimants as a proportion of residents aged 16-64,2.3
 2018-06-01,Rumworth,E05000665,Claimants as a proportion of residents aged 16-64,5.2
 2018-06-01,Smithills,E05000666,Claimants as a proportion of residents aged 16-64,3.1
-2018-06-01,Tonge with the Haulgh,E05000667,Claimants as a proportion of residents aged 16-64,5.4
+2018-06-01,Tonge with the Haulgh,E05000667,Claimants as a proportion of residents aged 16-64,5.6
 2018-06-01,Westhoughton North and Chew Moor,E05000668,Claimants as a proportion of residents aged 16-64,1.5
 2018-06-01,Westhoughton South,E05000669,Claimants as a proportion of residents aged 16-64,2.1
 2018-06-01,Besses,E05000670,Claimants as a proportion of residents aged 16-64,3.2
 2018-06-01,Church,E05000671,Claimants as a proportion of residents aged 16-64,2.3
-2018-06-01,East,E05000672,Claimants as a proportion of residents aged 16-64,4.9
+2018-06-01,East,E05000672,Claimants as a proportion of residents aged 16-64,4.8
 2018-06-01,Elton,E05000673,Claimants as a proportion of residents aged 16-64,2.3
-2018-06-01,Holyrood,E05000674,Claimants as a proportion of residents aged 16-64,1.9
+2018-06-01,Holyrood,E05000674,Claimants as a proportion of residents aged 16-64,2
 2018-06-01,Moorside,E05000675,Claimants as a proportion of residents aged 16-64,4.9
 2018-06-01,North Manor,E05000676,Claimants as a proportion of residents aged 16-64,1
-2018-06-01,Pilkington Park,E05000677,Claimants as a proportion of residents aged 16-64,1.3
+2018-06-01,Pilkington Park,E05000677,Claimants as a proportion of residents aged 16-64,1.2
 2018-06-01,Radcliffe East,E05000678,Claimants as a proportion of residents aged 16-64,3.2
 2018-06-01,Radcliffe North,E05000679,Claimants as a proportion of residents aged 16-64,2.4
 2018-06-01,Radcliffe West,E05000680,Claimants as a proportion of residents aged 16-64,3
@@ -8183,13 +7957,13 @@ date,area_name,area_code,measure,value
 2018-06-01,Sedgley,E05000684,Claimants as a proportion of residents aged 16-64,1.7
 2018-06-01,Tottington,E05000685,Claimants as a proportion of residents aged 16-64,0.9
 2018-06-01,Unsworth,E05000686,Claimants as a proportion of residents aged 16-64,2
-2018-06-01,Ancoats and Clayton,E05000687,Claimants as a proportion of residents aged 16-64,2.8
+2018-06-01,Ancoats and Clayton,E05000687,Claimants as a proportion of residents aged 16-64,2.9
 2018-06-01,Ardwick,E05000688,Claimants as a proportion of residents aged 16-64,3.6
-2018-06-01,Baguley,E05000689,Claimants as a proportion of residents aged 16-64,3.5
+2018-06-01,Baguley,E05000689,Claimants as a proportion of residents aged 16-64,3.4
 2018-06-01,Bradford,E05000690,Claimants as a proportion of residents aged 16-64,4.7
 2018-06-01,Brooklands,E05000691,Claimants as a proportion of residents aged 16-64,2.5
 2018-06-01,Burnage,E05000692,Claimants as a proportion of residents aged 16-64,3
-2018-06-01,Charlestown,E05000693,Claimants as a proportion of residents aged 16-64,4.1
+2018-06-01,Charlestown,E05000693,Claimants as a proportion of residents aged 16-64,4
 2018-06-01,Cheetham,E05000694,Claimants as a proportion of residents aged 16-64,2.9
 2018-06-01,Chorlton,E05000695,Claimants as a proportion of residents aged 16-64,1.9
 2018-06-01,Chorlton Park,E05000696,Claimants as a proportion of residents aged 16-64,2.6
@@ -8198,84 +7972,84 @@ date,area_name,area_code,measure,value
 2018-06-01,Didsbury East,E05000699,Claimants as a proportion of residents aged 16-64,1.7
 2018-06-01,Didsbury West,E05000700,Claimants as a proportion of residents aged 16-64,1.3
 2018-06-01,Fallowfield,E05000701,Claimants as a proportion of residents aged 16-64,2.3
-2018-06-01,Gorton North,E05000702,Claimants as a proportion of residents aged 16-64,5.4
+2018-06-01,Gorton North,E05000702,Claimants as a proportion of residents aged 16-64,5.5
 2018-06-01,Gorton South,E05000703,Claimants as a proportion of residents aged 16-64,4
-2018-06-01,Harpurhey,E05000704,Claimants as a proportion of residents aged 16-64,5.7
+2018-06-01,Harpurhey,E05000704,Claimants as a proportion of residents aged 16-64,5.8
 2018-06-01,Higher Blackley,E05000705,Claimants as a proportion of residents aged 16-64,3.2
 2018-06-01,Hulme,E05000706,Claimants as a proportion of residents aged 16-64,2.8
-2018-06-01,Levenshulme,E05000707,Claimants as a proportion of residents aged 16-64,2.5
-2018-06-01,Longsight,E05000708,Claimants as a proportion of residents aged 16-64,3.7
+2018-06-01,Levenshulme,E05000707,Claimants as a proportion of residents aged 16-64,2.6
+2018-06-01,Longsight,E05000708,Claimants as a proportion of residents aged 16-64,3.8
 2018-06-01,Miles Platting and Newton Heath,E05000709,Claimants as a proportion of residents aged 16-64,6.1
 2018-06-01,Moss Side,E05000710,Claimants as a proportion of residents aged 16-64,4.5
 2018-06-01,Moston,E05000711,Claimants as a proportion of residents aged 16-64,3.6
-2018-06-01,Northenden,E05000712,Claimants as a proportion of residents aged 16-64,2.9
-2018-06-01,Old Moat,E05000713,Claimants as a proportion of residents aged 16-64,3.2
-2018-06-01,Rusholme,E05000714,Claimants as a proportion of residents aged 16-64,3.4
+2018-06-01,Northenden,E05000712,Claimants as a proportion of residents aged 16-64,3
+2018-06-01,Old Moat,E05000713,Claimants as a proportion of residents aged 16-64,3.1
+2018-06-01,Rusholme,E05000714,Claimants as a proportion of residents aged 16-64,3.5
 2018-06-01,Sharston,E05000715,Claimants as a proportion of residents aged 16-64,3.7
-2018-06-01,Whalley Range,E05000716,Claimants as a proportion of residents aged 16-64,4.1
+2018-06-01,Whalley Range,E05000716,Claimants as a proportion of residents aged 16-64,4
 2018-06-01,Withington,E05000717,Claimants as a proportion of residents aged 16-64,1.5
 2018-06-01,Woodhouse Park,E05000718,Claimants as a proportion of residents aged 16-64,3.5
-2018-06-01,Alexandra,E05000719,Claimants as a proportion of residents aged 16-64,8.2
-2018-06-01,Chadderton Central,E05000720,Claimants as a proportion of residents aged 16-64,2.9
-2018-06-01,Chadderton North,E05000721,Claimants as a proportion of residents aged 16-64,3.1
+2018-06-01,Alexandra,E05000719,Claimants as a proportion of residents aged 16-64,8.3
+2018-06-01,Chadderton Central,E05000720,Claimants as a proportion of residents aged 16-64,2.8
+2018-06-01,Chadderton North,E05000721,Claimants as a proportion of residents aged 16-64,3
 2018-06-01,Chadderton South,E05000722,Claimants as a proportion of residents aged 16-64,4.1
-2018-06-01,Coldhurst,E05000723,Claimants as a proportion of residents aged 16-64,8.3
+2018-06-01,Coldhurst,E05000723,Claimants as a proportion of residents aged 16-64,8.4
 2018-06-01,Crompton,E05000724,Claimants as a proportion of residents aged 16-64,2.2
 2018-06-01,Failsworth East,E05000725,Claimants as a proportion of residents aged 16-64,3.2
-2018-06-01,Failsworth West,E05000726,Claimants as a proportion of residents aged 16-64,3.7
-2018-06-01,Hollinwood,E05000727,Claimants as a proportion of residents aged 16-64,6.4
+2018-06-01,Failsworth West,E05000726,Claimants as a proportion of residents aged 16-64,3.8
+2018-06-01,Hollinwood,E05000727,Claimants as a proportion of residents aged 16-64,6.3
 2018-06-01,Medlock Vale,E05000728,Claimants as a proportion of residents aged 16-64,4.9
 2018-06-01,Royton North,E05000729,Claimants as a proportion of residents aged 16-64,2.8
 2018-06-01,Royton South,E05000730,Claimants as a proportion of residents aged 16-64,2.8
-2018-06-01,Saddleworth North,E05000731,Claimants as a proportion of residents aged 16-64,1.4
+2018-06-01,Saddleworth North,E05000731,Claimants as a proportion of residents aged 16-64,1.5
 2018-06-01,Saddleworth South,E05000732,Claimants as a proportion of residents aged 16-64,1.3
 2018-06-01,Saddleworth West and Lees,E05000733,Claimants as a proportion of residents aged 16-64,1.9
-2018-06-01,St James',E05000734,Claimants as a proportion of residents aged 16-64,4.9
+2018-06-01,St James',E05000734,Claimants as a proportion of residents aged 16-64,5
 2018-06-01,St Mary's,E05000735,Claimants as a proportion of residents aged 16-64,6.1
-2018-06-01,Shaw,E05000736,Claimants as a proportion of residents aged 16-64,3.4
-2018-06-01,Waterhead,E05000737,Claimants as a proportion of residents aged 16-64,5.7
+2018-06-01,Shaw,E05000736,Claimants as a proportion of residents aged 16-64,3.5
+2018-06-01,Waterhead,E05000737,Claimants as a proportion of residents aged 16-64,5.8
 2018-06-01,Werneth,E05000738,Claimants as a proportion of residents aged 16-64,6.2
-2018-06-01,Balderstone and Kirkholt,E05000739,Claimants as a proportion of residents aged 16-64,3.7
+2018-06-01,Balderstone and Kirkholt,E05000739,Claimants as a proportion of residents aged 16-64,3.8
 2018-06-01,Bamford,E05000740,Claimants as a proportion of residents aged 16-64,1.9
 2018-06-01,Castleton,E05000741,Claimants as a proportion of residents aged 16-64,2.9
 2018-06-01,Central Rochdale,E05000742,Claimants as a proportion of residents aged 16-64,6.5
-2018-06-01,East Middleton,E05000743,Claimants as a proportion of residents aged 16-64,2.5
-2018-06-01,Healey,E05000744,Claimants as a proportion of residents aged 16-64,1.8
+2018-06-01,East Middleton,E05000743,Claimants as a proportion of residents aged 16-64,2.6
+2018-06-01,Healey,E05000744,Claimants as a proportion of residents aged 16-64,1.9
 2018-06-01,Hopwood Hall,E05000745,Claimants as a proportion of residents aged 16-64,3.2
 2018-06-01,Kingsway,E05000746,Claimants as a proportion of residents aged 16-64,3.8
 2018-06-01,Littleborough Lakeside,E05000747,Claimants as a proportion of residents aged 16-64,1.4
-2018-06-01,Milkstone and Deeplish,E05000748,Claimants as a proportion of residents aged 16-64,4.7
+2018-06-01,Milkstone and Deeplish,E05000748,Claimants as a proportion of residents aged 16-64,4.9
 2018-06-01,Milnrow and Newhey,E05000749,Claimants as a proportion of residents aged 16-64,1.3
 2018-06-01,Norden,E05000750,Claimants as a proportion of residents aged 16-64,0.6
-2018-06-01,North Heywood,E05000751,Claimants as a proportion of residents aged 16-64,3.4
-2018-06-01,North Middleton,E05000752,Claimants as a proportion of residents aged 16-64,2.3
-2018-06-01,Smallbridge and Firgrove,E05000753,Claimants as a proportion of residents aged 16-64,4
-2018-06-01,South Middleton,E05000754,Claimants as a proportion of residents aged 16-64,1.9
-2018-06-01,Spotland and Falinge,E05000755,Claimants as a proportion of residents aged 16-64,2.8
+2018-06-01,North Heywood,E05000751,Claimants as a proportion of residents aged 16-64,3.5
+2018-06-01,North Middleton,E05000752,Claimants as a proportion of residents aged 16-64,2.4
+2018-06-01,Smallbridge and Firgrove,E05000753,Claimants as a proportion of residents aged 16-64,4.1
+2018-06-01,South Middleton,E05000754,Claimants as a proportion of residents aged 16-64,2
+2018-06-01,Spotland and Falinge,E05000755,Claimants as a proportion of residents aged 16-64,2.9
 2018-06-01,Wardle and West Littleborough,E05000756,Claimants as a proportion of residents aged 16-64,1
-2018-06-01,West Heywood,E05000757,Claimants as a proportion of residents aged 16-64,2.9
-2018-06-01,West Middleton,E05000758,Claimants as a proportion of residents aged 16-64,3.9
-2018-06-01,Barton,E05000759,Claimants as a proportion of residents aged 16-64,3.5
+2018-06-01,West Heywood,E05000757,Claimants as a proportion of residents aged 16-64,3.1
+2018-06-01,West Middleton,E05000758,Claimants as a proportion of residents aged 16-64,4
+2018-06-01,Barton,E05000759,Claimants as a proportion of residents aged 16-64,3.6
 2018-06-01,Boothstown and Ellenbrook,E05000760,Claimants as a proportion of residents aged 16-64,0.9
 2018-06-01,Broughton,E05000761,Claimants as a proportion of residents aged 16-64,6.3
-2018-06-01,Cadishead,E05000762,Claimants as a proportion of residents aged 16-64,1.9
+2018-06-01,Cadishead,E05000762,Claimants as a proportion of residents aged 16-64,2
 2018-06-01,Claremont,E05000763,Claimants as a proportion of residents aged 16-64,1.1
 2018-06-01,Eccles,E05000764,Claimants as a proportion of residents aged 16-64,2.3
-2018-06-01,Irlam,E05000765,Claimants as a proportion of residents aged 16-64,2.1
+2018-06-01,Irlam,E05000765,Claimants as a proportion of residents aged 16-64,2
 2018-06-01,Irwell Riverside,E05000766,Claimants as a proportion of residents aged 16-64,3.5
-2018-06-01,Kersal,E05000767,Claimants as a proportion of residents aged 16-64,2.3
+2018-06-01,Kersal,E05000767,Claimants as a proportion of residents aged 16-64,2.2
 2018-06-01,Langworthy,E05000768,Claimants as a proportion of residents aged 16-64,5.1
 2018-06-01,Little Hulton,E05000769,Claimants as a proportion of residents aged 16-64,5.6
 2018-06-01,Ordsall,E05000770,Claimants as a proportion of residents aged 16-64,1.9
-2018-06-01,Pendlebury,E05000771,Claimants as a proportion of residents aged 16-64,2.5
+2018-06-01,Pendlebury,E05000771,Claimants as a proportion of residents aged 16-64,2.4
 2018-06-01,Swinton North,E05000772,Claimants as a proportion of residents aged 16-64,2.5
 2018-06-01,Swinton South,E05000773,Claimants as a proportion of residents aged 16-64,2.2
 2018-06-01,Walkden North,E05000774,Claimants as a proportion of residents aged 16-64,4.2
-2018-06-01,Walkden South,E05000775,Claimants as a proportion of residents aged 16-64,2.2
+2018-06-01,Walkden South,E05000775,Claimants as a proportion of residents aged 16-64,2.1
 2018-06-01,Weaste and Seedley,E05000776,Claimants as a proportion of residents aged 16-64,2.8
-2018-06-01,Winton,E05000777,Claimants as a proportion of residents aged 16-64,3.3
+2018-06-01,Winton,E05000777,Claimants as a proportion of residents aged 16-64,3.4
 2018-06-01,Worsley,E05000778,Claimants as a proportion of residents aged 16-64,0.4
-2018-06-01,Bramhall North,E05000779,Claimants as a proportion of residents aged 16-64,1
+2018-06-01,Bramhall North,E05000779,Claimants as a proportion of residents aged 16-64,0.9
 2018-06-01,Bramhall South and Woodford,E05000780,Claimants as a proportion of residents aged 16-64,0.5
 2018-06-01,Bredbury and Woodley,E05000781,Claimants as a proportion of residents aged 16-64,1.7
 2018-06-01,Bredbury Green and Romiley,E05000782,Claimants as a proportion of residents aged 16-64,2.3
@@ -8283,45 +8057,45 @@ date,area_name,area_code,measure,value
 2018-06-01,Cheadle and Gatley,E05000784,Claimants as a proportion of residents aged 16-64,1.1
 2018-06-01,Cheadle Hulme North,E05000785,Claimants as a proportion of residents aged 16-64,1.5
 2018-06-01,Cheadle Hulme South,E05000786,Claimants as a proportion of residents aged 16-64,0.9
-2018-06-01,Davenport and Cale Green,E05000787,Claimants as a proportion of residents aged 16-64,2.8
+2018-06-01,Davenport and Cale Green,E05000787,Claimants as a proportion of residents aged 16-64,2.7
 2018-06-01,Edgeley and Cheadle Heath,E05000788,Claimants as a proportion of residents aged 16-64,2.4
 2018-06-01,Hazel Grove,E05000789,Claimants as a proportion of residents aged 16-64,1.2
-2018-06-01,Heald Green,E05000790,Claimants as a proportion of residents aged 16-64,1.1
+2018-06-01,Heald Green,E05000790,Claimants as a proportion of residents aged 16-64,1
 2018-06-01,Heatons North,E05000791,Claimants as a proportion of residents aged 16-64,1.5
 2018-06-01,Heatons South,E05000792,Claimants as a proportion of residents aged 16-64,1.5
 2018-06-01,Manor,E05000793,Claimants as a proportion of residents aged 16-64,1.9
-2018-06-01,Marple North,E05000794,Claimants as a proportion of residents aged 16-64,0.9
-2018-06-01,Marple South,E05000795,Claimants as a proportion of residents aged 16-64,1.2
+2018-06-01,Marple North,E05000794,Claimants as a proportion of residents aged 16-64,1
+2018-06-01,Marple South,E05000795,Claimants as a proportion of residents aged 16-64,1.1
 2018-06-01,Offerton,E05000796,Claimants as a proportion of residents aged 16-64,1.9
 2018-06-01,Reddish North,E05000797,Claimants as a proportion of residents aged 16-64,2.4
 2018-06-01,Reddish South,E05000798,Claimants as a proportion of residents aged 16-64,1.9
 2018-06-01,Stepping Hill,E05000799,Claimants as a proportion of residents aged 16-64,1
 2018-06-01,Ashton Hurst,E05000800,Claimants as a proportion of residents aged 16-64,3.5
-2018-06-01,Ashton St Michael's,E05000801,Claimants as a proportion of residents aged 16-64,3.6
+2018-06-01,Ashton St Michael's,E05000801,Claimants as a proportion of residents aged 16-64,3.7
 2018-06-01,Ashton Waterloo,E05000802,Claimants as a proportion of residents aged 16-64,2.6
-2018-06-01,Audenshaw,E05000803,Claimants as a proportion of residents aged 16-64,2.1
+2018-06-01,Audenshaw,E05000803,Claimants as a proportion of residents aged 16-64,2.2
 2018-06-01,Denton North East,E05000804,Claimants as a proportion of residents aged 16-64,2.5
-2018-06-01,Denton South,E05000805,Claimants as a proportion of residents aged 16-64,3.3
-2018-06-01,Denton West,E05000806,Claimants as a proportion of residents aged 16-64,1.4
+2018-06-01,Denton South,E05000805,Claimants as a proportion of residents aged 16-64,3.4
+2018-06-01,Denton West,E05000806,Claimants as a proportion of residents aged 16-64,1.5
 2018-06-01,Droylsden East,E05000807,Claimants as a proportion of residents aged 16-64,2.4
 2018-06-01,Droylsden West,E05000808,Claimants as a proportion of residents aged 16-64,2.6
-2018-06-01,Dukinfield,E05000809,Claimants as a proportion of residents aged 16-64,3.1
-2018-06-01,Dukinfield Stalybridge,E05000810,Claimants as a proportion of residents aged 16-64,2.6
+2018-06-01,Dukinfield,E05000809,Claimants as a proportion of residents aged 16-64,3.2
+2018-06-01,Dukinfield Stalybridge,E05000810,Claimants as a proportion of residents aged 16-64,2.7
 2018-06-01,Hyde Godley,E05000811,Claimants as a proportion of residents aged 16-64,3.7
-2018-06-01,Hyde Newton,E05000812,Claimants as a proportion of residents aged 16-64,3.7
+2018-06-01,Hyde Newton,E05000812,Claimants as a proportion of residents aged 16-64,3.8
 2018-06-01,Hyde Werneth,E05000813,Claimants as a proportion of residents aged 16-64,2.7
 2018-06-01,Longdendale,E05000814,Claimants as a proportion of residents aged 16-64,3.6
 2018-06-01,Mossley,E05000815,Claimants as a proportion of residents aged 16-64,2.4
-2018-06-01,St Peter's,E05000816,Claimants as a proportion of residents aged 16-64,5.1
+2018-06-01,St Peter's,E05000816,Claimants as a proportion of residents aged 16-64,5.2
 2018-06-01,Stalybridge North,E05000817,Claimants as a proportion of residents aged 16-64,4.5
 2018-06-01,Stalybridge South,E05000818,Claimants as a proportion of residents aged 16-64,2.7
-2018-06-01,Altrincham,E05000819,Claimants as a proportion of residents aged 16-64,1.5
-2018-06-01,Ashton upon Mersey,E05000820,Claimants as a proportion of residents aged 16-64,1.4
+2018-06-01,Altrincham,E05000819,Claimants as a proportion of residents aged 16-64,1.6
+2018-06-01,Ashton upon Mersey,E05000820,Claimants as a proportion of residents aged 16-64,1.3
 2018-06-01,Bowdon,E05000821,Claimants as a proportion of residents aged 16-64,1.3
 2018-06-01,Broadheath,E05000822,Claimants as a proportion of residents aged 16-64,1.5
-2018-06-01,Brooklands,E05000823,Claimants as a proportion of residents aged 16-64,0.8
+2018-06-01,Brooklands,E05000823,Claimants as a proportion of residents aged 16-64,0.9
 2018-06-01,Bucklow-St Martins,E05000824,Claimants as a proportion of residents aged 16-64,4.5
-2018-06-01,Clifford,E05000825,Claimants as a proportion of residents aged 16-64,4.4
+2018-06-01,Clifford,E05000825,Claimants as a proportion of residents aged 16-64,4.5
 2018-06-01,Davyhulme East,E05000826,Claimants as a proportion of residents aged 16-64,1.6
 2018-06-01,Davyhulme West,E05000827,Claimants as a proportion of residents aged 16-64,1.7
 2018-06-01,Flixton,E05000828,Claimants as a proportion of residents aged 16-64,1.2
@@ -8329,35 +8103,261 @@ date,area_name,area_code,measure,value
 2018-06-01,Hale Barns,E05000830,Claimants as a proportion of residents aged 16-64,0.8
 2018-06-01,Hale Central,E05000831,Claimants as a proportion of residents aged 16-64,0.7
 2018-06-01,Longford,E05000832,Claimants as a proportion of residents aged 16-64,3.6
-2018-06-01,Priory,E05000833,Claimants as a proportion of residents aged 16-64,1.4
+2018-06-01,Priory,E05000833,Claimants as a proportion of residents aged 16-64,1.3
 2018-06-01,St Mary's,E05000834,Claimants as a proportion of residents aged 16-64,3
 2018-06-01,Sale Moor,E05000835,Claimants as a proportion of residents aged 16-64,2.3
 2018-06-01,Stretford,E05000836,Claimants as a proportion of residents aged 16-64,3.3
 2018-06-01,Timperley,E05000837,Claimants as a proportion of residents aged 16-64,0.7
-2018-06-01,Urmston,E05000838,Claimants as a proportion of residents aged 16-64,1.8
+2018-06-01,Urmston,E05000838,Claimants as a proportion of residents aged 16-64,1.9
 2018-06-01,Village,E05000839,Claimants as a proportion of residents aged 16-64,2
-2018-06-01,Abram,E05000840,Claimants as a proportion of residents aged 16-64,3.3
-2018-06-01,Ashton,E05000841,Claimants as a proportion of residents aged 16-64,1.9
+2018-06-01,Abram,E05000840,Claimants as a proportion of residents aged 16-64,3.4
+2018-06-01,Ashton,E05000841,Claimants as a proportion of residents aged 16-64,1.8
 2018-06-01,Aspull New Springs Whelley,E05000842,Claimants as a proportion of residents aged 16-64,1.9
-2018-06-01,Astley Mosley Common,E05000843,Claimants as a proportion of residents aged 16-64,1.5
-2018-06-01,Atherleigh,E05000844,Claimants as a proportion of residents aged 16-64,3.1
-2018-06-01,Atherton,E05000845,Claimants as a proportion of residents aged 16-64,4.5
+2018-06-01,Astley Mosley Common,E05000843,Claimants as a proportion of residents aged 16-64,1.6
+2018-06-01,Atherleigh,E05000844,Claimants as a proportion of residents aged 16-64,3.2
+2018-06-01,Atherton,E05000845,Claimants as a proportion of residents aged 16-64,4.6
 2018-06-01,Bryn,E05000846,Claimants as a proportion of residents aged 16-64,2.2
-2018-06-01,Douglas,E05000847,Claimants as a proportion of residents aged 16-64,4
-2018-06-01,Golborne and Lowton West,E05000848,Claimants as a proportion of residents aged 16-64,2.5
-2018-06-01,Hindley,E05000849,Claimants as a proportion of residents aged 16-64,3.3
-2018-06-01,Hindley Green,E05000850,Claimants as a proportion of residents aged 16-64,1.6
+2018-06-01,Douglas,E05000847,Claimants as a proportion of residents aged 16-64,4.1
+2018-06-01,Golborne and Lowton West,E05000848,Claimants as a proportion of residents aged 16-64,2.6
+2018-06-01,Hindley,E05000849,Claimants as a proportion of residents aged 16-64,3.4
+2018-06-01,Hindley Green,E05000850,Claimants as a proportion of residents aged 16-64,1.7
 2018-06-01,Ince,E05000851,Claimants as a proportion of residents aged 16-64,4.5
-2018-06-01,Leigh East,E05000852,Claimants as a proportion of residents aged 16-64,4
+2018-06-01,Leigh East,E05000852,Claimants as a proportion of residents aged 16-64,4.1
 2018-06-01,Leigh South,E05000853,Claimants as a proportion of residents aged 16-64,3.2
-2018-06-01,Leigh West,E05000854,Claimants as a proportion of residents aged 16-64,5
+2018-06-01,Leigh West,E05000854,Claimants as a proportion of residents aged 16-64,4.9
 2018-06-01,Lowton East,E05000855,Claimants as a proportion of residents aged 16-64,1.4
 2018-06-01,Orrell,E05000856,Claimants as a proportion of residents aged 16-64,1.2
 2018-06-01,Pemberton,E05000857,Claimants as a proportion of residents aged 16-64,4.5
 2018-06-01,Shevington with Lower Ground,E05000858,Claimants as a proportion of residents aged 16-64,1.3
 2018-06-01,Standish with Langtree,E05000859,Claimants as a proportion of residents aged 16-64,1.5
 2018-06-01,Tyldesley,E05000860,Claimants as a proportion of residents aged 16-64,2.5
-2018-06-01,Wigan Central,E05000861,Claimants as a proportion of residents aged 16-64,3.7
-2018-06-01,Wigan West,E05000862,Claimants as a proportion of residents aged 16-64,2.4
+2018-06-01,Wigan Central,E05000861,Claimants as a proportion of residents aged 16-64,3.8
+2018-06-01,Wigan West,E05000862,Claimants as a proportion of residents aged 16-64,2.6
 2018-06-01,Winstanley,E05000863,Claimants as a proportion of residents aged 16-64,0.7
-2018-06-01,Worsley Mesnes,E05000864,Claimants as a proportion of residents aged 16-64,3
+2018-06-01,Worsley Mesnes,E05000864,Claimants as a proportion of residents aged 16-64,3.1
+2018-07-01,Greater Manchester,E47000001,Claimants as a proportion of residents aged 16-64,3
+2018-07-01,Bolton,E08000001,Claimants as a proportion of residents aged 16-64,3.3
+2018-07-01,Bury,E08000002,Claimants as a proportion of residents aged 16-64,2.5
+2018-07-01,Manchester,E08000003,Claimants as a proportion of residents aged 16-64,3.2
+2018-07-01,Oldham,E08000004,Claimants as a proportion of residents aged 16-64,4.4
+2018-07-01,Rochdale,E08000005,Claimants as a proportion of residents aged 16-64,2.9
+2018-07-01,Salford,E08000006,Claimants as a proportion of residents aged 16-64,2.9
+2018-07-01,Stockport,E08000007,Claimants as a proportion of residents aged 16-64,1.9
+2018-07-01,Tameside,E08000008,Claimants as a proportion of residents aged 16-64,3.2
+2018-07-01,Trafford,E08000009,Claimants as a proportion of residents aged 16-64,2.2
+2018-07-01,Wigan,E08000010,Claimants as a proportion of residents aged 16-64,2.9
+2018-07-01,Astley Bridge,E05000650,Claimants as a proportion of residents aged 16-64,2.2
+2018-07-01,Bradshaw,E05000651,Claimants as a proportion of residents aged 16-64,2.4
+2018-07-01,Breightmet,E05000652,Claimants as a proportion of residents aged 16-64,4.8
+2018-07-01,Bromley Cross,E05000653,Claimants as a proportion of residents aged 16-64,0.9
+2018-07-01,Crompton,E05000654,Claimants as a proportion of residents aged 16-64,4.6
+2018-07-01,Farnworth,E05000655,Claimants as a proportion of residents aged 16-64,5.3
+2018-07-01,Great Lever,E05000656,Claimants as a proportion of residents aged 16-64,4.5
+2018-07-01,Halliwell,E05000657,Claimants as a proportion of residents aged 16-64,7.5
+2018-07-01,Harper Green,E05000658,Claimants as a proportion of residents aged 16-64,3.7
+2018-07-01,Heaton and Lostock,E05000659,Claimants as a proportion of residents aged 16-64,0.8
+2018-07-01,Horwich and Blackrod,E05000660,Claimants as a proportion of residents aged 16-64,1.6
+2018-07-01,Horwich North East,E05000661,Claimants as a proportion of residents aged 16-64,2
+2018-07-01,Hulton,E05000662,Claimants as a proportion of residents aged 16-64,2.8
+2018-07-01,Kearsley,E05000663,Claimants as a proportion of residents aged 16-64,2.3
+2018-07-01,Little Lever and Darcy Lever,E05000664,Claimants as a proportion of residents aged 16-64,2.2
+2018-07-01,Rumworth,E05000665,Claimants as a proportion of residents aged 16-64,5.2
+2018-07-01,Smithills,E05000666,Claimants as a proportion of residents aged 16-64,3.1
+2018-07-01,Tonge with the Haulgh,E05000667,Claimants as a proportion of residents aged 16-64,5.5
+2018-07-01,Westhoughton North and Chew Moor,E05000668,Claimants as a proportion of residents aged 16-64,1.4
+2018-07-01,Westhoughton South,E05000669,Claimants as a proportion of residents aged 16-64,2.1
+2018-07-01,Besses,E05000670,Claimants as a proportion of residents aged 16-64,3.1
+2018-07-01,Church,E05000671,Claimants as a proportion of residents aged 16-64,2.2
+2018-07-01,East,E05000672,Claimants as a proportion of residents aged 16-64,4.7
+2018-07-01,Elton,E05000673,Claimants as a proportion of residents aged 16-64,2.2
+2018-07-01,Holyrood,E05000674,Claimants as a proportion of residents aged 16-64,2
+2018-07-01,Moorside,E05000675,Claimants as a proportion of residents aged 16-64,4.8
+2018-07-01,North Manor,E05000676,Claimants as a proportion of residents aged 16-64,1.1
+2018-07-01,Pilkington Park,E05000677,Claimants as a proportion of residents aged 16-64,1.2
+2018-07-01,Radcliffe East,E05000678,Claimants as a proportion of residents aged 16-64,3.2
+2018-07-01,Radcliffe North,E05000679,Claimants as a proportion of residents aged 16-64,2.4
+2018-07-01,Radcliffe West,E05000680,Claimants as a proportion of residents aged 16-64,3
+2018-07-01,Ramsbottom,E05000681,Claimants as a proportion of residents aged 16-64,1.2
+2018-07-01,Redvales,E05000682,Claimants as a proportion of residents aged 16-64,2.7
+2018-07-01,St Mary's,E05000683,Claimants as a proportion of residents aged 16-64,2.4
+2018-07-01,Sedgley,E05000684,Claimants as a proportion of residents aged 16-64,1.8
+2018-07-01,Tottington,E05000685,Claimants as a proportion of residents aged 16-64,0.9
+2018-07-01,Unsworth,E05000686,Claimants as a proportion of residents aged 16-64,2
+2018-07-01,Ancoats and Clayton,E05000687,Claimants as a proportion of residents aged 16-64,2.9
+2018-07-01,Ardwick,E05000688,Claimants as a proportion of residents aged 16-64,3.6
+2018-07-01,Baguley,E05000689,Claimants as a proportion of residents aged 16-64,3.3
+2018-07-01,Bradford,E05000690,Claimants as a proportion of residents aged 16-64,4.9
+2018-07-01,Brooklands,E05000691,Claimants as a proportion of residents aged 16-64,2.5
+2018-07-01,Burnage,E05000692,Claimants as a proportion of residents aged 16-64,3.2
+2018-07-01,Charlestown,E05000693,Claimants as a proportion of residents aged 16-64,4
+2018-07-01,Cheetham,E05000694,Claimants as a proportion of residents aged 16-64,2.8
+2018-07-01,Chorlton,E05000695,Claimants as a proportion of residents aged 16-64,1.8
+2018-07-01,Chorlton Park,E05000696,Claimants as a proportion of residents aged 16-64,2.6
+2018-07-01,City Centre,E05000697,Claimants as a proportion of residents aged 16-64,0.3
+2018-07-01,Crumpsall,E05000698,Claimants as a proportion of residents aged 16-64,3.5
+2018-07-01,Didsbury East,E05000699,Claimants as a proportion of residents aged 16-64,1.6
+2018-07-01,Didsbury West,E05000700,Claimants as a proportion of residents aged 16-64,1.3
+2018-07-01,Fallowfield,E05000701,Claimants as a proportion of residents aged 16-64,2.3
+2018-07-01,Gorton North,E05000702,Claimants as a proportion of residents aged 16-64,5.6
+2018-07-01,Gorton South,E05000703,Claimants as a proportion of residents aged 16-64,4.3
+2018-07-01,Harpurhey,E05000704,Claimants as a proportion of residents aged 16-64,5.8
+2018-07-01,Higher Blackley,E05000705,Claimants as a proportion of residents aged 16-64,3.2
+2018-07-01,Hulme,E05000706,Claimants as a proportion of residents aged 16-64,2.9
+2018-07-01,Levenshulme,E05000707,Claimants as a proportion of residents aged 16-64,2.7
+2018-07-01,Longsight,E05000708,Claimants as a proportion of residents aged 16-64,3.9
+2018-07-01,Miles Platting and Newton Heath,E05000709,Claimants as a proportion of residents aged 16-64,6.4
+2018-07-01,Moss Side,E05000710,Claimants as a proportion of residents aged 16-64,4.7
+2018-07-01,Moston,E05000711,Claimants as a proportion of residents aged 16-64,3.7
+2018-07-01,Northenden,E05000712,Claimants as a proportion of residents aged 16-64,2.9
+2018-07-01,Old Moat,E05000713,Claimants as a proportion of residents aged 16-64,3.2
+2018-07-01,Rusholme,E05000714,Claimants as a proportion of residents aged 16-64,3.6
+2018-07-01,Sharston,E05000715,Claimants as a proportion of residents aged 16-64,3.5
+2018-07-01,Whalley Range,E05000716,Claimants as a proportion of residents aged 16-64,4.2
+2018-07-01,Withington,E05000717,Claimants as a proportion of residents aged 16-64,1.5
+2018-07-01,Woodhouse Park,E05000718,Claimants as a proportion of residents aged 16-64,3.3
+2018-07-01,Alexandra,E05000719,Claimants as a proportion of residents aged 16-64,8.3
+2018-07-01,Chadderton Central,E05000720,Claimants as a proportion of residents aged 16-64,2.8
+2018-07-01,Chadderton North,E05000721,Claimants as a proportion of residents aged 16-64,3
+2018-07-01,Chadderton South,E05000722,Claimants as a proportion of residents aged 16-64,4
+2018-07-01,Coldhurst,E05000723,Claimants as a proportion of residents aged 16-64,8.2
+2018-07-01,Crompton,E05000724,Claimants as a proportion of residents aged 16-64,2.3
+2018-07-01,Failsworth East,E05000725,Claimants as a proportion of residents aged 16-64,3.3
+2018-07-01,Failsworth West,E05000726,Claimants as a proportion of residents aged 16-64,4
+2018-07-01,Hollinwood,E05000727,Claimants as a proportion of residents aged 16-64,6.1
+2018-07-01,Medlock Vale,E05000728,Claimants as a proportion of residents aged 16-64,5
+2018-07-01,Royton North,E05000729,Claimants as a proportion of residents aged 16-64,2.6
+2018-07-01,Royton South,E05000730,Claimants as a proportion of residents aged 16-64,2.7
+2018-07-01,Saddleworth North,E05000731,Claimants as a proportion of residents aged 16-64,1.5
+2018-07-01,Saddleworth South,E05000732,Claimants as a proportion of residents aged 16-64,1.3
+2018-07-01,Saddleworth West and Lees,E05000733,Claimants as a proportion of residents aged 16-64,1.9
+2018-07-01,St James',E05000734,Claimants as a proportion of residents aged 16-64,5.1
+2018-07-01,St Mary's,E05000735,Claimants as a proportion of residents aged 16-64,6.3
+2018-07-01,Shaw,E05000736,Claimants as a proportion of residents aged 16-64,3.2
+2018-07-01,Waterhead,E05000737,Claimants as a proportion of residents aged 16-64,6
+2018-07-01,Werneth,E05000738,Claimants as a proportion of residents aged 16-64,6.2
+2018-07-01,Balderstone and Kirkholt,E05000739,Claimants as a proportion of residents aged 16-64,3.8
+2018-07-01,Bamford,E05000740,Claimants as a proportion of residents aged 16-64,1.9
+2018-07-01,Castleton,E05000741,Claimants as a proportion of residents aged 16-64,2.9
+2018-07-01,Central Rochdale,E05000742,Claimants as a proportion of residents aged 16-64,6.3
+2018-07-01,East Middleton,E05000743,Claimants as a proportion of residents aged 16-64,2.5
+2018-07-01,Healey,E05000744,Claimants as a proportion of residents aged 16-64,1.7
+2018-07-01,Hopwood Hall,E05000745,Claimants as a proportion of residents aged 16-64,3.3
+2018-07-01,Kingsway,E05000746,Claimants as a proportion of residents aged 16-64,3.9
+2018-07-01,Littleborough Lakeside,E05000747,Claimants as a proportion of residents aged 16-64,1.6
+2018-07-01,Milkstone and Deeplish,E05000748,Claimants as a proportion of residents aged 16-64,4.8
+2018-07-01,Milnrow and Newhey,E05000749,Claimants as a proportion of residents aged 16-64,1.4
+2018-07-01,Norden,E05000750,Claimants as a proportion of residents aged 16-64,0.8
+2018-07-01,North Heywood,E05000751,Claimants as a proportion of residents aged 16-64,3.5
+2018-07-01,North Middleton,E05000752,Claimants as a proportion of residents aged 16-64,2.2
+2018-07-01,Smallbridge and Firgrove,E05000753,Claimants as a proportion of residents aged 16-64,4
+2018-07-01,South Middleton,E05000754,Claimants as a proportion of residents aged 16-64,1.9
+2018-07-01,Spotland and Falinge,E05000755,Claimants as a proportion of residents aged 16-64,2.9
+2018-07-01,Wardle and West Littleborough,E05000756,Claimants as a proportion of residents aged 16-64,1
+2018-07-01,West Heywood,E05000757,Claimants as a proportion of residents aged 16-64,3
+2018-07-01,West Middleton,E05000758,Claimants as a proportion of residents aged 16-64,4
+2018-07-01,Barton,E05000759,Claimants as a proportion of residents aged 16-64,3.5
+2018-07-01,Boothstown and Ellenbrook,E05000760,Claimants as a proportion of residents aged 16-64,1
+2018-07-01,Broughton,E05000761,Claimants as a proportion of residents aged 16-64,5.9
+2018-07-01,Cadishead,E05000762,Claimants as a proportion of residents aged 16-64,1.8
+2018-07-01,Claremont,E05000763,Claimants as a proportion of residents aged 16-64,1.1
+2018-07-01,Eccles,E05000764,Claimants as a proportion of residents aged 16-64,2.3
+2018-07-01,Irlam,E05000765,Claimants as a proportion of residents aged 16-64,1.9
+2018-07-01,Irwell Riverside,E05000766,Claimants as a proportion of residents aged 16-64,3.4
+2018-07-01,Kersal,E05000767,Claimants as a proportion of residents aged 16-64,2.2
+2018-07-01,Langworthy,E05000768,Claimants as a proportion of residents aged 16-64,4.9
+2018-07-01,Little Hulton,E05000769,Claimants as a proportion of residents aged 16-64,5.5
+2018-07-01,Ordsall,E05000770,Claimants as a proportion of residents aged 16-64,1.8
+2018-07-01,Pendlebury,E05000771,Claimants as a proportion of residents aged 16-64,2.3
+2018-07-01,Swinton North,E05000772,Claimants as a proportion of residents aged 16-64,2.5
+2018-07-01,Swinton South,E05000773,Claimants as a proportion of residents aged 16-64,2.1
+2018-07-01,Walkden North,E05000774,Claimants as a proportion of residents aged 16-64,4.2
+2018-07-01,Walkden South,E05000775,Claimants as a proportion of residents aged 16-64,2.1
+2018-07-01,Weaste and Seedley,E05000776,Claimants as a proportion of residents aged 16-64,2.7
+2018-07-01,Winton,E05000777,Claimants as a proportion of residents aged 16-64,3.3
+2018-07-01,Worsley,E05000778,Claimants as a proportion of residents aged 16-64,0.5
+2018-07-01,Bramhall North,E05000779,Claimants as a proportion of residents aged 16-64,1
+2018-07-01,Bramhall South and Woodford,E05000780,Claimants as a proportion of residents aged 16-64,0.5
+2018-07-01,Bredbury and Woodley,E05000781,Claimants as a proportion of residents aged 16-64,1.7
+2018-07-01,Bredbury Green and Romiley,E05000782,Claimants as a proportion of residents aged 16-64,2.3
+2018-07-01,Brinnington and Central,E05000783,Claimants as a proportion of residents aged 16-64,6.4
+2018-07-01,Cheadle and Gatley,E05000784,Claimants as a proportion of residents aged 16-64,1.2
+2018-07-01,Cheadle Hulme North,E05000785,Claimants as a proportion of residents aged 16-64,1.5
+2018-07-01,Cheadle Hulme South,E05000786,Claimants as a proportion of residents aged 16-64,0.9
+2018-07-01,Davenport and Cale Green,E05000787,Claimants as a proportion of residents aged 16-64,2.7
+2018-07-01,Edgeley and Cheadle Heath,E05000788,Claimants as a proportion of residents aged 16-64,2.4
+2018-07-01,Hazel Grove,E05000789,Claimants as a proportion of residents aged 16-64,1.1
+2018-07-01,Heald Green,E05000790,Claimants as a proportion of residents aged 16-64,1
+2018-07-01,Heatons North,E05000791,Claimants as a proportion of residents aged 16-64,1.6
+2018-07-01,Heatons South,E05000792,Claimants as a proportion of residents aged 16-64,1.6
+2018-07-01,Manor,E05000793,Claimants as a proportion of residents aged 16-64,1.9
+2018-07-01,Marple North,E05000794,Claimants as a proportion of residents aged 16-64,0.9
+2018-07-01,Marple South,E05000795,Claimants as a proportion of residents aged 16-64,1.1
+2018-07-01,Offerton,E05000796,Claimants as a proportion of residents aged 16-64,1.9
+2018-07-01,Reddish North,E05000797,Claimants as a proportion of residents aged 16-64,2.4
+2018-07-01,Reddish South,E05000798,Claimants as a proportion of residents aged 16-64,1.7
+2018-07-01,Stepping Hill,E05000799,Claimants as a proportion of residents aged 16-64,0.9
+2018-07-01,Ashton Hurst,E05000800,Claimants as a proportion of residents aged 16-64,3.9
+2018-07-01,Ashton St Michael's,E05000801,Claimants as a proportion of residents aged 16-64,3.9
+2018-07-01,Ashton Waterloo,E05000802,Claimants as a proportion of residents aged 16-64,2.8
+2018-07-01,Audenshaw,E05000803,Claimants as a proportion of residents aged 16-64,2.1
+2018-07-01,Denton North East,E05000804,Claimants as a proportion of residents aged 16-64,2.6
+2018-07-01,Denton South,E05000805,Claimants as a proportion of residents aged 16-64,3.3
+2018-07-01,Denton West,E05000806,Claimants as a proportion of residents aged 16-64,1.4
+2018-07-01,Droylsden East,E05000807,Claimants as a proportion of residents aged 16-64,2.5
+2018-07-01,Droylsden West,E05000808,Claimants as a proportion of residents aged 16-64,2.6
+2018-07-01,Dukinfield,E05000809,Claimants as a proportion of residents aged 16-64,3.5
+2018-07-01,Dukinfield Stalybridge,E05000810,Claimants as a proportion of residents aged 16-64,2.7
+2018-07-01,Hyde Godley,E05000811,Claimants as a proportion of residents aged 16-64,3.8
+2018-07-01,Hyde Newton,E05000812,Claimants as a proportion of residents aged 16-64,3.8
+2018-07-01,Hyde Werneth,E05000813,Claimants as a proportion of residents aged 16-64,2.7
+2018-07-01,Longdendale,E05000814,Claimants as a proportion of residents aged 16-64,3.8
+2018-07-01,Mossley,E05000815,Claimants as a proportion of residents aged 16-64,2.6
+2018-07-01,St Peter's,E05000816,Claimants as a proportion of residents aged 16-64,5.3
+2018-07-01,Stalybridge North,E05000817,Claimants as a proportion of residents aged 16-64,4.3
+2018-07-01,Stalybridge South,E05000818,Claimants as a proportion of residents aged 16-64,2.8
+2018-07-01,Altrincham,E05000819,Claimants as a proportion of residents aged 16-64,1.6
+2018-07-01,Ashton upon Mersey,E05000820,Claimants as a proportion of residents aged 16-64,1.4
+2018-07-01,Bowdon,E05000821,Claimants as a proportion of residents aged 16-64,1.3
+2018-07-01,Broadheath,E05000822,Claimants as a proportion of residents aged 16-64,1.6
+2018-07-01,Brooklands,E05000823,Claimants as a proportion of residents aged 16-64,0.9
+2018-07-01,Bucklow-St Martins,E05000824,Claimants as a proportion of residents aged 16-64,4.8
+2018-07-01,Clifford,E05000825,Claimants as a proportion of residents aged 16-64,4.8
+2018-07-01,Davyhulme East,E05000826,Claimants as a proportion of residents aged 16-64,1.8
+2018-07-01,Davyhulme West,E05000827,Claimants as a proportion of residents aged 16-64,1.7
+2018-07-01,Flixton,E05000828,Claimants as a proportion of residents aged 16-64,1.3
+2018-07-01,Gorse Hill,E05000829,Claimants as a proportion of residents aged 16-64,3.8
+2018-07-01,Hale Barns,E05000830,Claimants as a proportion of residents aged 16-64,0.9
+2018-07-01,Hale Central,E05000831,Claimants as a proportion of residents aged 16-64,0.7
+2018-07-01,Longford,E05000832,Claimants as a proportion of residents aged 16-64,3.6
+2018-07-01,Priory,E05000833,Claimants as a proportion of residents aged 16-64,1.3
+2018-07-01,St Mary's,E05000834,Claimants as a proportion of residents aged 16-64,2.9
+2018-07-01,Sale Moor,E05000835,Claimants as a proportion of residents aged 16-64,2.3
+2018-07-01,Stretford,E05000836,Claimants as a proportion of residents aged 16-64,3.4
+2018-07-01,Timperley,E05000837,Claimants as a proportion of residents aged 16-64,0.7
+2018-07-01,Urmston,E05000838,Claimants as a proportion of residents aged 16-64,1.9
+2018-07-01,Village,E05000839,Claimants as a proportion of residents aged 16-64,2.1
+2018-07-01,Abram,E05000840,Claimants as a proportion of residents aged 16-64,3.5
+2018-07-01,Ashton,E05000841,Claimants as a proportion of residents aged 16-64,1.8
+2018-07-01,Aspull New Springs Whelley,E05000842,Claimants as a proportion of residents aged 16-64,1.7
+2018-07-01,Astley Mosley Common,E05000843,Claimants as a proportion of residents aged 16-64,1.7
+2018-07-01,Atherleigh,E05000844,Claimants as a proportion of residents aged 16-64,3.1
+2018-07-01,Atherton,E05000845,Claimants as a proportion of residents aged 16-64,4.7
+2018-07-01,Bryn,E05000846,Claimants as a proportion of residents aged 16-64,2.3
+2018-07-01,Douglas,E05000847,Claimants as a proportion of residents aged 16-64,3.9
+2018-07-01,Golborne and Lowton West,E05000848,Claimants as a proportion of residents aged 16-64,2.5
+2018-07-01,Hindley,E05000849,Claimants as a proportion of residents aged 16-64,3.2
+2018-07-01,Hindley Green,E05000850,Claimants as a proportion of residents aged 16-64,1.8
+2018-07-01,Ince,E05000851,Claimants as a proportion of residents aged 16-64,4.7
+2018-07-01,Leigh East,E05000852,Claimants as a proportion of residents aged 16-64,4.3
+2018-07-01,Leigh South,E05000853,Claimants as a proportion of residents aged 16-64,3.3
+2018-07-01,Leigh West,E05000854,Claimants as a proportion of residents aged 16-64,5
+2018-07-01,Lowton East,E05000855,Claimants as a proportion of residents aged 16-64,1.5
+2018-07-01,Orrell,E05000856,Claimants as a proportion of residents aged 16-64,1.3
+2018-07-01,Pemberton,E05000857,Claimants as a proportion of residents aged 16-64,4.5
+2018-07-01,Shevington with Lower Ground,E05000858,Claimants as a proportion of residents aged 16-64,1.4
+2018-07-01,Standish with Langtree,E05000859,Claimants as a proportion of residents aged 16-64,1.4
+2018-07-01,Tyldesley,E05000860,Claimants as a proportion of residents aged 16-64,2.6
+2018-07-01,Wigan Central,E05000861,Claimants as a proportion of residents aged 16-64,3.7
+2018-07-01,Wigan West,E05000862,Claimants as a proportion of residents aged 16-64,2.5
+2018-07-01,Winstanley,E05000863,Claimants as a proportion of residents aged 16-64,0.7
+2018-07-01,Worsley Mesnes,E05000864,Claimants as a proportion of residents aged 16-64,3.1

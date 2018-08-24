@@ -1,0 +1,1 @@
+/Applications/table2qb-0.3.0/table2qb exec components-pipeline --input-csv /Users/henrypartridge/Documents/GitHub/projects/opengovintelligence/gmdatastore/data/RDF/components/components.csv --base-uri http://gmdatastore.org.uk/ --output-file /Users/henrypartridge/Documents/GitHub/projects/opengovintelligence/gmdatastore/data/RDF/components/components.ttl

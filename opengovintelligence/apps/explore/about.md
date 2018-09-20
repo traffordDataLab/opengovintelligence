@@ -1,21 +1,21 @@
 
 ### Work<ness app
 
-This web application has been developed by the [Trafford Data Lab](https://www.trafforddatalab.io/) as part of a European Union funded [OpenGovIntelligence](http://www.opengovintelligence.eu) project. It is the result of a co-creation excercise involving Trafford Council, thhe Greater Manchester Combined Authority and the Department for Work and Pensions to assist with reducing worklessness across the Greater Manchester region.
+This web application has been developed by the [Trafford Data Lab](https://www.trafforddatalab.io/) as part of the European Union funded [OpenGovIntelligence](http://www.opengovintelligence.eu) project. It is the result of a co-creation exercise involving Trafford Council, the Greater Manchester Combined Authority and the Department for Work and Pensions to help reduce worklessness across the Greater Manchester region.
 
 >The OpenGovIntelligence project aims to modernize Public Administration by connecting it to Civil Society through the innovative application of Linked Open Statistical Data (LOSD). We believe the publication of high quality public statistics can transform society, services and enterprises throughout Europe.
 
 The application visualises data relating to worklessness in a variety of ways to help improve understanding of the scale and the extent of need.
 
-### Structure
+### Structure of the app
 
 #### Clusters
 
 The cluster map visualises the spatial distribution of key indicators relating to worklessness using a technique called Local Indicators of Spatial Association [(Anselin, 1995)](http://onlinelibrary.wiley.com/doi/10.1111/j.1538-4632.1995.tb00338.x/abstract). The map shows Lower-layer Super Output Areas (LSOAs) which have 400 households or around 1,500 residents as statistically significant **spatial clusters** (High-High and Low-Low) or **spatial outliers** (Low-High and High-Low). An LSOA marked 'High-High' exhibits positive spatial autocorrelation because it has high values of x and is surrounded by areas with similarly high values. Conversely, an LSOA marked 'High-Low' indicates negative spatial autocorrelation because it records a high value of x and is surrounded by areas with low values.
 
-By hovering over the LSOAs on the map, information such as the indicator value, electoral ward and deprivation data are displayed in a moveable panel.
+By hovering over the LSOAs on the map, information such as the indicator value, electoral ward and deprivation data are displayed in the panel.
 
-There are a number of other map options available. Hovering over the layer icon situated under the zoom control (+ - buttons) displays choices for the map backgrounds, such as a satellite and road atlas views, as well as the locations of Jobcentre Plus sites, gambling premises, GP practices, food banks and probation offices which can be overlayed on the map.
+There are a number of other map options available. Hovering over the layer icon situated under the zoom control (+ - buttons) displays choices for the map backgrounds, such as road atlas and satellite views, as well as the locations of Jobcentre Plus sites, gambling premises, GP practices, food banks and probation offices which can be overlayed on the map.
 
 #### Trends
 
@@ -56,7 +56,7 @@ The app was developed using [Shiny](https://cran.r-project.org/web/packages/shin
 - [jsonlite](https://cran.r-project.org/web/packages/jsonlite/index.html)
 - [geojsonio](https://cran.r-project.org/web/packages/geojsonio/index.html)
 
-Source code is available from [here](https://github.com/traffordDataLab/projects/tree/master/opengovintelligence/apps/production/work%3Cness). 
+Source code is available from [here](https://github.com/traffordDataLab/projects/tree/master/opengovintelligence). 
 
 ---
 

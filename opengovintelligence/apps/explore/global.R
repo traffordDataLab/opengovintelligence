@@ -11,6 +11,9 @@ source("https://www.traffordDataLab.io/assets/theme/ggplot2/theme_lab.R")
 # load LISA stats ---------------------------
 source("https://www.traffordDataLab.io/assets/rfunctions/LISA/lisa_stats.R")
 
+# load Leaflet popups ---------------------------
+source("popups.R")
+
 # load tabular data ---------------------------
 
 # latest claimant count data from nomis

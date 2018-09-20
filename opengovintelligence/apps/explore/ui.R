@@ -5,10 +5,10 @@ ui <- navbarPage(
   tabPanel(
     title = "Clusters",
     div(class="shinyContainer",
-        tags$head(includeCSS("styles_base.css"), includeCSS("styles_shiny.css"), includeCSS("styles_map.css"),
+        tags$head(includeCSS("styles_base.css"), includeCSS("styles_shiny.css"), includeCSS("styles_map.css"), includeCSS("styles_popup.css"),
                   tags$style(HTML("table.imd td:nth-child(2), table.imd td:nth-child(3) { text-align: right; }"))),
         leafletOutput("cluster_map", width = "100%", height = "100%"),
-        absolutePanel(id = "shinyControls", class = "panel panel-default controls", fixed = TRUE, draggable = TRUE,
+        absolutePanel(id = "shinyControls", class = "panel panel-default controls", fixed = TRUE, draggable = FALSE,
                       br(),
                       selectInput(inputId = "la",
                                   label = NULL,

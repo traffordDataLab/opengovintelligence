@@ -151,10 +151,6 @@ server <- function(input, output, session) {
   output$cluster_map <- renderLeaflet({
     
     leaflet() %>% 
-      addTiles(urlTemplate = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", 
-               attribution = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community | <a href="https://www.ons.gov.uk/methodology/geography/licences"> Contains OS data © Crown copyright and database right (2017)</a>', 
-               group = "Aerial",
-               options = providerTileOptions(minZoom = 10, maxZoom = 16)) %>%
       addTiles(urlTemplate = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
                attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://cartodb.com/attributions">CartoDB</a> | <a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2017)</a>',
                group = "Low Detail",
@@ -163,6 +159,10 @@ server <- function(input, output, session) {
                attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>  | <a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2017)</a>',
                group = "High Detail",
                options = providerTileOptions(minZoom = 10, maxZoom = 16)) %>% 
+      addTiles(urlTemplate = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", 
+               attribution = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community | <a href="https://www.ons.gov.uk/methodology/geography/licences"> Contains OS data © Crown copyright and database right (2017)</a>', 
+               group = "Satellite",
+               options = providerTileOptions(minZoom = 10, maxZoom = 16)) %>%
       addTiles(urlTemplate = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}{r}.png",
                attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://cartodb.com/attributions">CartoDB</a> | <a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2017)</a>',
                group = "Dark",
@@ -172,7 +172,7 @@ server <- function(input, output, session) {
                group = "None") %>% 
       setView(-2.28417866956407, 53.5151885751656, zoom = 11) %>% 
       addLayersControl(position = 'topleft',
-                       baseGroups = c("Aerial", "High Detail", "Low Detail", "Dark", "None"),
+                       baseGroups = c("Low Detail", "High Detail", "Satellite", "Dark", "None"),
                        overlayGroups = c("Jobcentre Plus", "Probation offices", "GPs", "Food banks", "Betting shops"), 
                        options = layersControlOptions(collapsed = TRUE)) %>% 
       hideGroup(c("Jobcentre Plus", "Probation offices", "GPs", "Food banks", "Betting shops")) %>% 
@@ -198,11 +198,11 @@ server <- function(input, output, session) {
                                                       style = list(
                                                         "color"="white",
                                                         "text-shadow" = "-1px -1px 10px #757575, 1px -1px 10px #757575, 1px 1px 10px #757575, -1px 1px 10px #757575"))) %>%
-      addAwesomeMarkers(data = jcplus, popup = ~as.character(name), icon = ~makeAwesomeIcon(icon = "building-o", library = "fa", markerColor = "green", iconColor = "#fff"), group = "Jobcentre Plus", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
-      addAwesomeMarkers(data = probation, popup = ~as.character(name), icon = ~makeAwesomeIcon(icon = "balance-scale", library = "fa", markerColor = "black", iconColor = "#fff"), group = "Probation offices", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
-      addAwesomeMarkers(data = gp, popup = ~as.character(name), icon = ~makeAwesomeIcon(icon = "stethoscope", library = "fa", markerColor = "pink", iconColor = "#fff"), group = "GPs", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
-      addAwesomeMarkers(data = food_bank, popup = ~as.character(name), icon = ~makeAwesomeIcon(icon = "fa-cutlery", library = "fa", markerColor = "orange", iconColor = "#fff"), group = "Food banks", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
-      addAwesomeMarkers(data = betting, popup = ~as.character(name), icon = ~makeAwesomeIcon(icon = "money", library = "fa", markerColor = "darkpurple", iconColor = "#fff"), group = "Betting shops", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
+      addAwesomeMarkers(data = jcplus, popup = jcplus_popup, icon = ~makeAwesomeIcon(icon = "building-o", library = "fa", markerColor = "green", iconColor = "#fff"), group = "Jobcentre Plus", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
+      addAwesomeMarkers(data = probation, popup = probation_popup, icon = ~makeAwesomeIcon(icon = "balance-scale", library = "fa", markerColor = "black", iconColor = "#fff"), group = "Probation offices", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
+      addAwesomeMarkers(data = gp, popup = gp_popup, icon = ~makeAwesomeIcon(icon = "stethoscope", library = "fa", markerColor = "pink", iconColor = "#fff"), group = "GPs", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
+      addAwesomeMarkers(data = food_bank, popup = food_bank_popup, icon = ~makeAwesomeIcon(icon = "fa-cutlery", library = "fa", markerColor = "orange", iconColor = "#fff"), group = "Food banks", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
+      addAwesomeMarkers(data = betting, popup = betting_popup, icon = ~makeAwesomeIcon(icon = "money", library = "fa", markerColor = "darkpurple", iconColor = "#fff"), group = "Betting shops", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
       addLegend(position = "bottomleft", colors = c("#F0F0F0", "#E93F36", "#2144F5", "#9794F8", "#EF9493"),
                 labels = 
                   c(paste0("Not significant (", formatC(sum(filteredData()$quad_sig == "Not significant"), format="f", big.mark = ",", digits=0), ")"),
@@ -359,10 +359,6 @@ server <- function(input, output, session) {
   
   output$isochrone_map <- renderLeaflet({
     leaflet() %>% 
-      addTiles(urlTemplate = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", 
-               attribution = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community | <a href="https://www.ons.gov.uk/methodology/geography/licences"> Contains OS data © Crown copyright and database right (2017)</a>', 
-               group = "Aerial",
-               options = providerTileOptions(minZoom = 10, maxZoom = 16)) %>%
       addTiles(urlTemplate = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
                attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://cartodb.com/attributions">CartoDB</a> | <a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2017)</a>',
                group = "Low Detail",
@@ -371,6 +367,10 @@ server <- function(input, output, session) {
                attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>  | <a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2017)</a>',
                group = "High Detail",
                options = providerTileOptions(minZoom = 10, maxZoom = 16)) %>% 
+      addTiles(urlTemplate = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", 
+               attribution = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community | <a href="https://www.ons.gov.uk/methodology/geography/licences"> Contains OS data © Crown copyright and database right (2017)</a>', 
+               group = "Satellite",
+               options = providerTileOptions(minZoom = 10, maxZoom = 16)) %>%
       addTiles(urlTemplate = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}{r}.png",
                attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://cartodb.com/attributions">CartoDB</a> | <a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2017)</a>',
                group = "Dark",
@@ -386,13 +386,13 @@ server <- function(input, output, session) {
                                                       style = list(
                                                         "color"="white",
                                                         "text-shadow" = "-1px -1px 10px #757575, 1px -1px 10px #757575, 1px 1px 10px #757575, -1px 1px 10px #757575"))) %>%
-      addAwesomeMarkers(data = jcplus, popup = ~as.character(name), icon = ~makeAwesomeIcon(icon = "building-o", library = "fa", markerColor = "green", iconColor = "#fff"), group = "Jobcentre Plus", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
-      addAwesomeMarkers(data = probation, popup = ~as.character(name), icon = ~makeAwesomeIcon(icon = "balance-scale", library = "fa", markerColor = "black", iconColor = "#fff"), group = "Probation offices", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
-      addAwesomeMarkers(data = gp, popup = ~as.character(name), icon = ~makeAwesomeIcon(icon = "stethoscope", library = "fa", markerColor = "pink", iconColor = "#fff"), group = "GPs", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
-      addAwesomeMarkers(data = food_bank, popup = ~as.character(name), icon = ~makeAwesomeIcon(icon = "fa-cutlery", library = "fa", markerColor = "orange", iconColor = "#fff"), group = "Food banks", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
-      addAwesomeMarkers(data = betting, popup = ~as.character(name), icon = ~makeAwesomeIcon(icon = "money", library = "fa", markerColor = "darkpurple", iconColor = "#fff"), group = "Betting shops", options = markerOptions(riseOnHover = TRUE, opacity = 0.75)) %>% 
+      addAwesomeMarkers(data = jcplus, popup = jcplus_popup, icon = ~makeAwesomeIcon(icon = "building-o", library = "fa", markerColor = "green", iconColor = "#fff"), group = "Jobcentre Plus", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
+      addAwesomeMarkers(data = probation, popup = probation_popup, icon = ~makeAwesomeIcon(icon = "balance-scale", library = "fa", markerColor = "black", iconColor = "#fff"), group = "Probation offices", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
+      addAwesomeMarkers(data = gp, popup = gp_popup, icon = ~makeAwesomeIcon(icon = "stethoscope", library = "fa", markerColor = "pink", iconColor = "#fff"), group = "GPs", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
+      addAwesomeMarkers(data = food_bank, popup = food_bank_popup, icon = ~makeAwesomeIcon(icon = "fa-cutlery", library = "fa", markerColor = "orange", iconColor = "#fff"), group = "Food banks", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
+      addAwesomeMarkers(data = betting, popup = betting_popup, icon = ~makeAwesomeIcon(icon = "money", library = "fa", markerColor = "darkpurple", iconColor = "#fff"), group = "Betting shops", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
       addLayersControl(position = 'topleft',
-                       baseGroups = c("Aerial", "High Detail", "Low Detail", "Dark", "None"),
+                       baseGroups = c("Low Detail", "High Detail", "Satellite", "Dark", "None"),
                        overlayGroups = c("Jobcentre Plus", "Probation offices", "GPs", "Food banks", "Betting shops"), 
                        options = layersControlOptions(collapsed = TRUE)) %>% 
       hideGroup(c("Jobcentre Plus", "Probation offices", "GPs", "Food banks", "Betting shops")) %>% 

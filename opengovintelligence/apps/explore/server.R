@@ -237,7 +237,7 @@ server <- function(input, output, session) {
     filter(df_ts, area_name %in% input$GM_areas)
   })
   
-  output$ggplot_plot <- renderPlotly({
+  output$ggplot_plot <- renderPlot({
     if(is.null(area_data())) {
       return(NULL)
     }
@@ -249,64 +249,50 @@ server <- function(input, output, session) {
       scale_colour_brewer(palette = "Dark2") +
       theme_lab() +
       theme(panel.grid.major.y = element_blank(),
-            plot.title = element_text(size = 14, colour = "#757575", face = "bold", hjust = 0.5, vjust = 5),
+            plot.title = element_text(size = 16, colour = "#757575", face = "bold", hjust = 0.5, vjust = 5),
             axis.title = element_blank(),
             legend.title = element_blank())
     
     if(input$multiple) {
       if(input$facet) {
-        p <- p + geom_line(aes(colour = area_name)) +
-          geom_point(aes(colour = area_name, 
-                         text = paste('<br>Date: ', as.Date(date),
-                                      '<br>Proportion (%): ', value)),
-                     fill = "white", shape = 21) +
+        p + geom_line(aes(colour = area_name), size = 1) +
           labs(title = paste("Proportion of residents claiming JSA or Universal Credit")) +
           facet_wrap(~area_name) +
           theme(legend.position = "none") +
           theme(panel.spacing = unit(1, "lines"),
                 strip.text = element_text(size = 10, vjust = 1))
-        ggplotly(p, tooltip = c("text")) # %>% config(displayModeBar = F, showLink = F)
       } else {
-        p <- p +  geom_line(aes(colour = area_name)) +
-          geom_point(aes(colour = area_name,
-                         text = paste('<br>Date: ', as.Date(date),
-                                      '<br>Proportion (%): ', value)),
-                     fill = "white", shape = 21) +
+        p +  geom_line(aes(colour = area_name), size = 1) +
           labs(title = paste("Proportion of residents claiming JSA or Universal Credit"))
-        ggplotly(p, tooltip = c("text")) # %>% config(displayModeBar = F)
       }
     } else {
-      p <- p + geom_line(colour = "#1b9e77") +
-        geom_point(aes(text = paste('<br>Date: ', as.Date(date),
-                                    '<br>Proportion (%): ', value)), 
-                   colour = "#1b9e77", fill = "white", shape = 21) +
-        labs(title = paste("Proportion of residents claiming JSA or Universal Credit in", area_data()$area_name)) 
-      ggplotly(p, tooltip = c("text")) # %>% config(displayModeBar = F)
+      p + geom_line(colour = "#1b9e77", size = 1) +
+        labs(title = paste("Proportion of residents claiming JSA or Universal Credit in", area_data()$area_name))
     }
     
   })
   
   output$area_table <- renderDT({
-    area_data() 
+    if(is.null(area_data())) {
+      return(NULL)
+    }
     
-  }, rownames = FALSE, 
-  colnames = c("Date", "Area code", "Area name", "Proportion (%)"), 
-  options = list(pageLength = 10, dom = 'tip'))
-  
-  output$download <- renderUI({
-    if(!is.null(area_data())) {
-      downloadButton('downloadData', 'Download CSV', style = 'padding:4px; font-size:80%')
-    }
-  })
-  
-  output$downloadData <- downloadHandler(
-    filename = function() {
-      paste("data_download.csv")
-    },
-    content = function(file) {
-      write.csv(area_data(), file, row.names = FALSE)
-    }
-  )
+    area_data() %>% 
+      arrange(desc(date)) %>% 
+      DT::datatable(filter = "top", extensions = c("Buttons", "Scroller"),
+                    rownames = FALSE,
+                    style = "bootstrap",
+                    class = "compact",
+                    width = "100%",
+                    options = list(
+                      dom = "Blrtip",
+                      deferRender = TRUE,
+                      scrollY = 300,
+                      scroller = TRUE,
+                      columnDefs = list(list(visible = FALSE, targets = c(1))),
+                      buttons = list(I("colvis"), "csv", "excel")),
+                    colnames = c("Date", "Area code", "Area name", "Proportion (%)"))
+    })
   
   # Reachability ---------------------------   
   

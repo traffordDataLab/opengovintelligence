@@ -1,0 +1,84 @@
+---
+output: github_document
+---
+
+## Querying a GraphQL client for linked data using R
+
+<br />
+
+The following script relies on the [`ghql`](https://github.com/ropensci/ghql) R package (Chamberlain 2017) to query multidimensional QB datasets using [GraphQL](http://graphql.org/). The example uses the graphql-qb service at [graphql-qb.publishmydata.com](graphql-qb.publishmydata.com) which stores data from [statistics.gov.scot](statistics.gov.scot).
+
+---
+
+##### Install the `ghql` package from GitHub (and `devtools` if not already installed)
+```{r, eval=FALSE}
+devtools::install_github("hadley/devtools")
+devtools::install_github("ropensci/ghql")
+```
+
+##### Load the necessary R packages
+```{r, message=FALSE, warnings=FALSE}
+library(ghql) # for querying 
+library(jsonlite) # for parsing the json response
+library(httr) # for working with URLs
+library(tidyverse) # for tidying data
+```
+
+##### Initialize the GraphQL client by pointing it to the appropriate endpoint e.g. http://graphql-qb.publishmydata.com/graphql
+```{r}
+client <- GraphqlClient$new(url = "http://graphql-qb.publishmydata.com/graphql")
+```
+
+No OAuth token is required for this endpoint but the `headers` argument can be used for this purpose.
+
+##### Make a Query class object
+```{r}
+qry <- Query$new()
+```
+
+##### Add your GraphQL query, e.g. Filter datasets about gender and return the title and description
+```{r}
+qry$query('query', '
+  {
+    datasets(dimensions: {and: ["http://statistics.gov.scot/def/dimension/gender"]}) {
+      title
+      description
+    }
+  }
+')
+```
+
+##### Return the responses
+```{r}
+responses <- client$exec(qry$queries$query)
+```
+
+##### Convert to a dataframe and return column names
+```{r}
+df <- as.data.frame(responses)
+glimpse(df)
+```
+
+##### Change the column names
+```{r}
+df <- rename(df, Dataset = data.datasets.title,
+             Description = data.datasets.description)
+```
+
+The table below shows the first 6 responses.
+
+```{r, echo=FALSE}
+library(knitr) ; library(kableExtra)
+kable(head(df), format = "html") %>%
+  kable_styling(bootstrap_options = "striped", full_width = F)
+```
+
+<br />
+
+### References
+
+- Chamberlain, Scott (2017). ghql: General Purpose GraphQL Client. R package version 0.0.3.9110. [https://github.com/ropensci/ghql](https://github.com/ropensci/ghql)      
+- Ooms, Jeroen (2014). The jsonlite Package: A Practical and Consistent Mapping Between JSON Data and R Objects. arXiv:1403.2805 [stat.CO] URL [https://arxiv.org/abs/1403.2805](https://arxiv.org/abs/1403.2805).  
+- Wickham, Hadley (2017). httr: Tools for Working with URLs and HTTP. R package version 1.3.1. [https://CRAN.R-project.org/package=httr](https://CRAN.R-project.org/package=httr)  
+- Wickham, Hadley (2017). tidyverse: Easily Install and Load 'Tidyverse' Packages. R package version 1.1.1. [https://CRAN.R-project.org/package=tidyverse](https://CRAN.R-project.org/package=tidyverse)
+

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <title>Summarise</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta charset="UTF-8"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
+  integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+  crossorigin=""/>
+  <style>
+  html, body{
+    padding: 0 20px 5em 12px;
+    margin: 0;
+    height: 100%;
+    font-family: 'Open Sans', sans-serif;
+    color: #212121;
+  }
+  a{
+    color: #e24a90;
+    text-decoration: none;
+  }
+  a:hover{
+    text-decoration: underline;
+  }
+
+  h1, h2
+  {
+    font-family: 'Roboto', sans-serif;
+    color: #757575;
+  }
+  .double div{
+    float: left;
+  }
+  select{
+    font-size: 12px;
+  }
+  .double{
+    clear:both;
+    padding-top: 20px;
+  }
+  #map{
+    width:70%;
+    height:400px;
+  }
+  #countPoints{
+    background-color: white;
+    opacity: 0.8;
+    position: relative;
+    top: 350px;
+    left:20px;
+    z-index: 1000;
+    padding:0 20px;
+  }
+  #countPoints p{
+    font-size: 12px;
+    line-height: 12px;
+  }
+  #timeLine{
+    width:70%;
+  }
+  .comment{
+    width:25%;
+    padding-top: 15px;
+    padding-left: 10px;
+    margin-left: 3px;
+    border-style: none none none solid;
+    border-color: #e24a90;
+    border-width: 1px;
+  }
+  #tableDiv{
+    width:70%;
+    padding-bottom: 40px;
+  }
+  .circleLegend{
+    border:1px solid black;
+    border-radius: 50%;
+    height: 8px;
+    width: 8px;
+    opacity: 0.8;
+    margin-right: 5px;
+  }
+  #tableTitle{
+    font-size: 20px;
+  }
+  .bar{
+    background-color: #e24a90;
+    height: 15px;
+  }
+  #OGIfooter{
+    clear:both;
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
+  }
+  .svg_holder{
+  float: left;
+  margin-right: 12px;
+  }
+  @media (max-width:800px)
+  {
+    #map{
+      width:95%;
+    }
+    #timeLine, #tableDiv{
+      width:100%;
+    }
+    .comment{
+      width:100%;
+      padding-top: 10px;
+      padding-left: 0px;
+      margin-left: 0px;
+      border-style: none;
+    }
+    #countPoints{
+      top: 300px;
+    }
+    #tableDiv{
+      font-size: 10px;
+    }
+    #tableTitle {
+      font-size: 14px;
+    }
+  }
+  @media (min-width:1300px)  {
+    .double
+    {
+      width: 1240px;
+    }
+  }
+</style>
+</head>
+<body>
+  <h2 id='titleName'>Greater Manchester</h2>
+  <div class="double">
+    <div id="map"><div id="countPoints"><p></p></div></div>
+    <div id="statComm" class="comment">Select an area for information related to unemployment.</div>
+  </div>
+  <div class="double">
+    <div id='Local Authority'></div>
+    <div id='Ward'></div>
+  </div>
+  <div class="double">
+    <div id='timeLine'></div>
+    <div id='chartComm' class="comment"></div>
+  </div>
+  <div class="double">
+    <div id= "tableDiv">
+      <p id="tableTitle"></p>
+      <table id='BRtable'></table>
+    </div>
+    <div id="bussinessComm" class="comment"></div>
+  </div>
+  <div id="OGIfooter">
+    <div class="svg_holder">
+      <svg width="81" height="54">
+  	     <desc>European flag</desc>
+  	     <g transform="scale(0.1)">
+  	     <defs><g id="s"><g id="c"><path id="t" d="M0,0v1h0.5z" transform="translate(0,-1)rotate(18)"/><use xlink:href="#t" transform="scale(-1,1)"/></g><g id="a"><use xlink:href="#c" transform="rotate(72)"/><use xlink:href="#c" transform="rotate(144)"/></g><use xlink:href="#a" transform="scale(-1,1)"/></g></defs>
+  	     <rect fill="#039" width="810" height="540"/><g fill="#fc0" transform="scale(30)translate(13.5,9)"><use xlink:href="#s" y="-6"/><use xlink:href="#s" y="6"/><g id="l"><use xlink:href="#s" x="-6"/><use xlink:href="#s" transform="rotate(150)translate(0,6)rotate(66)"/><use xlink:href="#s" transform="rotate(120)translate(0,6)rotate(24)"/><use xlink:href="#s" transform="rotate(60)translate(0,6)rotate(12)"/><use xlink:href="#s" transform="rotate(30)translate(0,6)rotate(42)"/></g><use xlink:href="#l" transform="scale(-1,1)"/></g></g>
+      </svg>
+    </div>
+    <p>This project has received funding from the European Union's Horizon 2020 research and innovation programme under grant agreement No 693849.</p>
+  </div>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://www.trafforddatalab.io/assets/javascript/labError.js"></script>
+  <script src="https://www.trafforddatalab.io/assets/javascript/labAjax.js"></script>
+  <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
+  integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
+  crossorigin=""></script>
+  <script src="http://www.trafforddatalab.io/assets/d3/timeSeries.js"></script>
+  <script>
+
+  var endpoint = 'http://gmdatastore.org.uk/sparql.json';
+
+  var keyObj = '{"area_name":"Greater Manchester", "area_code":"E47000001"}'
+
+  //Start the map
+  var dateNow = new Date();
+  var leafletMap = L.map('map')
+  tiles=L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a> Contains National Statistics &amp; OS data <a href="https://www.ons.gov.uk/methodology/geography/licences">&copy; Crown copyright and database right ' + dateNow.getFullYear() + '</a>',
+  }).addTo(leafletMap);
+  var dataSeries=[]
+
+  plotReport(keyObj);// plot report for GM
+
+  var query1 = 'SELECT ?area_name ?area_code WHERE { ?metcty <http://www.w3.org/2000/01/rdf-schema#label> "E11000001" . ?district <http://publishmydata.com/def/ontology/spatial/within> ?metcty . ?district <http://statistics.data.gov.uk/def/statistical-geography#officialname> ?area_name . ?district <http://www.w3.org/2000/01/rdf-schema#label> ?area_code }'
+  postQuery(query1,endpoint,function(d){popSelect(d,"Local Authority","loadWardList")});//populate the first dropdown
+
+  function postQuery(query, url, callback){
+    query="query="+encodeURIComponent(query)
+    labAjax(url,callback,{ data:query, method: 'POST', header: [{ header: 'Accept', value: 'application/sparql-results+json' }, { header: 'Content-Type', value: 'application/x-www-form-urlencoded'}] });
+  }
+
+  function popSelect(data,container,onChangeFun){
+    var laNames = data.results.bindings;
+    var laSelect = '<select name="frmLAnames" onChange="' + onChangeFun + '(this.value)" class="datasetSelect"><option value="{}">Select a ' + container + '</option>';
+
+    for (var i = 0; i < laNames.length; i++) {
+      laSelect += '<option value="{£area_name£:£' + laNames[i]["area_name"]["value"] + '£,£area_code£:£' + laNames[i]["area_code"]["value"] + '£}"';
+      laSelect += '>' + laNames[i]["area_name"]["value"] + '</option>';
+    }
+    laSelect += '</select>';
+    var divf = document.createElement('div');
+    divf.innerHTML = laSelect;
+    document.getElementById(container).innerHTML = "";
+    document.getElementById(container).appendChild(divf);
+  }
+
+  function loadWardList(LAkey){
+
+    if(LAkey=="{}"){
+      LAkey = '{"area_name":"Greater Manchester", "area_code":"E11000001"}';
+
+      document.getElementById('Ward').innerHTML = "";
+      dataSeries=[]
+      plotReport(LAkey)
+    }else{
+
+      plotReport(LAkey);
+
+      var LAkey=JSON.parse(LAkey.replace(/£/g, '"'));
+      var area_code = LAkey["area_code"];
+      var area_name = LAkey["area_name"];
+
+      //ward list
+      var query = 'SELECT ?area_name ?area_code WHERE {?district <http://www.w3.org/2000/01/rdf-schema#label> "'+ area_code +'" . ?indistrict <http://publishmydata.com/def/ontology/spatial/within> ?district . ?indistrict <http://statistics.data.gov.uk/def/statistical-entity#code> <http://statistics.data.gov.uk/id/statistical-entity/E05> . ?indistrict <http://statistics.data.gov.uk/def/statistical-geography#officialname> ?area_name . ?indistrict <http://www.w3.org/2000/01/rdf-schema#label> ?area_code . }'
+      postQuery(query,endpoint,function(d){popSelect(d,"Ward","plotReport")});
+    }
+
+  }
+
+  function plotReport (obj) {
+
+    if (obj!= "{}"){
+
+      var keyObj=JSON.parse(obj.replace(/£/g, '"'));
+      var area_code = keyObj["area_code"];
+      var area_name = keyObj["area_name"];
+
+      if (!/^E47/.test(area_code)){
+        leafletMap.removeLayer(boundary);
+        leafletMap.removeLayer(bshops);
+      }
+
+      if(/^E11/.test(area_code)){
+        area_code= "E47000001"
+      }
+      document.getElementById('titleName').innerHTML = area_name;
+
+      //Map
+      d3.json("http://gmdatastore.org.uk/boundaries/"+area_code+".json", function(error, geoData) {
+
+        boundary = L.geoJSON(geoData,{style:{"color":"#e24a90"}})
+        .addTo(leafletMap);
+        leafletMap.fitBounds(boundary.getBounds()); // adjust the zoom to fit the boundary to the screen size
+
+        var queryBS= 'SELECT ?name ?lat ?lon ?address WHERE {?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://gmdatastore.org.uk/def/BettingShop> . ?s <http://gmdatastore.org.uk/def/ward> <http://statistics.data.gov.uk/id/statistical-geography/'+area_code+'> . ?s <http://www.w3.org/2000/01/rdf-schema#label> ?name . ?s <http://schema.org/address> ?urlAddress . ?urlAddress <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ?lat . ?urlAddress <http://www.w3.org/2003/01/geo/wgs84_pos#long> ?lon . ?urlAddress <http://schema.org/streetAddress> ?address .}'
+
+        postQuery(queryBS,endpoint,function(d){
+          var bindings = d.results.bindings;
+
+          //Plot circles
+          var circles=[];
+          bindings.forEach(function(bspoint) {
+            var circle=L.circleMarker([bspoint.lat.value, bspoint.lon.value], {
+              color: 'black',
+              opacity: 0.8,
+              weight: 1,
+              fillColor: 'white',
+              fillOpacity: 0.8,
+              radius: 5
+            })
+            circles.push(circle)
+          })
+          bshops = L.layerGroup(circles).addTo(leafletMap);
+          if (bindings.length==0){
+            document.getElementById('countPoints').getElementsByTagName('p')[0].innerHTML="";
+            document.getElementById('countPoints').style.opacity=0;
+          }else{
+            document.getElementById('countPoints').getElementsByTagName('p')[0].innerHTML="<div class='circleLegend' style=\"background:white\"></div>BettingShops: "+bindings.length;
+            document.getElementById('countPoints').style.opacity=0.8;
+          }
+
+        })
+
+      })
+
+      //Comment stats
+      var query = 'SELECT DISTINCT ?count WHERE { ?wardurl <http://www.w3.org/2000/01/rdf-schema#label> "' + area_code + '" . ?s2 <http://purl.org/linked-data/sdmx/2009/dimension#refArea> ?wardurl . ?s2 <http://purl.org/linked-data/cube#dataSet> <http://gmdatastore.org.uk/data/population-2011-census> . ?s2 <http://gmdatastore.org.uk/def/dimension/gender> <http://gmdatastore.org.uk/def/concept/gender/all> .		?s2 <http://gmdatastore.org.uk/def/measure-properties/count> ?count .}'
+
+      postQuery(query,endpoint,function(d){
+        var count = d.results.bindings;
+
+        document.getElementById('statComm').innerHTML ="Select an area for information related to unemployment.";
+        if(count.length>0){
+          var numFormat = d3.format(",");
+          document.getElementById('statComm').innerHTML =  area_name + " Population (Census 2011): " + numFormat(count[0]["count"]["value"]);
+        }
+      })
+
+      //Time series of Claimant Count
+      var query = 'SELECT ?date ?percent WHERE { ?wardurl <http://www.w3.org/2000/01/rdf-schema#label> "'+ area_code +'" . ?s2 <http://purl.org/linked-data/cube#dataSet> <http://gmdatastore.org.uk/data/claimant-count> . ?s2 <http://purl.org/linked-data/sdmx/2009/dimension#refArea> ?wardurl . ?s2 <http://gmdatastore.org.uk/def/measure-properties/percent> ?percent . ?s2 <http://purl.org/linked-data/sdmx/2009/dimension#refPeriod> ?refDate . ?refDate <http://www.w3.org/2000/01/rdf-schema#label> ?date . } ORDER BY ?date'
+
+      postQuery(query,endpoint,function(d){
+
+        document.getElementById('timeLine').innerHTML = "";
+
+        var bindings = d.results.bindings;
+        var data=[];
+        for (var i = 0; i < bindings.length; i++) {
+          data.push({serie:area_name, date:bindings[i]["date"]["value"],value:bindings[i]["percent"]["value"]})
+        }
+
+        if (dataSeries.length<=1){
+          dataSeries.push(data);
+        }else if (dataSeries.length==2){
+          if (/^E08/.test(area_code)){//LA
+            dataSeries[1]=data;
+          }else{
+            dataSeries[2]=data;
+          }
+        }else if (dataSeries.length==3){
+          if (/^E08/.test(area_code)){//LA
+            dataSeries.splice(2,1);
+            dataSeries[1]=data;
+          }else{
+            dataSeries[2]=data;
+          }
+        }
+
+        var formatTime = "%Y-%m";
+
+        var plotParams={data:dataSeries,
+          formatTime:formatTime,
+          container:"#timeLine",
+          title:"Proportion of people claiming unemployment related benefits ",
+          ytitle:"Percent",
+          source:"Claimant Count, DWP",
+          palette:['#fbc7d9','#f18db4','#e24a90'],//['#f7a9c6','#ee7dab','#e24a90']
+        }
+        var svg=timeSeries(plotParams)
+
+        //Comment timeseries
+        var subs = (data[data.length-1].value-data[data.length-13].value).toFixed(2)
+        var subst= Math.abs(subs)+"%"
+
+        if (subs==0.00) subst = ""
+
+        document.getElementById('chartComm').innerHTML = "";
+        var difference ="";
+        if (subs==0) difference="equal to"
+        else if (subs>0) difference="more than"
+              else if (subs<0) difference="less than"
+        var parseTime = d3.timeParse("%Y-%m");
+        var formatTime = d3.timeFormat("%B, %Y");
+        document.getElementById('chartComm').innerHTML = "On " + formatTime(parseTime(data[data.length-1].date)) + " , " + data[data.length-1].value+ "% of the population was claiming unemployment related benefits in " + data[data.length-1].serie + ".</br> That was "+ subst +" "+ difference +" the percentage of claimants on " + formatTime(parseTime(data[data.length-13].date)) + ". "
+      });
+
+      //Table for business register employment survey
+      var query2 = 'SELECT DISTINCT ?category ?count WHERE { ?wardurl <http://www.w3.org/2000/01/rdf-schema#label> "'+ area_code +'" . ?s2 <http://purl.org/linked-data/sdmx/2009/dimension#refArea> ?wardurl . ?s2 <http://purl.org/linked-data/cube#dataSet> <http://gmdatastore.org.uk/data/business-register-employment-survey> . ?s2 <http://gmdatastore.org.uk/def/dimension/industry-category> ?urlcategory . ?urlcategory <http://www.w3.org/2000/01/rdf-schema#label> ?category . ?s2 <http://gmdatastore.org.uk/def/measure-properties/count> ?count . }'
+
+      postQuery(query2,endpoint,function(data){
+
+        document.getElementById("BRtable").innerHTML = "";
+        document.getElementById("tableTitle").innerHTML = "";
+        document.getElementById('bussinessComm').innerHTML ="";
+        var bindings = data.results.bindings;
+
+        var tableContent = ""
+        if (bindings.length>0){
+          document.getElementById('tableTitle').innerHTML = "Count of employees by broad industry group according to the UK business register and employment survey <a href='https:\//www.gov.uk/government/statistics/bres-2015-detailed-industrial-breakdown-and-ward-level-totals'>(BRES)</a> 2015 "
+
+          for (var i = 0; i < bindings.length; i++) {
+            var category=bindings[i]["category"]["value"].replace(/(\(.*|^.*:)/g,'')
+            tableContent += '<tr><td>' + category + '</td><td>' + bindings[i]["count"]["value"] + '</td></tr>'
+          }
+          document.getElementById('BRtable').innerHTML = tableContent;
+
+          var width = document.getElementById('tableDiv').offsetWidth-document.getElementById('BRtable').offsetWidth-20//.getElementsByTagName('tr');
+
+          var max = d3.max(bindings, function (d) {
+            return + d["count"]["value"];
+          })
+
+          var barScale = d3.scaleLinear()
+          .range([0, width])
+          .domain([0, max]);
+
+          var trs = document.getElementById('BRtable').getElementsByTagName('tr')
+
+          for (var i = 0; i < bindings.length; i++) {
+            var tdB = document.createElement("td");
+            tdB.innerHTML = '<td><div class="bar" style="width:' + barScale(bindings[i]["count"]["value"])+'px"></div></tr>';
+            trs[i].appendChild(tdB)
+          }
+
+          //Comment bussiness register employment
+          for (var i = 0; i < bindings.length; i++){
+            if(bindings[i]["count"]["value"]== max){
+              var industry = bindings[i]["category"]["value"].replace(/(\(.*|^.*:)/g,'')
+              break;
+            }
+          }
+          document.getElementById('bussinessComm').innerHTML =  "The industry with the largest number of employees working in " + area_name + " is: " + industry +".";
+          document.getElementById('bussinessComm').style.borderColor = "#e24a90";
+        }else{
+          document.getElementById('bussinessComm').style.borderColor = "white";
+        }
+      });
+    }
+  }
+</script>
+</body>
+</html>

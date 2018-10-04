@@ -12,5 +12,5 @@ Work relating to the EU-funded [OpenGovIntelligence](http://www.opengovintellige
 ---
 
 
-<div class="svg_holder" style="float: left; margin-right: 12px;"><img src="eu_flag.png" alt="Flag of the European Union"/></div>
+<img src="eu_flag.png" width="100" alt="Flag of the European Union" style="float: left; margin-right: 12px;"/>
 <p>This project has received funding from the European Union's Horizon 2020 research and innovation programme under grant agreement No 693849.</p>

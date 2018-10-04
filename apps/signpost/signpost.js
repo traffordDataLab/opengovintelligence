@@ -305,7 +305,7 @@ function isDatasetLayer(layer) {
 // Set up the basic map environment
 var app = new LabLeafletMap({
     title: 'Signpost',
-    about: 'Find services relating to worklessness within Greater Manchester.'
+    about: 'Find services relating to worklessness within Greater Manchester.<br /><br /><img src="eu_flag.png" width="50" alt="Flag of the European Union" style="float: left; margin-right: 6px; margin-top: 5px;"/> Developed for the EU funded <a href="http://www.opengovintelligence.eu" target="_blank">opengovintelligence</a> project.'
 });
 app.layerControl.remove();   // remove the layer control as it is not required
 

@@ -1,11 +1,18 @@
 {
-    "dataset_name": {
-        "title": "",
-        "about": "",
-        "attribution": "",
-        "url": "",
-        "theme": "",
-        "legend": "",
+    "food_banks": {
+        "title": "Food banks",
+        "about": "Location of food banks, pantries and food clubs across Greater Manchester.<br /><br />Download: <a href='https://www.trafforddatalab.io/open_data/food_banks/GM_food_banks.csv' target='_blank'>CSV</a> | <a href='https://www.trafforddatalab.io/open_data/food_banks/GM_food_banks.geojson' target='_blank'>GeoJSON</a>.<br />Further resources available <a href='https://github.com/traffordDataLab/open_data/tree/master/food_banks' target='_blank'>on GitHub</a>.",
+        "attribution": "<a href='https://www.gmpovertyaction.org' target='_blank'>GM Poverty Action</a>",
+        "url": "https://www.trafforddatalab.io/open_data/food_banks/GM_food_banks.geojson",
+        "theme": "na",
+        "cluster": true
+    },
+    "general_practices": {
+        "title": "General practices",
+        "about": "General practice (GP) locations in Greater Manchester.<br /><br />Download: <a href='https://www.trafforddatalab.io/open_data/general_practice/GM_general_practices.csv' target='_blank'>CSV</a> | <a href='https://www.trafforddatalab.io/open_data/general_practice/GM_general_practices.geojson' target='_blank'>GeoJSON</a>.<br />Further resources available <a href='https://github.com/traffordDataLab/open_data/tree/master/general_practice' target='_blank'>on GitHub</a>.",
+        "attribution": "<a href='https://www.cqc.org.uk' target='_blank'>Care Quality Commission</a>",
+        "url": "https://www.trafforddatalab.io/open_data/general_practice/GM_general_practices.geojson",
+        "theme": "na",
         "cluster": true
     }
 }

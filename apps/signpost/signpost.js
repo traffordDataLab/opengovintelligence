@@ -429,7 +429,7 @@ app.map.on('reachability:delete', function (e) {
 
 
 // ######### DATASET METADATA & SELECTION UI  #########
-labAjax('datasets.json', function (data) {
+labAjax('apps/signpost/datasets.json', function (data) {
     // Load the JSON holding the metadata for all the datasets which we visualise in the app. The data is in the form:
     /*
     "": {
@@ -480,12 +480,14 @@ labAjax('datasets.json', function (data) {
     var optGroupTheme = '';     // ensure we create new optgroup tags based on the themes
 
     for (var i = 0; i < arrSelectList.length; i++) {
+        /* COMMENTED OUT AS WE DON'T WANT THEMES
         // Write out new optgroup tag
         if (optGroupTheme != arrSelectList[i].theme) {
             if (optGroupTheme != '') datasetSelect += '</optgroup>';
             datasetSelect += '<optgroup label="' + arrSelectList[i].theme + '">';
             optGroupTheme = arrSelectList[i].theme;
         }
+        */
 
         // Write out the dataset list
         datasetSelect += '<option value="' + arrSelectList[i].dataset + '"';
@@ -493,7 +495,8 @@ labAjax('datasets.json', function (data) {
         datasetSelect += '>' + arrSelectList[i].title + '</option>';
     }
 
-    datasetSelect += '</optgroup></select>';
+    //datasetSelect += '</optgroup></select>';  COMMENTED OUT AS WE DON'T WANT THEMES
+    datasetSelect += '</select>';
 
     // Add the dataset chooser UI to the filter container along with the element to toggle point data clustering
     app.updateFilterGUI(datasetSelect + '<div id="toggleClusteringContainer" class="hideContent"><input type="checkbox" id="toggleClustering" onClick="toggleClustering()"/><label for="toggleClustering" class="toggleCluster">cluster markers</label></div>');

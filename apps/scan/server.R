@@ -173,9 +173,9 @@ server <- function(input, output, session) {
       setView(-2.28417866956407, 53.5151885751656, zoom = 11) %>% 
       addLayersControl(position = 'topleft',
                        baseGroups = c("Low Detail", "High Detail", "Satellite", "Dark", "None"),
-                       overlayGroups = c("Jobcentre Plus", "Probation offices", "GPs", "Food banks", "Betting shops"), 
+                       overlayGroups = c("Jobcentre Plus", "Probation offices", "GPs", "Food banks", "Gambling premises"), 
                        options = layersControlOptions(collapsed = TRUE)) %>% 
-      hideGroup(c("Jobcentre Plus", "Probation offices", "GPs", "Food banks", "Betting shops")) %>% 
+      hideGroup(c("Jobcentre Plus", "Probation offices", "GPs", "Food banks", "Gambling premises")) %>% 
       htmlwidgets::onRender(
         " function(el, t) {
         var myMap = this;
@@ -202,7 +202,7 @@ server <- function(input, output, session) {
       addAwesomeMarkers(data = probation, popup = probation_popup, icon = ~makeAwesomeIcon(icon = "balance-scale", library = "fa", markerColor = "black", iconColor = "#fff"), group = "Probation offices", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
       addAwesomeMarkers(data = gp, popup = gp_popup, icon = ~makeAwesomeIcon(icon = "stethoscope", library = "fa", markerColor = "pink", iconColor = "#fff"), group = "GPs", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
       addAwesomeMarkers(data = food_bank, popup = food_bank_popup, icon = ~makeAwesomeIcon(icon = "fa-cutlery", library = "fa", markerColor = "orange", iconColor = "#fff"), group = "Food banks", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
-      addAwesomeMarkers(data = betting, popup = betting_popup, icon = ~makeAwesomeIcon(icon = "money", library = "fa", markerColor = "darkpurple", iconColor = "#fff"), group = "Betting shops", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
+      addAwesomeMarkers(data = gambling, popup = gambling_popup, icon = ~makeAwesomeIcon(icon = "money", library = "fa", markerColor = "darkpurple", iconColor = "#fff"), group = "Gambling premises", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
       addLegend(position = "bottomleft", colors = c("#F0F0F0", "#E93F36", "#2144F5", "#9794F8", "#EF9493"),
                 labels = 
                   c(paste0("Not significant (", formatC(sum(filteredData()$quad_sig == "Not significant"), format="f", big.mark = ",", digits=0), ")"),
@@ -376,12 +376,12 @@ server <- function(input, output, session) {
       addAwesomeMarkers(data = probation, popup = probation_popup, icon = ~makeAwesomeIcon(icon = "balance-scale", library = "fa", markerColor = "black", iconColor = "#fff"), group = "Probation offices", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
       addAwesomeMarkers(data = gp, popup = gp_popup, icon = ~makeAwesomeIcon(icon = "stethoscope", library = "fa", markerColor = "pink", iconColor = "#fff"), group = "GPs", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
       addAwesomeMarkers(data = food_bank, popup = food_bank_popup, icon = ~makeAwesomeIcon(icon = "fa-cutlery", library = "fa", markerColor = "orange", iconColor = "#fff"), group = "Food banks", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
-      addAwesomeMarkers(data = betting, popup = betting_popup, icon = ~makeAwesomeIcon(icon = "money", library = "fa", markerColor = "darkpurple", iconColor = "#fff"), group = "Betting shops", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
+      addAwesomeMarkers(data = gambling, popup = gambling_popup, icon = ~makeAwesomeIcon(icon = "money", library = "fa", markerColor = "darkpurple", iconColor = "#fff"), group = "Gambling premises", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
       addLayersControl(position = 'topleft',
                        baseGroups = c("Low Detail", "High Detail", "Satellite", "Dark", "None"),
-                       overlayGroups = c("Jobcentre Plus", "Probation offices", "GPs", "Food banks", "Betting shops"), 
+                       overlayGroups = c("Jobcentre Plus", "Probation offices", "GPs", "Food banks", "Gambling premises"), 
                        options = layersControlOptions(collapsed = TRUE)) %>% 
-      hideGroup(c("Jobcentre Plus", "Probation offices", "GPs", "Food banks", "Betting shops")) %>% 
+      hideGroup(c("Jobcentre Plus", "Probation offices", "GPs", "Food banks", "Gambling premises")) %>% 
       htmlwidgets::onRender(
         " function(el, t) {
         var myMap = this;

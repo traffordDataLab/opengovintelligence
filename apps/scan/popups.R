@@ -85,17 +85,17 @@ food_bank_popup = ~paste0(
   "</div>"
 )
 
-betting_popup = ~paste0(
+gambling_popup = ~paste0(
   "<div class='popupContainer'>",
-  "<h5>", betting$name, "</h5>",
+  "<h5>", gambling$Name, "</h5>",
   "<table class='popupLayout'>",
   "<tr>",
   "<td>Address</td>",
-  "<td>", betting$address, "</td>",
+  "<td>", gambling$Address, "</td>",
   "</tr>",
   "<tr>",
   "<td>Postcode</td>",
-  "<td>", betting$postcode, "</td>",
+  "<td>", gambling$Postcode, "</td>",
   "</tr>",
   "</table>",
   "</div>"

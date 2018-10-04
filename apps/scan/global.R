@@ -2,8 +2,7 @@
 
 # load necessary packages ---------------------------
 library(shiny) ; library(tidyverse) ; library(leaflet) ; library(sf) ; library(spdep) ; library(rgeos) ; 
-library(ggplot2) ; library(plotly) ; library(DT) ; 
-library(httr) ; library(geojsonio) ; library(jsonlite)
+library(ggplot2) ; library(plotly) ; library(DT) ; library(httr) ; library(geojsonio) ; library(jsonlite)
 
 # load Trafford Data Lab's ggplot2 theme ---------------------------
 source("https://www.traffordDataLab.io/assets/theme/ggplot2/theme_lab.R")
@@ -49,20 +48,16 @@ la <- st_read("https://www.traffordDataLab.io/spatial_data/local_authority/2016/
          centroid_lat = map_dbl(geometry, ~st_centroid(.x)[[2]]))
 
 # Jobcentre Plus locations in Greater Manchester
-jcplus <- st_read("https://www.traffordDataLab.io/open_data/job_centre_plus/jobcentreplus_gm.geojson") %>% 
-  rename(lad17cd = area_code, lad17nm = area_name)
+jcplus <- st_read("https://www.traffordDataLab.io/open_data/job_centre_plus/jobcentreplus_gm.geojson")
 
-# Betting shops in Greater Manchester
-betting <- st_read("https://github.com/traffordDataLab/projects/raw/master/opengovintelligence/apps/explore/data/betting_shops/bettingshops_gm.geojson") %>% 
-  rename(lad17cd = area_code, lad17nm = area_name)
+# Gambling premises in Greater Manchester
+gambling <- st_read("https://www.traffordDataLab.io/open_data/gambling_premises/gm_gambling_premises.geojson")
 
 # General Practices in Greater Manchester
-gp <- st_read("https://www.traffordDataLab.io/open_data/general_practice/GM_general_practices.geojson") %>% 
-  rename(lad17cd = area_code, lad17nm = area_name)
+gp <- st_read("https://www.traffordDataLab.io/open_data/general_practice/GM_general_practices.geojson")
 
 # Food banks in Greater Manchester
 food_bank <- st_read("https://www.traffordDataLab.io/open_data/food_banks/GM_food_banks.geojson")
 
 # Probation offices in Greater Manchester
-probation <- st_read("https://www.traffordDataLab.io/open_data/probation/GM_probation_offices.geojson") %>% 
-  rename(lad17cd = area_code, lad17nm = area_name)
+probation <- st_read("https://www.traffordDataLab.io/open_data/probation/GM_probation_offices.geojson")

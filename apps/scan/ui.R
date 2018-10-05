@@ -4,6 +4,10 @@ ui <- navbarPage(
   title = div(tags$a(href = "https://www.trafforddatalab.io/", target = "_blank", 
                      tags$img(src = "https://trafforddatalab.github.io/assets/logo/trafforddatalab_logo.svg", height = "25", width = "99")), 
               "Work<ness app"), windowTitle = "Work<ness app",
+  tabPanel(title = "Suggested workflow", 
+           fluidRow(
+             column(8, offset = 1,
+                    includeMarkdown("workflow.md"), style = "color:#212121"))),
   tabPanel(title = "Clusters",
            div(class="shinyContainer",
                tags$head(includeCSS("styles_base.css"), includeCSS("styles_shiny.css"), includeCSS("styles_map.css"), includeCSS("styles_popup.css"),
@@ -43,10 +47,6 @@ ui <- navbarPage(
                       plotOutput("ggplot_plot", width = "80%", height = "300px"),
                       br(),
                       DTOutput("area_table", width = "80%"))))),
-  tabPanel(title = "Suggested workflow", 
-           fluidRow(
-             column(8, offset = 1,
-                    includeMarkdown("workflow.md"), style = "color:#212121"))),
   tabPanel(title = "About", 
            fluidRow(
              column(8, offset = 1,

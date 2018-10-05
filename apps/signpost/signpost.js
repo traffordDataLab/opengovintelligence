@@ -324,7 +324,7 @@ app.geocoder = L.Control.geocoder({
 
 // Access the icon element within the plugin to replace the default graphics with a Font Awesome icon
 app.geocoderIcon = document.getElementsByClassName('leaflet-control-geocoder-icon')[0];
-app.geocoderIcon.innerHTML = '';
+app.geocoderIcon.innerHTML = null;
 app.geocoderIconClass = 'fa-search';
 L.DomUtil.addClass(app.geocoderIcon, 'fa ' + app.geocoderIconClass);
 

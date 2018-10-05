@@ -48,16 +48,16 @@ la <- st_read("https://www.traffordDataLab.io/spatial_data/local_authority/2016/
          centroid_lat = map_dbl(geometry, ~st_centroid(.x)[[2]]))
 
 # Jobcentre Plus locations in Greater Manchester
-jcplus <- st_read("https://www.traffordDataLab.io/open_data/job_centre_plus/jobcentreplus_gm.geojson")
+jcplus <- st_read("https://www.traffordDataLab.io/open_data/jobcentre_plus/gm_jobcentreplus.geojson")
 
 # Gambling premises in Greater Manchester
 gambling <- st_read("https://www.traffordDataLab.io/open_data/gambling_premises/gm_gambling_premises.geojson")
 
 # General Practices in Greater Manchester
-gp <- st_read("https://www.traffordDataLab.io/open_data/general_practice/GM_general_practices.geojson")
+gp <- st_read("https://www.traffordDataLab.io/open_data/general_practice/gm_general_practices.geojson")
 
 # Food banks in Greater Manchester
-food_bank <- st_read("https://www.traffordDataLab.io/open_data/food_banks/GM_food_banks.geojson")
+food_bank <- st_read("https://www.traffordDataLab.io/open_data/food_banks/gm_food_banks.geojson")
 
 # Probation offices in Greater Manchester
-probation <- st_read("https://www.traffordDataLab.io/open_data/probation/GM_probation_offices.geojson")
+probation <- st_read("https://www.traffordDataLab.io/open_data/probation/gm_probation_offices.geojson")

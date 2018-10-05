@@ -1,6 +1,6 @@
 /*
     Created:        2018/10/04 by James Austin - Trafford Data Lab
-    Purpose:        Developed for the opengovintelligence project (http://www.opengovintelligence.eu) with EU funding, co-created with the Department for Work and Pensions to provide a signposting facility to services related to worklessness within Greater Manchester.
+    Purpose:        Provides a signposting facility to services related to worklessness within Greater Manchester. Developed for the opengovintelligence project (http://www.opengovintelligence.eu) with EU funding and co-created with the Department for Work and Pensions. Uses software developed outside of the opengovintelligence project.
     Dependencies:   Leaflet.js - (C) Vladimir Agafonkin http://leafletjs.com
                     Leaflet.awesome-markers.js - Lennard Voogdt https://github.com/lvoogdt/Leaflet.awesome-markers
                     Leaflet.Locate plugin - (C) Dominik Moritz https://github.com/domoritz/leaflet-locatecontrol
@@ -363,7 +363,7 @@ app.reachabilityControl = labSetupReachabilityPlugin({
 });
 app.reachabilityControl.addTo(app.map);
 
-app.baseLayers['High detail'].addTo(app.map);   // Choose the base/tile layer for the map
+app.baseLayers['Low detail'].addTo(app.map);   // Choose the base/tile layer for the map
 
 app.datasetGeoJson = null;       // object to store GeoJSON created from datasets loaded from the select list. ***NOTE*** this object is important for the resetting of styles for clusered marker datasets
 app.datasetCluster = null;       // object to store a leaflet.markercluster object - created if the dataset contains point data

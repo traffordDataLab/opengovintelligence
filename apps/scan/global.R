@@ -54,10 +54,10 @@ jcplus <- st_read("https://www.traffordDataLab.io/open_data/jobcentre_plus/gm_jo
 gambling <- st_read("https://www.traffordDataLab.io/open_data/gambling_premises/gm_gambling_premises.geojson")
 
 # General Practices in Greater Manchester
-gp <- st_read("https://www.traffordDataLab.io/open_data/general_practice/gm_general_practices.geojson")
+gp <- st_read("https://github.com/traffordDataLab/open_data/raw/master/general_practice/gm_general_practices.geojson")
 
 # Food banks in Greater Manchester
-food_bank <- st_read("https://www.traffordDataLab.io/open_data/food_banks/gm_food_banks.geojson")
+food_bank <- st_read("https://github.com/traffordDataLab/open_data/raw/master/food_banks/gm_food_banks.geojson")
 
 # Probation offices in Greater Manchester
-probation <- st_read("https://www.traffordDataLab.io/open_data/probation/gm_probation_offices.geojson")
+probation <- st_read("https://github.com/traffordDataLab/open_data/raw/master/probation/gm_probation_offices.geojson")

@@ -324,8 +324,10 @@ app.geocoder = L.Control.geocoder({
 
 // Access the icon element within the plugin to replace the default graphics with a Font Awesome icon
 app.geocoderIcon = document.getElementsByClassName('leaflet-control-geocoder-icon')[0];
-app.geocoderIcon.innerHTML = null;
 app.geocoderIconClass = 'fa-search';
+while (app.geocoderIcon.firstChild) {
+    app.geocoderIcon.removeChild(app.geocoderIcon.firstChild);  // remove any child nodes, such as the &nbsp; char added by the plugin
+}
 L.DomUtil.addClass(app.geocoderIcon, 'fa ' + app.geocoderIconClass);
 
 // Events to add and remove the spinner class from the geocoder control

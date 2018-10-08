@@ -343,17 +343,19 @@ app.geocoder.on('finishgeocode', function () {
     app.geocoder._collapse();
 });
 
-// prevent a marker being placed at the search location and draw a bounding box instead
-app.geocoder.on('markgeocode', function(e) {
-    var bbox = e.geocode.bbox;
-    var poly = L.polygon([
-         bbox.getSouthEast(),
-         bbox.getNorthEast(),
-         bbox.getNorthWest(),
-         bbox.getSouthWest()
-    ]).addTo(app.map);
-    app.map.fitBounds(poly.getBounds());
+// prevent a standard marker being placed at the search location, create a custom one instead
+app.geocoder.on('markgeocode', function(result) {
+    result = result.geocode || result;
+    app.map.fitBounds(result.bbox); // zoom to the bounds of the result area
+
+    // remove current marker if it exists and create a new marker
+    if (app.geocoderMarker != null && app.map.hasLayer(app.geocoderMarker)) app.map.removeLayer(app.geocoderMarker);
+    app.geocoderMarker = new L.Marker(result.center, { icon: L.divIcon({ className: 'fa fa-street-view geocoderMarker' }) })
+        .bindPopup(result.html || result.name, { offset: L.point(14, 0) })
+        .addTo(app.map)
+        .openPopup();
 });
+
 
 
 // Add the reachability plugin

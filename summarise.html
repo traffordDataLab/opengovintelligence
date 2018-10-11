@@ -97,6 +97,9 @@
   float: left;
   margin-right: 12px;
   }
+  _:-ms-fullscreen, :root #timeLine{
+    height:20vw;
+  }
   @media (max-width:800px)
   {
     #map{
@@ -170,6 +173,9 @@
   crossorigin=""></script>
   <script src="http://www.trafforddatalab.io/assets/d3/timeSeries.js"></script>
   <script>
+
+  if (location.protocol == 'https:')
+  location.href = location.href.replace(/^https:/, 'http:')
 
   var endpoint = 'http://gmdatastore.org.uk/sparql.json';
 

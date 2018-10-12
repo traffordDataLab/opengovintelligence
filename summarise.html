@@ -376,7 +376,7 @@
 
         var tableContent = ""
         if (bindings.length>0){
-          document.getElementById('tableTitle').innerHTML = "Count of employees by broad industry group according to the UK business register and employment survey <a href='https:\//www.gov.uk/government/statistics/bres-2015-detailed-industrial-breakdown-and-ward-level-totals'>(BRES)</a> 2015 "
+          document.getElementById('tableTitle').innerHTML = "Count of employees by broad industry group according to the UK business register and employment survey <a href='https:\//www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/businessregisterandemploymentsurveybresprovisionalresults/2014revisedand2015provisional'>(BRES)</a> 2015 "
 
           for (var i = 0; i < bindings.length; i++) {
             var category=bindings[i]["category"]["value"].replace(/(\(.*|^.*:)/g,'')

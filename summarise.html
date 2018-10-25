@@ -307,7 +307,7 @@
       })
 
       //Time series of Claimant Count
-      var query = 'SELECT ?date ?percent WHERE { ?wardurl <http://www.w3.org/2000/01/rdf-schema#label> "'+ area_code +'" . ?s2 <http://purl.org/linked-data/cube#dataSet> <http://gmdatastore.org.uk/data/claimant-count> . ?s2 <http://purl.org/linked-data/sdmx/2009/dimension#refArea> ?wardurl . ?s2 <http://gmdatastore.org.uk/def/measure-properties/percent> ?percent . ?s2 <http://purl.org/linked-data/sdmx/2009/dimension#refPeriod> ?refDate . ?refDate <http://www.w3.org/2000/01/rdf-schema#label> ?date . } ORDER BY ?date'
+      var query = 'SELECT ?date ?percent WHERE { ?wardurl <http://www.w3.org/2000/01/rdf-schema#label> "'+ area_code +'" . ?s2 <http://purl.org/linked-data/cube#dataSet> <http://gmdatastore.org.uk/data/claimant-rate> . ?s2 <http://purl.org/linked-data/sdmx/2009/dimension#refArea> ?wardurl . ?s2 <http://gmdatastore.org.uk/def/measure-properties/percent> ?percent . ?s2 <http://purl.org/linked-data/sdmx/2009/dimension#refPeriod> ?refDate . ?refDate <http://www.w3.org/2000/01/rdf-schema#label> ?date . } ORDER BY ?date'
 
       postQuery(query,endpoint,function(d){
 

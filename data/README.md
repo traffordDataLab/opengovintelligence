@@ -3,9 +3,11 @@
 This repository contains RDF data cubes that have been converted from tabular CSV flat files using [table2qb](https://github.com/Swirrl/table2qb).
 
 - Claimant count
+- Claimant rate
 - Households with lone parent not in employment
 - Social rented households
 - Working age adults with no qualifications
+- Working age population
 
 The linked datasets are available on [GM Data Store](http://gmdatastore.org.uk/).
 

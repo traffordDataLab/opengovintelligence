@@ -10,9 +10,6 @@ source("https://www.traffordDataLab.io/assets/theme/ggplot2/theme_lab.R")
 # load LISA stats ---------------------------
 source("https://www.traffordDataLab.io/assets/rfunctions/LISA/lisa_stats.R")
 
-# load Leaflet popups ---------------------------
-source("popups.R")
-
 # load tabular data ---------------------------
 
 # latest claimant count data from nomis
@@ -48,16 +45,4 @@ la <- st_read("https://www.traffordDataLab.io/spatial_data/local_authority/2016/
          centroid_lat = map_dbl(geometry, ~st_centroid(.x)[[2]]))
 
 # Jobcentre Plus locations in Greater Manchester
-jcplus <- st_read("https://www.traffordDataLab.io/open_data/job_centre_plus/jobcentreplus_gm.geojson")
-
-# Gambling premises in Greater Manchester
-gambling <- st_read("https://www.traffordDataLab.io/open_data/gambling_premises/gm_gambling_premises.geojson")
-
-# General Practices in Greater Manchester
-gp <- st_read("https://www.traffordDataLab.io/open_data/general_practice/GM_general_practices.geojson")
-
-# Food banks in Greater Manchester
-food_bank <- st_read("https://www.traffordDataLab.io/open_data/food_banks/GM_food_banks.geojson")
-
-# Probation offices in Greater Manchester
-probation <- st_read("https://www.traffordDataLab.io/open_data/probation/GM_probation_offices.geojson")
+jcplus <- st_read("https://www.traffordDataLab.io/open_data/jobcentre_plus/gm_jobcentreplus.geojson")

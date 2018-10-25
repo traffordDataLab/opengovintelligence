@@ -173,9 +173,9 @@ server <- function(input, output, session) {
       setView(-2.28417866956407, 53.5151885751656, zoom = 11) %>% 
       addLayersControl(position = 'topleft',
                        baseGroups = c("Low Detail", "High Detail", "Satellite", "Dark", "None"),
-                       overlayGroups = c("Jobcentre Plus", "Probation offices", "GPs", "Food banks", "Gambling premises"), 
+                       overlayGroups = c("Jobcentre Plus"), 
                        options = layersControlOptions(collapsed = TRUE)) %>% 
-      hideGroup(c("Jobcentre Plus", "Probation offices", "GPs", "Food banks", "Gambling premises")) %>% 
+      hideGroup(c("Jobcentre Plus")) %>% 
       htmlwidgets::onRender(
         " function(el, t) {
         var myMap = this;
@@ -186,6 +186,22 @@ server <- function(input, output, session) {
     factpal <- colorFactor(c("#F0F0F0", "#E93F36", "#2144F5", "#9794F8", "#EF9493"),
                            levels = c("Not significant", "High-High", "Low-Low", "Low-High", "High-Low"),
                            ordered = TRUE)
+    
+    popup = ~paste0(
+      "<div class='popupContainer'>",
+      "<h5>", jcplus$Name, "</h5>",
+      "<table class='popupLayout'>",
+      "<tr>",
+      "<td>Address</td>",
+      "<td>", jcplus$Address, "</td>",
+      "</tr>",
+      "<tr>",
+      "<td>Postcode</td>",
+      "<td>", jcplus$Postcode, "</td>",
+      "</tr>",
+      "</table>",
+      "</div>"
+    )
     
     leafletProxy("cluster_map", data = filteredData()) %>%
       clearShapes() %>% clearControls() %>% clearMarkers() %>% 
@@ -198,11 +214,7 @@ server <- function(input, output, session) {
                                                       style = list(
                                                         "color"="white",
                                                         "text-shadow" = "-1px -1px 10px #757575, 1px -1px 10px #757575, 1px 1px 10px #757575, -1px 1px 10px #757575"))) %>%
-      addAwesomeMarkers(data = jcplus, popup = jcplus_popup, icon = ~makeAwesomeIcon(icon = "building-o", library = "fa", markerColor = "green", iconColor = "#fff"), group = "Jobcentre Plus", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
-      addAwesomeMarkers(data = probation, popup = probation_popup, icon = ~makeAwesomeIcon(icon = "balance-scale", library = "fa", markerColor = "black", iconColor = "#fff"), group = "Probation offices", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
-      addAwesomeMarkers(data = gp, popup = gp_popup, icon = ~makeAwesomeIcon(icon = "stethoscope", library = "fa", markerColor = "pink", iconColor = "#fff"), group = "GPs", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
-      addAwesomeMarkers(data = food_bank, popup = food_bank_popup, icon = ~makeAwesomeIcon(icon = "fa-cutlery", library = "fa", markerColor = "orange", iconColor = "#fff"), group = "Food banks", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
-      addAwesomeMarkers(data = gambling, popup = gambling_popup, icon = ~makeAwesomeIcon(icon = "money", library = "fa", markerColor = "darkpurple", iconColor = "#fff"), group = "Gambling premises", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
+      addAwesomeMarkers(data = jcplus, popup = popup, icon = ~makeAwesomeIcon(icon = "building-o", library = "fa", markerColor = "green", iconColor = "#fff"), group = "Jobcentre Plus", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
       addLegend(position = "bottomleft", colors = c("#F0F0F0", "#E93F36", "#2144F5", "#9794F8", "#EF9493"),
                 labels = 
                   c(paste0("Not significant (", formatC(sum(filteredData()$quad_sig == "Not significant"), format="f", big.mark = ",", digits=0), ")"),

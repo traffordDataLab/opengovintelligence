@@ -23,10 +23,3 @@ query <- paste0(
 working_age_adults_with_no_qualifications <- SPARQL(endpoint, query)$results %>% 
   mutate(date = as.Date("2011-03-27", format = '%Y-%m-%d')) %>% 
   select(date, everything())
-
-census_2011 <- bind_rows(lone_parent_not_in_employment, social_rented_households, no_qualifications) %>% 
-  mutate(lsoa11cd = factor(lsoa11cd),
-         lsoa11nm = factor(lsoa11nm),
-         lad17nm = factor(lad17nm),
-         measure = factor(measure),
-         value = as.integer(value))

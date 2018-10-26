@@ -1,9 +1,7 @@
-## Work<ness app ##
+## Scan app ##
 
 server <- function(input, output, session) {
   values <- reactiveValues(highlight = c())
-  
-  # Clusters ---------------------------
   
   filteredData <- reactive({
     
@@ -24,7 +22,7 @@ server <- function(input, output, session) {
   })
   
   observe({
-    values$highlight <- input$cluster_map_shape_mouseover$id
+    values$highlight <- input$map_shape_mouseover$id
   })
   
   output$info <- renderUI({
@@ -148,7 +146,7 @@ server <- function(input, output, session) {
     }
     })
   
-  output$cluster_map <- renderLeaflet({
+  output$map <- renderLeaflet({
     
     leaflet() %>% 
       addTiles(urlTemplate = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
@@ -187,6 +185,8 @@ server <- function(input, output, session) {
                            levels = c("Not significant", "High-High", "Low-Low", "Low-High", "High-Low"),
                            ordered = TRUE)
     
+    icon <- makeIcon(iconUrl = "icon.jpg", iconWidth = 36, iconHeight = 32, iconAnchorX = 16, iconAnchorY = 16)
+    
     popup = ~paste0(
       "<div class='popupContainer'>",
       "<h5>", jcplus$Name, "</h5>",
@@ -202,8 +202,9 @@ server <- function(input, output, session) {
       "</table>",
       "</div>"
     )
+  
     
-    leafletProxy("cluster_map", data = filteredData()) %>%
+    leafletProxy("map", data = filteredData()) %>%
       clearShapes() %>% clearControls() %>% clearMarkers() %>% 
       addPolygons(data = filteredData(), fillColor = ~factpal(quad_sig), fillOpacity = 0.4, 
                   stroke = TRUE, color = "black", weight = 1, layerId = ~lsoa11cd,
@@ -214,7 +215,7 @@ server <- function(input, output, session) {
                                                       style = list(
                                                         "color"="white",
                                                         "text-shadow" = "-1px -1px 10px #757575, 1px -1px 10px #757575, 1px 1px 10px #757575, -1px 1px 10px #757575"))) %>%
-      addAwesomeMarkers(data = jcplus, popup = popup, icon = ~makeAwesomeIcon(icon = "building-o", library = "fa", markerColor = "green", iconColor = "#fff"), group = "Jobcentre Plus", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
+      addMarkers(data = jcplus, popup = popup, icon = icon, group = "Jobcentre Plus", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
       addLegend(position = "bottomleft", colors = c("#F0F0F0", "#E93F36", "#2144F5", "#9794F8", "#EF9493"),
                 labels = 
                   c(paste0("Not significant (", formatC(sum(filteredData()$quad_sig == "Not significant"), format="f", big.mark = ",", digits=0), ")"),

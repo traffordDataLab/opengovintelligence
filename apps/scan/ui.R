@@ -24,25 +24,6 @@ ui <- navbarPage(
                                           selected = "Residents claiming JSA or Universal Credit"),
                              hr(),
                              uiOutput("info")))),
-  tabPanel(title = "Trends",
-           fluidPage(
-             absolutePanel(id = "shinyControls", class = "panel panel-default controls", style = "z-index: 1000", fixed = TRUE, draggable = FALSE,
-                           br(),
-                           uiOutput("choose_area"),
-                           checkboxInput("multiple", 
-                                         label = "or multiple areas", 
-                                         value = FALSE),
-                           conditionalPanel(
-                             condition="input.multiple==true",
-                             h6("Output options"),
-                             checkboxInput("facet", 
-                                           label = "Facet by area", 
-                                           value = FALSE))),
-             fluidRow(
-               column(width = 9, offset = 1,
-                      plotOutput("ggplot_plot", width = "80%", height = "300px"),
-                      br(),
-                      DTOutput("area_table", width = "80%"))))),
   tabPanel(title = "Suggested workflow", 
            fluidRow(
              column(8, offset = 1,

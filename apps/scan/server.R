@@ -22,14 +22,14 @@ server <- function(input, output, session) {
   })
   
   observe({
-    values$highlight <- input$map_shape_mouseover$id
+    values$highlight <- input$map_shape_click$id
   })
   
   output$info <- renderUI({
     
     if("Greater Manchester" == input$la){
     if (is.null(values$highlight)) {
-      return(tags$h4("Hover over a neighbourhood for more information"))
+      return(tags$h4("Click on a neighbourhood for more information"))
     } else {
       lsoaCode <- filteredData()$lsoa11cd[values$highlight == GM_lsoa$lsoa11cd]
       return(tags$div(
@@ -87,7 +87,7 @@ server <- function(input, output, session) {
       
     } else if ("Greater Manchester" != input$la){
       if (is.null(values$highlight)) {
-        return(tags$h4("then hover over an LSOA"))
+        return(tags$h4("Click on a neighbourhood for more information"))
       } else {
         lsoa <- GM_lsoa[GM_lsoa@data$lad17nm == input$la, ]
         lsoaCode <- filteredData()$lsoa11cd[values$highlight == lsoa$lsoa11cd]
@@ -168,7 +168,6 @@ server <- function(input, output, session) {
       addTiles(urlTemplate = "", 
                attribution = '<a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2018)</a>',
                group = "None") %>% 
-      setView(-2.28417866956407, 53.5151885751656, zoom = 11) %>% 
       addLayersControl(position = 'topleft',
                        baseGroups = c("Low Detail", "High Detail", "Satellite", "Dark", "None"),
                        overlayGroups = c("Jobcentre Plus"), 
@@ -179,6 +178,18 @@ server <- function(input, output, session) {
         var myMap = this;
         myMap._container.style['background'] = '#ffffff';}")
     })
+  
+  observe({
+    req(values$highlight)
+    map <- leafletProxy("map") %>%
+      removeShape("highlighted") %>%
+      addPolylines(data = filteredData()[filteredData()$lsoa11cd == values$highlight, ], fill = FALSE,
+                  color = "#e24a90", opacity = 1, layerId = "highlighted")
+  })
+  
+  observeEvent(input$la, {
+    values$highlight <- NULL
+  })
   
   observe({
     factpal <- colorFactor(c("#F0F0F0", "#E93F36", "#2144F5", "#9794F8", "#EF9493"),
@@ -202,21 +213,46 @@ server <- function(input, output, session) {
       "</table>",
       "</div>"
     )
-  
-    
-    leafletProxy("map", data = filteredData()) %>%
+
+    if("Greater Manchester" == input$la){
+      leafletProxy("map", data = filteredData()) %>%
+        clearShapes() %>% clearControls() %>% clearMarkers() %>% 
+        setView(-2.28417866956407, 53.5151885751656, zoom = 11) %>% 
+        addPolygons(data = filteredData(), fillColor = ~factpal(quad_sig), fillOpacity = 0.4, 
+                    stroke = TRUE, color = "black", weight = 1, layerId = ~lsoa11cd,
+                    highlight = highlightOptions(color = "#e24a90", weight = 2, opacity = 1, bringToFront = TRUE)) %>%
+        addPolylines(data = la, stroke = TRUE, weight = 2, color = "#212121", opacity = 1) %>% 
+        addLabelOnlyMarkers(data = la, lng = ~centroid_lng, lat = ~centroid_lat, label = ~as.character(lad17nm), 
+                            labelOptions = labelOptions(noHide = T, textOnly = T, direction = "bottom",
+                                                        style = list(
+                                                          "color"="white",
+                                                          "text-shadow" = "-1px -1px 10px #757575, 1px -1px 10px #757575, 1px 1px 10px #757575, -1px 1px 10px #757575"))) %>%
+        addMarkers(data = jcplus, popup = popup, icon = icon, group = "Jobcentre Plus", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
+        addLegend(position = "bottomleft", colors = c("#F0F0F0", "#E93F36", "#2144F5", "#9794F8", "#EF9493"),
+                  labels = 
+                    c(paste0("Not significant (", formatC(sum(filteredData()$quad_sig == "Not significant"), format="f", big.mark = ",", digits=0), ")"),
+                      paste0("High-High (", sum(filteredData()$quad_sig == "High-High"), ")"),  
+                      paste0("Low-Low (", sum(filteredData()$quad_sig == "Low-Low"), ")"),
+                      paste0("Low-High (", sum(filteredData()$quad_sig == "Low-High"), ")"),
+                      paste0("High-Low (", sum(filteredData()$quad_sig == "High-Low "), ")")), 
+                  opacity = 0.4,
+                  title = "LISA cluster map") }
+    else {
+      bbox <- st_bbox(la[la$lad17nm == input$la, ]) %>% as.vector()
+      leafletProxy("map", data = filteredData()) %>%
       clearShapes() %>% clearControls() %>% clearMarkers() %>% 
+      fitBounds(bbox[1], bbox[2], bbox[3], bbox[4]) %>%  
       addPolygons(data = filteredData(), fillColor = ~factpal(quad_sig), fillOpacity = 0.4, 
                   stroke = TRUE, color = "black", weight = 1, layerId = ~lsoa11cd,
-                  highlight = highlightOptions(color = "#FFFF00", weight = 3, opacity = 1, bringToFront = TRUE)) %>%
-      addPolylines(data = la, stroke = TRUE, weight = 3, color = "#212121", opacity = 1) %>% 
-      addLabelOnlyMarkers(data = la, lng = ~centroid_lng, lat = ~centroid_lat, label = ~as.character(lad17nm), 
+                  highlight = highlightOptions(color = "#e24a90", weight = 2, opacity = 1, bringToFront = TRUE)) %>%
+      addPolylines(data = la[la$lad17nm == input$la, ], stroke = TRUE, weight = 2, color = "#212121", opacity = 1) %>% 
+      addLabelOnlyMarkers(data = la[la$lad17nm == input$la, ], lng = ~centroid_lng, lat = ~centroid_lat, label = ~as.character(lad17nm), 
                           labelOptions = labelOptions(noHide = T, textOnly = T, direction = "bottom",
                                                       style = list(
                                                         "color"="white",
                                                         "text-shadow" = "-1px -1px 10px #757575, 1px -1px 10px #757575, 1px 1px 10px #757575, -1px 1px 10px #757575"))) %>%
-      addMarkers(data = jcplus, popup = popup, icon = icon, group = "Jobcentre Plus", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
-      addLegend(position = "bottomleft", colors = c("#F0F0F0", "#E93F36", "#2144F5", "#9794F8", "#EF9493"),
+        addMarkers(data = jcplus, popup = popup, icon = icon, group = "Jobcentre Plus", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
+        addLegend(position = "bottomleft", colors = c("#F0F0F0", "#E93F36", "#2144F5", "#9794F8", "#EF9493"),
                 labels = 
                   c(paste0("Not significant (", formatC(sum(filteredData()$quad_sig == "Not significant"), format="f", big.mark = ",", digits=0), ")"),
                     paste0("High-High (", sum(filteredData()$quad_sig == "High-High"), ")"),  
@@ -225,6 +261,7 @@ server <- function(input, output, session) {
                     paste0("High-Low (", sum(filteredData()$quad_sig == "High-Low "), ")")), 
                 opacity = 0.4,
                 title = "LISA cluster map")
-  })
+  }
+    })
   
 }

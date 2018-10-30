@@ -4,7 +4,7 @@
     color: #e24a90;
 }
 </style>
-# Trafford Worklessness Pilot: Signpost
+# <span style="color: #ccc;">Trafford Worklessness Pilot:</span> [<span class="link">Signpost</span>](http://www.trafforddatalab.io/opengovintelligence/signpost.html)
 
 #### Background
 This web application has been developed by the [<span class="link">Trafford Data Lab</span>](https://www.trafforddatalab.io/) as part of the European Union funded [<span class="link">OpenGovIntelligence</span>](http://www.opengovintelligence.eu) project. It is the result of a co-creation exercise involving [<span class="link">Trafford Council</span>](http://www.trafford.gov.uk/residents/residents.aspx), the [<span class="link">Greater Manchester Combined Authority</span>](https://www.greatermanchester-ca.gov.uk/) and the [<span class="link">Department for Work and Pensions</span>](https://www.gov.uk/government/organisations/department-for-work-pensions) to help reduce worklessness across the Greater Manchester region.
@@ -48,6 +48,11 @@ Spatial vector boundary layers were provided by the ONS' [<span class="link">Ope
 #### Developers
 The app was developed using javascript and the following libraries:
 - [<span class="link">leaflet</span>](https://leafletjs.com/)
+- [<span class="link">leaflet.awesome-markers</span>](https://github.com/lvoogdt/Leaflet.awesome-markers)
+- [<span class="link">leaflet.control.geocoder</span>](https://github.com/perliedman/leaflet-control-geocoder)
+- [<span class="link">leaflet.locate</span>](https://github.com/domoritz/leaflet-locatecontrol)
+- [<span class="link">leaflet.markercluster</span>](https://github.com/danzel)
+- [<span class="link">fontawesome</span>](https://fontawesome.com)
 
 The source code is available [<span class="link">here</span>](https://github.com/traffordDataLab/opengovintelligence).
 

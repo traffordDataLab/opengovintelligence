@@ -4,7 +4,7 @@
     color: #e24a90;
 }
 </style>
-# Trafford Worklessness Pilot: Summarise
+# <span style="color: #ccc;">Trafford Worklessness Pilot:</span> [<span class="link">Summarise</span>](http://www.trafforddatalab.io/opengovintelligence/summarise.html)
 
 #### Background
 This web application has been developed by the [<span class="link">Trafford Data Lab</span>](https://www.trafforddatalab.io/) as part of the European Union funded [<span class="link">OpenGovIntelligence</span>](http://www.opengovintelligence.eu) project. It is the result of a co-creation exercise involving [<span class="link">Trafford Council</span>](http://www.trafford.gov.uk/residents/residents.aspx), the [<span class="link">Greater Manchester Combined Authority</span>](https://www.greatermanchester-ca.gov.uk/) and the [<span class="link">Department for Work and Pensions</span>](https://www.gov.uk/government/organisations/department-for-work-pensions) to help reduce worklessness across the Greater Manchester region.

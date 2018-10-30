@@ -18,6 +18,26 @@
                 font-size: 0.7em;
                 padding: 10px 0 0 0;
             }
+
+            a
+            {
+                color: #e24a90;
+            }
+
+            h1
+            {
+                font-family: "Avenir", "Avenir Next", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+                color: #ccc;
+                font-size: 32px;
+                font-size: 3rem;
+                font-weight: 500;
+                line-height: 1em;
+            }
+
+            .thumbnail:hover
+            {
+                border: 1px solid #e24a90;
+            }
         </style>
     </head>
     <body>
@@ -27,7 +47,7 @@
             </div>
 
             <div class="main">
-                <h1>opengovintelligence</h1>
+                <h1>open<span style="color: #e24a90;">gov</span>intelligence</h1>
                 <p>
                     The <a href="https://www.trafforddatalab.io">Trafford Data Lab</a> is involved in one of six pilots in the <a href="http://www.opengovintelligence.eu" target="_blank">opengovintelligence</a> project. The <strong>Trafford Worklessness Pilot</strong> aims to produce a suite of applications to visualise <strong>Linked Open Statistical Data (LOSD)</strong>, and other open data sources, to identify areas of need and inform service delivery related to worklessness. These applications have been co-created with Jobcentre Plus staff in Stretford and council leads for worklessness across Greater Manchester and utilise the LOSD tools <a href="https://github.com/Swirrl/table2qb" target="_blank">table2qb</a> and <a href="https://github.com/Swirrl/cubiql" target="_blank">cubiql</a> created specifically for the opengovintelligence project.
                 </p>
@@ -39,7 +59,9 @@
                 </p>
                 <div>
                     <a href="http://www.trafforddatalab.io/opengovintelligence/summarise.html" target="_blank"><img src="summarise_thumbnail.png" class="thumbnail" alt="Summarise application" border="0"/><strong>Summarise</strong></a><br />
-                    Simple dashboard that presents summary statistics for claimant count data.
+                    Simple dashboard presenting summary statistics for the proportion of people claiming unemployment related benefits. Information can be viewed by electoral ward or Local Authority district level alongside comparators. Provides managers and policy specialists with an overview of worklessness across Greater Manchester.
+                    <br />
+                    <a href="http://www.trafforddatalab.io/opengovintelligence/summarise.html" target="_blank">Launch app</a> | <a href="https://github.com/traffordDataLab/opengovintelligence/blob/master/documentation/summarise_README.md" target="_blank">View documentation</a>
                 </div>
 
                 <br class="noFloat"/>
@@ -47,7 +69,9 @@
 
                 <div>
                     <a href="http://www.trafforddatalab.io/opengovintelligence/scan.html" target="_blank"><img src="scan_thumbnail.png" class="thumbnail" alt="Scan application" border="0"/><strong>Scan</strong></a><br />
-                    Explore claimant count data and other proxies for worklessness both spatially and temporally at a neighbourhood level.
+                    Explore claimant count data and other proxies for worklessness at a neighbourhood level. The map visualises the spatial distribution of key indicators relating to worklessness using a technique called Local Indicators of Spatial Association <a href="http://onlinelibrary.wiley.com/doi/10.1111/j.1538-4632.1995.tb00338.x/abstract" target="_blank">(Anselin, 1995)</a> producing statistically significant spatial clusters and outliers. Ideal for analysts in helping to identify and understand areas of focus.
+                    <br />
+                    <a href="http://www.trafforddatalab.io/opengovintelligence/scan.html" target="_blank">Launch app</a> | <a href="https://github.com/traffordDataLab/opengovintelligence/blob/master/documentation/scan_README.md" target="_blank">View documentation</a>
                 </div>
 
                 <br class="noFloat"/>
@@ -55,7 +79,9 @@
 
                 <div>
                     <a href="http://www.trafforddatalab.io/opengovintelligence/signpost.html" target="_blank"><img src="signpost_thumbnail.png" class="thumbnail" alt="Signpost application" border="0"/><strong>Signpost</strong></a><br />
-                    Signposting tool to assist link workers to locate services that can help job seekers get back into work.
+                    A signposting application to assist link workers to locate services that can help job seekers get back into work. Services can be identified within reach of where job seekers live. Also beneficial to managers in assessing the availability of services in relation to the Jobcentre Plus locations, ensuring job seekers have access to the services they require.
+                    <br />
+                    <a href="http://www.trafforddatalab.io/opengovintelligence/signpost.html" target="_blank">Launch app</a> | <a href="https://github.com/traffordDataLab/opengovintelligence/blob/master/documentation/signpost_README.md" target="_blank">View documentation</a>
                 </div>
 
                 <br class="noFloat"/>

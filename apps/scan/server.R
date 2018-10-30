@@ -41,45 +41,45 @@ server <- function(input, output, session) {
         HTML(paste(tags$span(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$value), 
                    " (", filteredData()[filteredData()$lsoa11cd == lsoaCode,]$quad, ")", sep = "")),
         br(), hr(),
-        tags$h4("Index of Multiple Deprivation (2015)"),
+        tags$strong("IMD 2015"),
         HTML("<table class='imd' style='width: 100%' callspacing='7'>
              <tr>
-             <th style='width: 70%'>Index/Domain</th>
-             <th style='width: 15%; text-align: right'>Rank</th>
-             <th style='width: 15%; text-align: right'>Decile</th>
+             <th style='width: 70%; font-weight: normal; font-style: italic'>Index/Domain</th>
+             <th style='width: 15%; text-align: left; font-weight: normal; font-style: italic'>Decile</th>
+             <th style='width: 15%; text-align: left; font-weight: normal; font-style: italic'>Rank</th>
              </tr> 
              <tr>
              <td>", "Index of Multiple Deprivation", "</td>
-             <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$rank, format="f", big.mark = ",", digits=0), "</td>
              <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$decile, "</td>
+             <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$rank, format="f", big.mark = ",", digits=0), "</td>
              </tr>
              <td>", "Income", "</td>
-             <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Income")$rank, format="f", big.mark = ",", digits=0), "</td>
              <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Income")$decile, "</td>
+             <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Income")$rank, format="f", big.mark = ",", digits=0), "</td>
              </tr>
              <td>", "Employment", "</td>
-             <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Employment")$rank, format="f", big.mark = ",", digits=0), "</td>
              <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Employment")$decile, "</td>
+             <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Employment")$rank, format="f", big.mark = ",", digits=0), "</td>
              </tr>
              <td>", "Education, Skills and Training", "</td>
-             <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Education, Skills and Training")$rank, format="f", big.mark = ",", digits=0), "</td>
              <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Education, Skills and Training")$decile, "</td>
+             <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Education, Skills and Training")$rank, format="f", big.mark = ",", digits=0), "</td>
              </tr>
              <td>", "Health Deprivation and Disability", "</td>
-             <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Health Deprivation and Disability")$rank, format="f", big.mark = ",", digits=0), "</td>
              <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Health Deprivation and Disability")$decile, "</td>
+             <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Health Deprivation and Disability")$rank, format="f", big.mark = ",", digits=0), "</td>
              </tr>
              <td>", "Crime", "</td>
-             <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$rank, format="f", big.mark = ",", digits=0), "</td>
              <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$decile, "</td>
+             <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$rank, format="f", big.mark = ",", digits=0), "</td>
              </tr>
              <td>", "Barriers to Housing and Services", "</td>
-             <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Crime")$rank, format="f", big.mark = ",", digits=0), "</td>
              <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Crime")$decile, "</td>
+             <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Crime")$rank, format="f", big.mark = ",", digits=0), "</td>
              </tr>
              <td>", "Living Environment", "</td>
-             <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Living Environment")$rank, format="f", big.mark = ",", digits=0), "</td>
              <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Living Environment")$decile, "</td>
+             <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Living Environment")$rank, format="f", big.mark = ",", digits=0), "</td>
              </tr>
              </table>")
         ))
@@ -100,45 +100,45 @@ server <- function(input, output, session) {
           HTML(paste(tags$span(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$value), 
                      " (", filteredData()[filteredData()$lsoa11cd == lsoaCode,]$quad, ")", sep = "")),
           br(), hr(),
-          tags$h4("Index of Multiple Deprivation (2015)"),
+          tags$strong("IMD 2015"),
           HTML("<table class='imd' style='width: 100%' callspacing='7'>
                <tr>
-               <th style='width: 70%'>Index/Domain</th>
-               <th style='width: 15%; text-align: right'>Rank</th>
-               <th style='width: 15%; text-align: right'>Decile</th>
+               <th style='width: 70%; font-weight: normal; font-style: italic'>Index/Domain</th>
+               <th style='width: 15%; text-align: left; font-weight: normal; font-style: italic'>Decile</th>
+               <th style='width: 15%; text-align: left; font-weight: normal; font-style: italic'>Rank</th>
                </tr> 
                <tr>
                <td>", "Index of Multiple Deprivation", "</td>
-               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$rank, format="f", big.mark = ",", digits=0), "</td>
                <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$decile, "</td>
+               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$rank, format="f", big.mark = ",", digits=0), "</td>
                </tr>
                <td>", "Income", "</td>
-               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Income")$rank, format="f", big.mark = ",", digits=0), "</td>
                <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Income")$decile, "</td>
+               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Income")$rank, format="f", big.mark = ",", digits=0), "</td>
                </tr>
                <td>", "Employment", "</td>
-               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Employment")$rank, format="f", big.mark = ",", digits=0), "</td>
                <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Employment")$decile, "</td>
+               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Employment")$rank, format="f", big.mark = ",", digits=0), "</td>
                </tr>
                <td>", "Education, Skills and Training", "</td>
-               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Education, Skills and Training")$rank, format="f", big.mark = ",", digits=0), "</td>
                <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Education, Skills and Training")$decile, "</td>
+               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Education, Skills and Training")$rank, format="f", big.mark = ",", digits=0), "</td>
                </tr>
                <td>", "Health Deprivation and Disability", "</td>
-               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Health Deprivation and Disability")$rank, format="f", big.mark = ",", digits=0), "</td>
                <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Health Deprivation and Disability")$decile, "</td>
+               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Health Deprivation and Disability")$rank, format="f", big.mark = ",", digits=0), "</td>
                </tr>
                <td>", "Crime", "</td>
-               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$rank, format="f", big.mark = ",", digits=0), "</td>
                <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$decile, "</td>
+               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$rank, format="f", big.mark = ",", digits=0), "</td>
                </tr>
                <td>", "Barriers to Housing and Services", "</td>
-               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Crime")$rank, format="f", big.mark = ",", digits=0), "</td>
                <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Crime")$decile, "</td>
+               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Crime")$rank, format="f", big.mark = ",", digits=0), "</td>
                </tr>
                <td>", "Living Environment", "</td>
-               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Living Environment")$rank, format="f", big.mark = ",", digits=0), "</td>
                <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Living Environment")$decile, "</td>
+               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Living Environment")$rank, format="f", big.mark = ",", digits=0), "</td>
                </tr>
                </table>")
           ))
@@ -161,15 +161,12 @@ server <- function(input, output, session) {
                attribution = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community | <a href="https://www.ons.gov.uk/methodology/geography/licences"> Contains OS data © Crown copyright and database right (2018)</a>', 
                group = "Satellite",
                options = providerTileOptions(minZoom = 10, maxZoom = 16)) %>%
-      addTiles(urlTemplate = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}{r}.png",
-               attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://cartodb.com/attributions">CartoDB</a> | <a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2018)</a>',
-               group = "Dark",
-               options = providerTileOptions(minZoom = 10, maxZoom = 16)) %>% 
       addTiles(urlTemplate = "", 
                attribution = '<a href="https://www.ons.gov.uk/methodology/geography/licences">Contains OS data © Crown copyright and database right (2018)</a>',
                group = "None") %>% 
+      setView(-2.28417866956407, 53.5151885751656, zoom = 11) %>%
       addLayersControl(position = 'topleft',
-                       baseGroups = c("Low Detail", "High Detail", "Satellite", "Dark", "None"),
+                       baseGroups = c("Low Detail", "High Detail", "Satellite", "None"),
                        overlayGroups = c("Jobcentre Plus"), 
                        options = layersControlOptions(collapsed = TRUE)) %>% 
       hideGroup(c("Jobcentre Plus")) %>% 
@@ -184,7 +181,7 @@ server <- function(input, output, session) {
     map <- leafletProxy("map") %>%
       removeShape("highlighted") %>%
       addPolylines(data = filteredData()[filteredData()$lsoa11cd == values$highlight, ], fill = FALSE,
-                  color = "#e24a90", opacity = 1, layerId = "highlighted")
+                  color = "#e24a90", weight = 2, opacity = 1, layerId = "highlighted")
   })
   
   observeEvent(input$la, {
@@ -217,10 +214,8 @@ server <- function(input, output, session) {
     if("Greater Manchester" == input$la){
       leafletProxy("map", data = filteredData()) %>%
         clearShapes() %>% clearControls() %>% clearMarkers() %>% 
-        setView(-2.28417866956407, 53.5151885751656, zoom = 11) %>% 
         addPolygons(data = filteredData(), fillColor = ~factpal(quad_sig), fillOpacity = 0.4, 
-                    stroke = TRUE, color = "black", weight = 1, layerId = ~lsoa11cd,
-                    highlight = highlightOptions(color = "#e24a90", weight = 2, opacity = 1, bringToFront = TRUE)) %>%
+                    stroke = TRUE, color = "#212121", weight = 1, layerId = ~lsoa11cd) %>%
         addPolylines(data = la, stroke = TRUE, weight = 2, color = "#212121", opacity = 1) %>% 
         addLabelOnlyMarkers(data = la, lng = ~centroid_lng, lat = ~centroid_lat, label = ~as.character(lad17nm), 
                             labelOptions = labelOptions(noHide = T, textOnly = T, direction = "bottom",
@@ -236,22 +231,21 @@ server <- function(input, output, session) {
                       paste0("Low-High (", sum(filteredData()$quad_sig == "Low-High"), ")"),
                       paste0("High-Low (", sum(filteredData()$quad_sig == "High-Low "), ")")), 
                   opacity = 0.4,
-                  title = "LISA cluster map") }
+                  title = paste0(input$measure, " (", format(distinct(filter(df, measure == input$measure), date), format = "%b-%Y"), ")")) }
     else {
       bbox <- st_bbox(la[la$lad17nm == input$la, ]) %>% as.vector()
       leafletProxy("map", data = filteredData()) %>%
       clearShapes() %>% clearControls() %>% clearMarkers() %>% 
       fitBounds(bbox[1], bbox[2], bbox[3], bbox[4]) %>%  
       addPolygons(data = filteredData(), fillColor = ~factpal(quad_sig), fillOpacity = 0.4, 
-                  stroke = TRUE, color = "black", weight = 1, layerId = ~lsoa11cd,
-                  highlight = highlightOptions(color = "#e24a90", weight = 2, opacity = 1, bringToFront = TRUE)) %>%
+                  stroke = TRUE, color = "#212121", weight = 1, layerId = ~lsoa11cd) %>%
       addPolylines(data = la[la$lad17nm == input$la, ], stroke = TRUE, weight = 2, color = "#212121", opacity = 1) %>% 
       addLabelOnlyMarkers(data = la[la$lad17nm == input$la, ], lng = ~centroid_lng, lat = ~centroid_lat, label = ~as.character(lad17nm), 
                           labelOptions = labelOptions(noHide = T, textOnly = T, direction = "bottom",
                                                       style = list(
                                                         "color"="white",
                                                         "text-shadow" = "-1px -1px 10px #757575, 1px -1px 10px #757575, 1px 1px 10px #757575, -1px 1px 10px #757575"))) %>%
-        addMarkers(data = jcplus, popup = popup, icon = icon, group = "Jobcentre Plus", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
+        addMarkers(data = jcplus[jcplus$Area.name == input$la, ], popup = popup, icon = icon, group = "Jobcentre Plus", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
         addLegend(position = "bottomleft", colors = c("#F0F0F0", "#E93F36", "#2144F5", "#9794F8", "#EF9493"),
                 labels = 
                   c(paste0("Not significant (", formatC(sum(filteredData()$quad_sig == "Not significant"), format="f", big.mark = ",", digits=0), ")"),
@@ -260,7 +254,7 @@ server <- function(input, output, session) {
                     paste0("Low-High (", sum(filteredData()$quad_sig == "Low-High"), ")"),
                     paste0("High-Low (", sum(filteredData()$quad_sig == "High-Low "), ")")), 
                 opacity = 0.4,
-                title = "LISA cluster map")
+                title = paste0(input$measure, " (", format(distinct(filter(df, measure == input$measure), date), format = "%b-%Y"), ")"))
   }
     })
   

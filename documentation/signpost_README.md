@@ -1,13 +1,9 @@
-<html>
-<head>
 <style>
 .link
 {
     color: #e24a90;
 }
 </style>
-</head>
-<body>
 # <span style="color: #ccc;">Trafford Worklessness Pilot:</span> [<span class="link">Signpost</span>](http://www.trafforddatalab.io/opengovintelligence/signpost.html)
 
 #### Background
@@ -65,5 +61,3 @@ The source code is available [<span class="link">here</span>](https://github.com
     <img src="../eu_flag.png" alt="Flag of the European Union" style="float: left; margin-right: 12px; height: 5em;"/>
     <span class="footerText">This project has received funding from the European Union's Horizon 2020 research and innovation programme under grant agreement No 693849.</span>
 </div>
-</body>
-</html>

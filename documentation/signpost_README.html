@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8" />
+      <title>signpost_README</title>
+      <style>.markdown-preview:not([data-use-github-style]) { padding: 2em; font-size: 1.2em; color: rgb(179, 184, 195); background-color: rgb(36, 41, 51); overflow: auto; }
+.markdown-preview:not([data-use-github-style]) > :first-child { margin-top: 0px; }
+.markdown-preview:not([data-use-github-style]) h1, .markdown-preview:not([data-use-github-style]) h2, .markdown-preview:not([data-use-github-style]) h3, .markdown-preview:not([data-use-github-style]) h4, .markdown-preview:not([data-use-github-style]) h5, .markdown-preview:not([data-use-github-style]) h6 { line-height: 1.2; margin-top: 1.5em; margin-bottom: 0.5em; color: rgb(255, 255, 255); }
+.markdown-preview:not([data-use-github-style]) h1 { font-size: 2.4em; font-weight: 300; }
+.markdown-preview:not([data-use-github-style]) h2 { font-size: 1.8em; font-weight: 400; }
+.markdown-preview:not([data-use-github-style]) h3 { font-size: 1.5em; font-weight: 500; }
+.markdown-preview:not([data-use-github-style]) h4 { font-size: 1.2em; font-weight: 600; }
+.markdown-preview:not([data-use-github-style]) h5 { font-size: 1.1em; font-weight: 600; }
+.markdown-preview:not([data-use-github-style]) h6 { font-size: 1em; font-weight: 600; }
+.markdown-preview:not([data-use-github-style]) strong { color: rgb(255, 255, 255); }
+.markdown-preview:not([data-use-github-style]) del { color: rgb(133, 141, 159); }
+.markdown-preview:not([data-use-github-style]) a, .markdown-preview:not([data-use-github-style]) a code { color: white; }
+.markdown-preview:not([data-use-github-style]) img { max-width: 100%; }
+.markdown-preview:not([data-use-github-style]) > p { margin-top: 0px; margin-bottom: 1.5em; }
+.markdown-preview:not([data-use-github-style]) > ul, .markdown-preview:not([data-use-github-style]) > ol { margin-bottom: 1.5em; }
+.markdown-preview:not([data-use-github-style]) blockquote { margin: 1.5em 0px; font-size: inherit; color: rgb(133, 141, 159); border-color: rgb(70, 79, 99); border-width: 4px; }
+.markdown-preview:not([data-use-github-style]) hr { margin: 3em 0px; border-top: 2px dashed rgb(70, 79, 99); background: none; }
+.markdown-preview:not([data-use-github-style]) table { margin: 1.5em 0px; }
+.markdown-preview:not([data-use-github-style]) th { color: rgb(255, 255, 255); }
+.markdown-preview:not([data-use-github-style]) th, .markdown-preview:not([data-use-github-style]) td { padding: 0.66em 1em; border: 1px solid rgb(70, 79, 99); }
+.markdown-preview:not([data-use-github-style]) code { color: rgb(255, 255, 255); background-color: rgb(53, 60, 75); }
+.markdown-preview:not([data-use-github-style]) pre.editor-colors { margin: 1.5em 0px; padding: 1em; font-size: 0.92em; border-radius: 3px; background-color: rgb(44, 51, 63); }
+.markdown-preview:not([data-use-github-style]) kbd { color: rgb(255, 255, 255); border-width: 1px 1px 2px; border-style: solid; border-color: rgb(70, 79, 99) rgb(70, 79, 99) rgb(57, 65, 81); border-image: initial; background-color: rgb(53, 60, 75); }
+.markdown-preview[data-use-github-style] { font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif; line-height: 1.6; word-wrap: break-word; padding: 30px; font-size: 16px; color: rgb(51, 51, 51); background-color: rgb(255, 255, 255); overflow: scroll; }
+.markdown-preview[data-use-github-style] > :first-child { margin-top: 0px !important; }
+.markdown-preview[data-use-github-style] > :last-child { margin-bottom: 0px !important; }
+.markdown-preview[data-use-github-style] a:not([href]) { color: inherit; text-decoration: none; }
+.markdown-preview[data-use-github-style] .absent { color: rgb(204, 0, 0); }
+.markdown-preview[data-use-github-style] .anchor { position: absolute; top: 0px; left: 0px; display: block; padding-right: 6px; padding-left: 30px; margin-left: -30px; }
+.markdown-preview[data-use-github-style] .anchor:focus { outline: none; }
+.markdown-preview[data-use-github-style] h1, .markdown-preview[data-use-github-style] h2, .markdown-preview[data-use-github-style] h3, .markdown-preview[data-use-github-style] h4, .markdown-preview[data-use-github-style] h5, .markdown-preview[data-use-github-style] h6 { position: relative; margin-top: 1em; margin-bottom: 16px; font-weight: bold; line-height: 1.4; }
+.markdown-preview[data-use-github-style] h1 .octicon-link, .markdown-preview[data-use-github-style] h2 .octicon-link, .markdown-preview[data-use-github-style] h3 .octicon-link, .markdown-preview[data-use-github-style] h4 .octicon-link, .markdown-preview[data-use-github-style] h5 .octicon-link, .markdown-preview[data-use-github-style] h6 .octicon-link { display: none; color: rgb(0, 0, 0); vertical-align: middle; }
+.markdown-preview[data-use-github-style] h1:hover .anchor, .markdown-preview[data-use-github-style] h2:hover .anchor, .markdown-preview[data-use-github-style] h3:hover .anchor, .markdown-preview[data-use-github-style] h4:hover .anchor, .markdown-preview[data-use-github-style] h5:hover .anchor, .markdown-preview[data-use-github-style] h6:hover .anchor { padding-left: 8px; margin-left: -30px; text-decoration: none; }
+.markdown-preview[data-use-github-style] h1:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h2:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h3:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h4:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h5:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h6:hover .anchor .octicon-link { display: inline-block; }
+.markdown-preview[data-use-github-style] h1 tt, .markdown-preview[data-use-github-style] h2 tt, .markdown-preview[data-use-github-style] h3 tt, .markdown-preview[data-use-github-style] h4 tt, .markdown-preview[data-use-github-style] h5 tt, .markdown-preview[data-use-github-style] h6 tt, .markdown-preview[data-use-github-style] h1 code, .markdown-preview[data-use-github-style] h2 code, .markdown-preview[data-use-github-style] h3 code, .markdown-preview[data-use-github-style] h4 code, .markdown-preview[data-use-github-style] h5 code, .markdown-preview[data-use-github-style] h6 code { font-size: inherit; }
+.markdown-preview[data-use-github-style] h1 { padding-bottom: 0.3em; font-size: 2.25em; line-height: 1.2; border-bottom: 1px solid rgb(238, 238, 238); }
+.markdown-preview[data-use-github-style] h1 .anchor { line-height: 1; }
+.markdown-preview[data-use-github-style] h2 { padding-bottom: 0.3em; font-size: 1.75em; line-height: 1.225; border-bottom: 1px solid rgb(238, 238, 238); }
+.markdown-preview[data-use-github-style] h2 .anchor { line-height: 1; }
+.markdown-preview[data-use-github-style] h3 { font-size: 1.5em; line-height: 1.43; }
+.markdown-preview[data-use-github-style] h3 .anchor { line-height: 1.2; }
+.markdown-preview[data-use-github-style] h4 { font-size: 1.25em; }
+.markdown-preview[data-use-github-style] h4 .anchor { line-height: 1.2; }
+.markdown-preview[data-use-github-style] h5 { font-size: 1em; }
+.markdown-preview[data-use-github-style] h5 .anchor { line-height: 1.1; }
+.markdown-preview[data-use-github-style] h6 { font-size: 1em; color: rgb(119, 119, 119); }
+.markdown-preview[data-use-github-style] h6 .anchor { line-height: 1.1; }
+.markdown-preview[data-use-github-style] p, .markdown-preview[data-use-github-style] blockquote, .markdown-preview[data-use-github-style] ul, .markdown-preview[data-use-github-style] ol, .markdown-preview[data-use-github-style] dl, .markdown-preview[data-use-github-style] table, .markdown-preview[data-use-github-style] pre { margin-top: 0px; margin-bottom: 16px; }
+.markdown-preview[data-use-github-style] hr { height: 4px; padding: 0px; margin: 16px 0px; background-color: rgb(231, 231, 231); border: 0px none; }
+.markdown-preview[data-use-github-style] ul, .markdown-preview[data-use-github-style] ol { padding-left: 2em; }
+.markdown-preview[data-use-github-style] ul.no-list, .markdown-preview[data-use-github-style] ol.no-list { padding: 0px; list-style-type: none; }
+.markdown-preview[data-use-github-style] ul ul, .markdown-preview[data-use-github-style] ul ol, .markdown-preview[data-use-github-style] ol ol, .markdown-preview[data-use-github-style] ol ul { margin-top: 0px; margin-bottom: 0px; }
+.markdown-preview[data-use-github-style] li > p { margin-top: 16px; }
+.markdown-preview[data-use-github-style] dl { padding: 0px; }
+.markdown-preview[data-use-github-style] dl dt { padding: 0px; margin-top: 16px; font-size: 1em; font-style: italic; font-weight: bold; }
+.markdown-preview[data-use-github-style] dl dd { padding: 0px 16px; margin-bottom: 16px; }
+.markdown-preview[data-use-github-style] blockquote { padding: 0px 15px; color: rgb(119, 119, 119); border-left: 4px solid rgb(221, 221, 221); }
+.markdown-preview[data-use-github-style] blockquote > :first-child { margin-top: 0px; }
+.markdown-preview[data-use-github-style] blockquote > :last-child { margin-bottom: 0px; }
+.markdown-preview[data-use-github-style] table { display: block; width: 100%; overflow: auto; word-break: keep-all; }
+.markdown-preview[data-use-github-style] table th { font-weight: bold; }
+.markdown-preview[data-use-github-style] table th, .markdown-preview[data-use-github-style] table td { padding: 6px 13px; border: 1px solid rgb(221, 221, 221); }
+.markdown-preview[data-use-github-style] table tr { background-color: rgb(255, 255, 255); border-top: 1px solid rgb(204, 204, 204); }
+.markdown-preview[data-use-github-style] table tr:nth-child(2n) { background-color: rgb(248, 248, 248); }
+.markdown-preview[data-use-github-style] img { max-width: 100%; box-sizing: border-box; }
+.markdown-preview[data-use-github-style] .emoji { max-width: none; }
+.markdown-preview[data-use-github-style] span.frame { display: block; overflow: hidden; }
+.markdown-preview[data-use-github-style] span.frame > span { display: block; float: left; width: auto; padding: 7px; margin: 13px 0px 0px; overflow: hidden; border: 1px solid rgb(221, 221, 221); }
+.markdown-preview[data-use-github-style] span.frame span img { display: block; float: left; }
+.markdown-preview[data-use-github-style] span.frame span span { display: block; padding: 5px 0px 0px; clear: both; color: rgb(51, 51, 51); }
+.markdown-preview[data-use-github-style] span.align-center { display: block; overflow: hidden; clear: both; }
+.markdown-preview[data-use-github-style] span.align-center > span { display: block; margin: 13px auto 0px; overflow: hidden; text-align: center; }
+.markdown-preview[data-use-github-style] span.align-center span img { margin: 0px auto; text-align: center; }
+.markdown-preview[data-use-github-style] span.align-right { display: block; overflow: hidden; clear: both; }
+.markdown-preview[data-use-github-style] span.align-right > span { display: block; margin: 13px 0px 0px; overflow: hidden; text-align: right; }
+.markdown-preview[data-use-github-style] span.align-right span img { margin: 0px; text-align: right; }
+.markdown-preview[data-use-github-style] span.float-left { display: block; float: left; margin-right: 13px; overflow: hidden; }
+.markdown-preview[data-use-github-style] span.float-left span { margin: 13px 0px 0px; }
+.markdown-preview[data-use-github-style] span.float-right { display: block; float: right; margin-left: 13px; overflow: hidden; }
+.markdown-preview[data-use-github-style] span.float-right > span { display: block; margin: 13px auto 0px; overflow: hidden; text-align: right; }
+.markdown-preview[data-use-github-style] code, .markdown-preview[data-use-github-style] tt { padding: 0.2em 0px; margin: 0px; font-size: 85%; background-color: rgba(0, 0, 0, 0.04); border-radius: 3px; }
+.markdown-preview[data-use-github-style] code::before, .markdown-preview[data-use-github-style] tt::before, .markdown-preview[data-use-github-style] code::after, .markdown-preview[data-use-github-style] tt::after { letter-spacing: -0.2em; content: " "; }
+.markdown-preview[data-use-github-style] code br, .markdown-preview[data-use-github-style] tt br { display: none; }
+.markdown-preview[data-use-github-style] del code { text-decoration: inherit; }
+.markdown-preview[data-use-github-style] pre > code { padding: 0px; margin: 0px; font-size: 100%; word-break: normal; white-space: pre; background: transparent; border: 0px; }
+.markdown-preview[data-use-github-style] .highlight { margin-bottom: 16px; }
+.markdown-preview[data-use-github-style] .highlight pre, .markdown-preview[data-use-github-style] pre { padding: 16px; overflow: auto; font-size: 85%; line-height: 1.45; background-color: rgb(247, 247, 247); border-radius: 3px; }
+.markdown-preview[data-use-github-style] .highlight pre { margin-bottom: 0px; word-break: normal; }
+.markdown-preview[data-use-github-style] pre { word-wrap: normal; }
+.markdown-preview[data-use-github-style] pre code, .markdown-preview[data-use-github-style] pre tt { display: inline; max-width: initial; padding: 0px; margin: 0px; overflow: initial; line-height: inherit; word-wrap: normal; background-color: transparent; border: 0px; }
+.markdown-preview[data-use-github-style] pre code::before, .markdown-preview[data-use-github-style] pre tt::before, .markdown-preview[data-use-github-style] pre code::after, .markdown-preview[data-use-github-style] pre tt::after { content: normal; }
+.markdown-preview[data-use-github-style] kbd { display: inline-block; padding: 3px 5px; font-size: 11px; line-height: 10px; color: rgb(85, 85, 85); vertical-align: middle; background-color: rgb(252, 252, 252); border-width: 1px; border-style: solid; border-color: rgb(204, 204, 204) rgb(204, 204, 204) rgb(187, 187, 187); border-image: initial; border-radius: 3px; box-shadow: rgb(187, 187, 187) 0px -1px 0px inset; }
+.markdown-preview[data-use-github-style] a { color: rgb(51, 122, 183); }
+.markdown-preview[data-use-github-style] code { color: inherit; }
+.markdown-preview[data-use-github-style] pre.editor-colors { padding: 0.8em 1em; margin-bottom: 1em; font-size: 0.85em; border-radius: 4px; overflow: auto; }
+.scrollbars-visible-always .markdown-preview pre.editor-colors .vertical-scrollbar, .scrollbars-visible-always .markdown-preview pre.editor-colors .horizontal-scrollbar { visibility: hidden; }
+.scrollbars-visible-always .markdown-preview pre.editor-colors:hover .vertical-scrollbar, .scrollbars-visible-always .markdown-preview pre.editor-colors:hover .horizontal-scrollbar { visibility: visible; }
+.markdown-preview .task-list-item-checkbox { position: absolute; margin: 0.25em 0px 0px -1.4em; }
+.markdown-preview ul label { vertical-align: top; }
+.markdown-preview code { text-shadow: none; }
+.bracket-matcher .region {
+  border-bottom: 1px dotted lime;
+  position: absolute;
+}
+.line-number.bracket-matcher.bracket-matcher {
+  color: #b3b8c3;
+  background-color: #394151;
+}
+
+.spell-check-misspelling .region {
+  border-bottom: 2px dotted rgba(255, 51, 51, 0.75);
+}
+.spell-check-corrections {
+  width: 25em !important;
+}
+
+pre.editor-colors {
+  color: #b3b8c3;
+  background-color: #242933;
+}
+pre.editor-colors .wrap-guide {
+  background-color: #2f3542;
+}
+pre.editor-colors .indent-guide {
+  color: #272e36;
+}
+pre.editor-colors .invisible-character {
+  color: #323b45;
+}
+pre.editor-colors .gutter {
+  color: #b3b8c3;
+  background-color: #242933;
+}
+pre.editor-colors .gutter .line-number.cursor-line {
+  color: #b3b8c3;
+  background-color: #2f3542;
+}
+pre.editor-colors .gutter .line-number.cursor-line-no-selection {
+  color: #b3b8c3;
+}
+pre.editor-colors .gutter .line-number.folded,
+pre.editor-colors .gutter .line-number:after,
+pre.editor-colors .fold-marker:after {
+  color: #525f6b;
+}
+pre.editor-colors .invisible {
+  color: #b3b8c3;
+}
+pre.editor-colors .cursor {
+  color: white;
+}
+pre.editor-colors .invisible-character {
+  color: #323b45;
+}
+pre.editor-colors .selection .region {
+  background-color: #394151;
+}
+pre.editor-colors .search-results .syntax--marker .region {
+  border: 1px solid #525f6b;
+  background-color: transparent;
+}
+pre.editor-colors .search-results .syntax--marker.current-result .region {
+  border: 1px solid white;
+}
+.syntax--comment {
+  color: #525f6b;
+}
+.syntax--entity.syntax--name.syntax--type {
+  text-decoration: underline;
+  color: #f0c674;
+}
+.syntax--entity.syntax--other.syntax--inherited-class {
+  color: #94b679;
+}
+.syntax--keyword {
+  color: #b54e5a;
+}
+.syntax--keyword.syntax--control {
+  color: #b54e5a;
+}
+.syntax--keyword.syntax--operator {
+  color: #b3b8c3;
+}
+.syntax--keyword.syntax--other.syntax--special-method {
+  color: #81a2be;
+}
+.syntax--keyword.syntax--other.syntax--unit {
+  color: #c6735b;
+}
+.syntax--storage {
+  color: #b54e5a;
+}
+.syntax--constant {
+  color: #c6735b;
+}
+.syntax--constant.syntax--character.syntax--escape {
+  color: #73d1d5;
+}
+.syntax--constant.syntax--numeric {
+  color: #c6735b;
+}
+.syntax--constant.syntax--other.syntax--color {
+  color: #73d1d5;
+}
+.syntax--constant.syntax--other.syntax--symbol {
+  color: #94b679;
+}
+.syntax--variable {
+  color: #c67357;
+}
+.syntax--variable.syntax--interpolation {
+  color: #af583b;
+}
+.syntax--variable.syntax--parameter.syntax--function {
+  color: #b3b8c3;
+}
+.syntax--invalid.syntax--illegal {
+  color: #242933;
+  background-color: #c67357;
+}
+.syntax--string {
+  color: #94b679;
+}
+.syntax--string.syntax--regexp {
+  color: #73d1d5;
+}
+.syntax--string.syntax--regexp .syntax--source.syntax--ruby.syntax--embedded {
+  color: #c6735b;
+}
+.syntax--string.syntax--other.syntax--link {
+  color: #c67357;
+}
+.syntax--punctuation.syntax--definition.syntax--comment {
+  color: #525f6b;
+}
+.syntax--punctuation.syntax--definition.syntax--string,
+.syntax--punctuation.syntax--definition.syntax--variable,
+.syntax--punctuation.syntax--definition.syntax--parameters,
+.syntax--punctuation.syntax--definition.syntax--array {
+  color: #b3b8c3;
+}
+.syntax--punctuation.syntax--definition.syntax--heading,
+.syntax--punctuation.syntax--definition.syntax--identity {
+  color: #81a2be;
+}
+.syntax--punctuation.syntax--definition.syntax--bold {
+  color: #f0c674;
+  font-style: bold;
+}
+.syntax--punctuation.syntax--definition.syntax--italic {
+  color: #b54e5a;
+  font-style: italic;
+}
+.syntax--punctuation.syntax--section.syntax--embedded {
+  color: #af583b;
+}
+.syntax--support.syntax--class {
+  color: #f0c674;
+}
+.syntax--support.syntax--function {
+  color: #73d1d5;
+}
+.syntax--support.syntax--function.syntax--any-method {
+  color: #81a2be;
+}
+.syntax--entity.syntax--name.syntax--function {
+  color: #81a2be;
+}
+.syntax--entity.syntax--name.syntax--class,
+.syntax--entity.syntax--name.syntax--type.syntax--class {
+  color: #f0c674;
+}
+.syntax--entity.syntax--name.syntax--section {
+  color: #81a2be;
+}
+.syntax--entity.syntax--name.syntax--tag {
+  text-decoration: underline;
+  color: #c67357;
+}
+.syntax--entity.syntax--other.syntax--attribute-name {
+  color: #c6735b;
+}
+.syntax--entity.syntax--other.syntax--attribute-name.syntax--id {
+  color: #81a2be;
+}
+.syntax--meta.syntax--class {
+  color: #f0c674;
+}
+.syntax--meta.syntax--link {
+  color: #c6735b;
+}
+.syntax--meta.syntax--require {
+  color: #81a2be;
+}
+.syntax--meta.syntax--selector {
+  color: #b54e5a;
+}
+.syntax--meta.syntax--separator {
+  color: #b3b8c3;
+  background-color: #272e36;
+}
+.syntax--none {
+  color: #b3b8c3;
+}
+.syntax--markup.syntax--bold {
+  color: #c6735b;
+  font-style: bold;
+}
+.syntax--markup.syntax--changed {
+  color: #b54e5a;
+}
+.syntax--markup.syntax--deleted {
+  color: #c67357;
+}
+.syntax--markup.syntax--italic {
+  color: #b54e5a;
+  font-style: italic;
+}
+.syntax--markup.syntax--heading .syntax--punctuation.syntax--definition.syntax--heading {
+  color: #81a2be;
+}
+.syntax--markup.syntax--inserted {
+  color: #94b679;
+}
+.syntax--markup.syntax--list {
+  color: #c67357;
+}
+.syntax--markup.syntax--quote {
+  color: #c6735b;
+}
+.syntax--markup.syntax--raw.syntax--inline {
+  color: #94b679;
+}
+.syntax--source.syntax--gfm .syntax--markup {
+  -webkit-font-smoothing: auto;
+}
+.syntax--source.syntax--gfm .syntax--markup.syntax--heading {
+  color: #94b679;
+}
+pre.editor-colors.mini .scroll-view {
+  padding-left: 1px;
+}
+
+a {
+    color: #e24a90;
+    text-decoration: none;
+}
+</style>
+  </head>
+  <body class='markdown-preview' data-use-github-style><h1 id="-span-style-color-ccc-trafford-worklessness-pilot-span-span-style-color-e24a90-signpost-span-"><span style="color: #ccc;">Trafford Worklessness Pilot:</span> <a href="http://www.trafforddatalab.io/opengovintelligence/signpost.html"><span style="color: #e24a90;">Signpost</span></a></h1>
+<h4 id="background">Background</h4>
+<p>This web application has been developed by the <a href="https://www.trafforddatalab.io/"><span style="color: #e24a90;">Trafford Data Lab</span></a> as part of the European Union funded <a href="http://www.opengovintelligence.eu"><span style="color: #e24a90;">OpenGovIntelligence</span></a> project. It is the result of a co-creation exercise involving <a href="http://www.trafford.gov.uk/residents/residents.aspx"><span style="color: #e24a90;">Trafford Council</span></a>, the <a href="https://www.greatermanchester-ca.gov.uk/"><span style="color: #e24a90;">Greater Manchester Combined Authority</span></a> and the <a href="https://www.gov.uk/government/organisations/department-for-work-pensions"><span style="color: #e24a90;">Department for Work and Pensions</span></a> to help reduce worklessness across the Greater Manchester region.</p>
+<blockquote>
+<p>The OpenGovIntelligence project aims to modernize Public Administration by connecting it to Civil Society through the innovative application of Linked Open Statistical Data (LOSD). We believe the publication of high quality public statistics can transform society, services and enterprises throughout Europe.
+The application is part of a <a href="http://www.trafforddatalab.io/opengovintelligence/"><span style="color: #e24a90;">suite of tools</span></a> that visualise linked open statistical data relating to worklessness to help identify need and locate assets or groups that could support the delivery of Jobcentre Plus services.</p>
+</blockquote>
+<h4 id="the-app">The app</h4>
+<p>The application loads with the interactive map displaying the boundaries of the Local Authorities in Greater Manchester. The top-right corner of the screen contains the <strong>information panel</strong> and the top-left corner of the screen contains the <strong>interactive map controls</strong>. You can pan/drag and zoom the map using a variety of different methods depending on the type of device you are using. If you are using a mouse with a scroll-wheel, you can zoom in and out using the wheel and pan/drag by holding the mouse button down and moving the mouse. Touchscreen devices can use the pinch-to-zoom gesture to zoom in and out and use the touch-and-drag gesture to pan/drag the map. Trackpad devices usually employ similar gestures to touchscreen.</p>
+<h5 id="information-panel">Information panel</h5>
+<p>The information panel comprises different sections. Initially just the select list containing the services which are able to be viewed is displayed. When you select an interactive item displayed on the map, such as one of the Local Authority boundaries or a location of a service chosen from the select list, information about the selected item appears in the information panel. The information panel is cleared by clicking on an area of the map which does not contain any interactive elements, i.e. outside the boundary of Greater Manchester.</p>
+<p>Choosing a service from the select list causes the locations of that service to be displayed on the map, represented by marker 'pins'. These markers are interactive and clicking on them will display the information about the service in the information panel. When a service has been chosen, clicking on the icon showing a white arrow within a pink circle in the top-right corner of the information panel will reveal further information about the dataset and provide links to access the data.</p>
+<h5 id="interactive-map-controls">Interactive map controls</h5>
+<p>There are three map controls displayed in the top-left corner of the screen: geolocate (compass icon), search (magnifying glass icon) and reachability (bulleye icon).</p>
+<p><strong>Geolocate</strong> attempts to calculate your current location and zoom in to that area on the map. To use this feature your device will need to have GPS capabilities and you will be asked to give permission for the app to access these features. If this is successful, after a few seconds you should see your approximate location displayed on the map with a blue dot and a buffer circle.</p>
+<p><strong>Search</strong> gives you the opportunity to enter either an address, postcode or place name to quickly zoom to that location on the map. If a number of locations match your search criteria, the options will be displayed below the search box. Entering partial postcode information may give unpredictable results.</p>
+<p><strong>Reachability</strong> is very useful when determining how easy it is for a client to access services from their location. You can read more about this feature in our <a href="https://medium.com/@traffordDataLab/out-of-reach-introducing-our-distance-and-travel-time-plugin-859932cb12e5"><span style="color: #e24a90;">Medium article</span></a> and see <a href="https://vimeo.com/user71230875"><span style="color: #e24a90;">demonstration videos on Vimeo</span></a>.</p>
+<p>To use the reachability feature, click on the icon and the options will appear. The first two icons allow choose whether you want to draw a new reachability area (pencil icon) or delete an existing one (bin/trash can icon). The next two icons determine if the reachability area is based on distance (road icon) or time (clock icon). Underneath are the travel mode options: driving (car icon), cycling (bicycle icon) and walking (person icon). Finally the distance or time options are presented in a select list (in 5 minute or 0.5 kilometre intervals depending on whether the distance or time icon is selected). The interval checkbox next to the select list allows either all intervals from the minimum up to the value chosen in the select list to be displayed (checked) or just the single selected value (unchecked).</p>
+<p>When you are ready to draw your reachability area(s), select the draw icon and then choose an area on the map. You can draw further areas if you wish by choosing another location on the map. The reachability tool stays in draw mode until you deselect it by clicking again on the draw icon. Once the tool is deselected the reachability area(s) you have created are interactive and you can select them and see the information about them displayed in the information panel.</p>
+<p>To delete reachability areas, open the tool and select the delete icon. If only one reachability area was displayed it will automatically be deleted and the reachability tool will be deselected. If you have more than one reachability area you need to choose which to delete. Simply selected anywhere within the reachability boundary of the area you want to delete. The delete mode will remain selected until there are no more reachability areas or until you deselect the delete mode.</p>
+<h4 id="sources">Sources</h4>
+<p>The following datasets were used in the application:</p>
+<ul>
+<li><a href="http://www.cqc.org.uk/about-us/transparency/using-cqc-data"><span style="color: #e24a90;">Dentists</span></a> (September 2018, CQC)</li>
+<li><a href="http://www.gmpovertyaction.org/maps/"><span style="color: #e24a90;">Food Banks</span></a> (January 2018, GM Poverty Action)</li>
+<li><a href="http://www.cqc.org.uk/about-us/transparency/using-cqc-data"><span style="color: #e24a90;">General practices</span></a> (October 2018, CQC)</li>
+<li><a href="http://www.cgmcrc.co.uk/contact-us/our-offices/"><span style="color: #e24a90;">Probation offices</span></a> (Cheshire &amp; Greater Manchester CRC)</li>
+<li><a href="https://www.gov.uk/government/publications/dwp-jobcentre-register"><span style="color: #e24a90;">Jobcentre Plus</span></a> (May 2018, DWP)</li>
+</ul>
+<p>Spatial vector boundary layers were provided by the ONS' <a href="http://geoportal.statistics.gov.uk/"><span style="color: #e24a90;">Open Geography Portal</span></a>.</p>
+<h4 id="developers">Developers</h4>
+<p>The app was developed using javascript and the following libraries:</p>
+<ul>
+<li><a href="https://leafletjs.com/"><span style="color: #e24a90;">leaflet</span></a></li>
+<li><a href="https://github.com/lvoogdt/Leaflet.awesome-markers"><span style="color: #e24a90;">leaflet.awesome-markers</span></a></li>
+<li><a href="https://github.com/perliedman/leaflet-control-geocoder"><span style="color: #e24a90;">leaflet.control.geocoder</span></a></li>
+<li><a href="https://github.com/domoritz/leaflet-locatecontrol"><span style="color: #e24a90;">leaflet.locate</span></a></li>
+<li><a href="https://github.com/danzel"><span style="color: #e24a90;">leaflet.markercluster</span></a></li>
+<li><a href="https://fontawesome.com"><span style="color: #e24a90;">fontawesome</span></a></li>
+</ul>
+<p>The source code is available <a href="https://github.com/traffordDataLab/opengovintelligence"><span style="color: #e24a90;">here</span></a>.</p>
+<hr>
+<div>
+    <img style="float: left; margin-right: 12px; height: 5em;" alt="Flag of the European Union" src="/Users/ja71658/Webroot/TraffordDataLab_GitHub/opengovintelligence/eu_flag.png">
+    <span class="footerText">This project has received funding from the European Union's Horizon 2020 research and innovation programme under grant agreement No 693849.</span>
+</div></body>
+</html>

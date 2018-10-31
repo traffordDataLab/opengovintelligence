@@ -58,8 +58,8 @@ function featureEvents (feature, layer) {
 // This function is for styling non-point data. If it has internal styling properties use them, otherwise use a default
 function styleOverlayData(feature) {
     var styles = {
-        color: '#fc6721',
-        fillColor: '#fc6721',
+        color: '#e24a90',
+        fillColor: '#e24a90',
         opacity: 0.5,
         fillOpacity: 0.2
     };
@@ -81,8 +81,8 @@ function pointData (feature, latlng) {
     if (app.datasetCluster == null) {
         // create the marker cluster object in case we require this feature - also indicates to the application that we have point data in the dataset
         app.datasetCluster = L.markerClusterGroup({
-            spiderLegPolylineOptions: { weight: 2, color: '#fc6721', opacity: 0.5 },
-            polygonOptions: { weight: 2, color: '#fc6721', opacity: 0.5, dashArray: '5' }
+            spiderLegPolylineOptions: { weight: 2, color: '#e24a90', opacity: 0.5 },
+            polygonOptions: { weight: 2, color: '#e24a90', opacity: 0.5, dashArray: '5' }
         });
     }
 
@@ -351,7 +351,7 @@ app.geocoder.on('markgeocode', function(result) {
 
     // remove current marker if it exists and create a new marker
     if (app.geocoderMarker != null && app.map.hasLayer(app.geocoderMarker)) app.map.removeLayer(app.geocoderMarker);
-    app.geocoderMarker = new L.Marker(result.center, { icon: L.divIcon({ className: 'fa fa-street-view geocoderMarker' }) })
+    app.geocoderMarker = new L.Marker(result.center, { icon: L.divIcon({ className: 'fa fa-location-arrow geocoderMarker' }) })
         .bindPopup(result.html || result.name, { offset: L.point(14, 0) })
         .addTo(app.map)
         .openPopup();
@@ -366,6 +366,19 @@ app.reachabilityControl = labSetupReachabilityPlugin({
     pane: 'pane_geography_overlay'
 });
 app.reachabilityControl.addTo(app.map);
+
+// Lab styling of the isolines polygons (Overidden from leaflet.reachability_lab_setup.js)
+function labStyleIsolines(feature) {
+    return {
+        color: '#212121',
+        fillColor: '#757575',
+        opacity: 0.8,
+        fillOpacity: 0.1,
+        weight: 4,
+        dashArray: '1,6',
+        lineCap: 'square'
+    };
+}
 
 
 app.datasetGeoJson = null;       // object to store GeoJSON created from datasets loaded from the select list. ***NOTE*** this object is important for the resetting of styles for clusered marker datasets
@@ -383,20 +396,20 @@ app.poly = {
 
 // Selected polygon styling
 app.polySelected = {
-    color: '#ffea00',
+    color: '#e24a90',
     weight: 5,
     opacity: '1'
 };
 
 // Point data feature styling
 app.marker = L.AwesomeMarkers.icon({
-    markerColor: 'pin-circle-orange-bright',
+    markerColor: 'pin-circle-pink-dark',
     iconSize: [20, 39]
 });
 
 // User-selected point data styling
 app.markerSelected = L.AwesomeMarkers.icon({
-    markerColor: 'pin-circle-yellow-bright',
+    markerColor: 'pin-circle-pink-bright',
     iconSize: [20, 39]
 });
 
@@ -526,7 +539,7 @@ labAjax('https://www.trafforddatalab.io/spatial_data/local_authority/2016/gm_loc
             query += '    cubiql {';
             query += '        dataset_working_age_population {';
             query += '            observations {';
-            query += '                page(first: 500) {';
+            query += '                page(first: 2000) {';
             query += '                    next_page';
             query += '                    observation {';
             query += '                        reference_area {';

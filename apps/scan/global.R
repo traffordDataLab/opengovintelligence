@@ -12,12 +12,12 @@ source("https://www.traffordDataLab.io/assets/rfunctions/LISA/lisa_stats.R")
 # load tabular data using SPARQL queries ---------------------------
 source("cubiql/queries.R")
   
-imd <- read_csv("https://www.traffordDataLab.io/open_data/imd_2015/IMD_2015_wide.csv",
-                col_types = cols(lsoa11cd = col_factor(NULL),
-                                 index_domain = col_factor(NULL),
-                                 decile = col_factor(1:10),
-                                 rank = col_integer(),
-                                 score = col_double()))
+# imd <- read_csv("https://www.traffordDataLab.io/open_data/imd_2015/IMD_2015_wide.csv",
+#                 col_types = cols(lsoa11cd = col_factor(NULL),
+#                                  index_domain = col_factor(NULL),
+#                                  decile = col_factor(1:10),
+#                                  rank = col_integer(),
+#                                  score = col_double()))
 
 # load geospatial data ---------------------------
 

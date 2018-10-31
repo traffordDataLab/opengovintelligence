@@ -23,5 +23,5 @@ ui <- bootstrapPage(
                               tabPanel("Help",
                                        br(),
                                        p("This application uses a technique called 'Local Indicators of Spatial Association' (", a(href = "https://doi.org/10.1111/j.1538-4632.1995.tb00338.x", target = "_blank", "Anselin, 1995"), ") to identify hot and cold spots of worklessness."),
-                                       p("Further information about the app can be found ", a(href = "http://www.trafforddatalab.io/opengovintelligence/", target = "_blank", "here"), "."))))))
+                                       p("Further information about the app can be found ", a(href = "http://www.trafforddatalab.io/opengovintelligence/documentation/scan_README.html", target = "_blank", "here"), "."))))))
   )

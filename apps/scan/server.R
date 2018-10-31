@@ -25,6 +25,68 @@ server <- function(input, output, session) {
     values$highlight <- input$map_shape_click$id
   })
   
+  imd <- reactive({
+    client <- GraphqlClient$new(url = "http://cubiql.gmdatastore.org.uk/graphql")
+    
+    qry <- Query$new()
+    qry$query('query', 
+              paste0(
+              '
+              {
+              cubiql {
+              dataset_indices_of_deprivation_2015 {
+              observations(dimensions: {reference_area: "http://statistics.data.gov.uk/id/statistical-geography/',
+              values$highlight, '"}) {
+              page(first: 500) {
+              observation {
+              reference_area {
+              label
+              }
+              score
+              rank
+              decile
+              indices_of_deprivation
+              measure_type
+              }
+              }
+              }
+              }
+              }
+              }
+              '))
+    
+    response <- fromJSON(client$exec(qry$queries$query), flatten = TRUE)
+    
+    df <- map_df(response$data$cubiql$dataset_indices_of_deprivation_2015$observations$page, as_data_frame) %>% 
+      mutate(index_domain = sub(".*/", "", indices_of_deprivation),
+             index_domain, index_domain = 
+               case_when(
+                 index_domain == "barrierstohousservices" ~ "Barriers to Housing and Services",
+                 index_domain == "crime" ~ "Crime",
+                 index_domain == "educskilltraindepriv" ~ "Education, Skills and Training",
+                 index_domain == "employmentdeprivation" ~ "Employment",
+                 index_domain == "healthdeprivdisability" ~ "Health Deprivation and Disability",
+                 index_domain == "idaci" ~ "Income Deprivation Affecting Children Index (IDACI)",
+                 index_domain == "idaopi" ~ "Income Deprivation Affecting Older People Index (IDAOPI)",
+                 index_domain == "incomedeprivation" ~ "Income",
+                 index_domain == "combineddeprivation" ~ "Index of Multiple Deprivation",
+                 index_domain == "livingenvdepriv" ~ "Living Environment"
+               )) %>% 
+      filter(!index_domain %in% c("Income Deprivation Affecting Children Index (IDACI)", 
+                                  "Income Deprivation Affecting Older People Index (IDAOPI)")) %>% 
+      select(lsoa11cd = reference_area.label,
+             index_domain,
+             decile, rank) %>% 
+      gather(type, value, -lsoa11cd, -index_domain) %>% 
+      filter(!is.na(value)) %>% 
+      spread(type, value) %>% 
+      mutate(lsoa11cd = factor(lsoa11cd),
+             index_domain = factor(index_domain),
+             decile = factor(decile, levels = 1:10),
+             rank = as.integer(rank))
+    print(df)
+  })
+  
   output$info <- renderUI({
     
     if("Greater Manchester" == input$la){
@@ -50,36 +112,36 @@ server <- function(input, output, session) {
              </tr> 
              <tr>
              <td>", "Index of Multiple Deprivation", "</td>
-             <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$decile, "</td>
-             <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$rank, format="f", big.mark = ",", digits=0), "</td>
+             <td>", subset(imd(), lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$decile, "</td>
+             <td>", formatC(subset(imd(), lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$rank, format="f", big.mark = ",", digits=0), "</td>
              </tr>
              <td>", "Income", "</td>
-             <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Income")$decile, "</td>
-             <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Income")$rank, format="f", big.mark = ",", digits=0), "</td>
+             <td>", subset(imd(), lsoa11cd == lsoaCode & index_domain == "Income")$decile, "</td>
+             <td>", formatC(subset(imd(), lsoa11cd == lsoaCode & index_domain == "Income")$rank, format="f", big.mark = ",", digits=0), "</td>
              </tr>
              <td>", "Employment", "</td>
-             <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Employment")$decile, "</td>
-             <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Employment")$rank, format="f", big.mark = ",", digits=0), "</td>
+             <td>", subset(imd(), lsoa11cd == lsoaCode & index_domain == "Employment")$decile, "</td>
+             <td>", formatC(subset(imd(), lsoa11cd == lsoaCode & index_domain == "Employment")$rank, format="f", big.mark = ",", digits=0), "</td>
              </tr>
              <td>", "Education, Skills and Training", "</td>
-             <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Education, Skills and Training")$decile, "</td>
-             <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Education, Skills and Training")$rank, format="f", big.mark = ",", digits=0), "</td>
+             <td>", subset(imd(), lsoa11cd == lsoaCode & index_domain == "Education, Skills and Training")$decile, "</td>
+             <td>", formatC(subset(imd(), lsoa11cd == lsoaCode & index_domain == "Education, Skills and Training")$rank, format="f", big.mark = ",", digits=0), "</td>
              </tr>
              <td>", "Health Deprivation and Disability", "</td>
-             <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Health Deprivation and Disability")$decile, "</td>
-             <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Health Deprivation and Disability")$rank, format="f", big.mark = ",", digits=0), "</td>
+             <td>", subset(imd(), lsoa11cd == lsoaCode & index_domain == "Health Deprivation and Disability")$decile, "</td>
+             <td>", formatC(subset(imd(), lsoa11cd == lsoaCode & index_domain == "Health Deprivation and Disability")$rank, format="f", big.mark = ",", digits=0), "</td>
              </tr>
              <td>", "Crime", "</td>
-             <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$decile, "</td>
-             <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$rank, format="f", big.mark = ",", digits=0), "</td>
+             <td>", subset(imd(), lsoa11cd == lsoaCode & index_domain == "Crime")$decile, "</td>
+             <td>", formatC(subset(imd(), lsoa11cd == lsoaCode & index_domain == "Crime")$rank, format="f", big.mark = ",", digits=0), "</td>
              </tr>
              <td>", "Barriers to Housing and Services", "</td>
-             <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Crime")$decile, "</td>
-             <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Crime")$rank, format="f", big.mark = ",", digits=0), "</td>
+             <td>", subset(imd(), lsoa11cd == lsoaCode & index_domain == "Barriers to Housing and Services")$decile, "</td>
+             <td>", formatC(subset(imd(), lsoa11cd == lsoaCode & index_domain == "Barriers to Housing and Services")$rank, format="f", big.mark = ",", digits=0), "</td>
              </tr>
              <td>", "Living Environment", "</td>
-             <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Living Environment")$decile, "</td>
-             <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Living Environment")$rank, format="f", big.mark = ",", digits=0), "</td>
+             <td>", subset(imd(), lsoa11cd == lsoaCode & index_domain == "Living Environment")$decile, "</td>
+             <td>", formatC(subset(imd(), lsoa11cd == lsoaCode & index_domain == "Living Environment")$rank, format="f", big.mark = ",", digits=0), "</td>
              </tr>
              </table>")
         ))
@@ -109,36 +171,36 @@ server <- function(input, output, session) {
                </tr> 
                <tr>
                <td>", "Index of Multiple Deprivation", "</td>
-               <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$decile, "</td>
-               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$rank, format="f", big.mark = ",", digits=0), "</td>
+               <td>", subset(imd(), lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$decile, "</td>
+               <td>", formatC(subset(imd(), lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$rank, format="f", big.mark = ",", digits=0), "</td>
                </tr>
                <td>", "Income", "</td>
-               <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Income")$decile, "</td>
-               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Income")$rank, format="f", big.mark = ",", digits=0), "</td>
+               <td>", subset(imd(), lsoa11cd == lsoaCode & index_domain == "Income")$decile, "</td>
+               <td>", formatC(subset(imd(), lsoa11cd == lsoaCode & index_domain == "Income")$rank, format="f", big.mark = ",", digits=0), "</td>
                </tr>
                <td>", "Employment", "</td>
-               <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Employment")$decile, "</td>
-               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Employment")$rank, format="f", big.mark = ",", digits=0), "</td>
+               <td>", subset(imd(), lsoa11cd == lsoaCode & index_domain == "Employment")$decile, "</td>
+               <td>", formatC(subset(imd(), lsoa11cd == lsoaCode & index_domain == "Employment")$rank, format="f", big.mark = ",", digits=0), "</td>
                </tr>
                <td>", "Education, Skills and Training", "</td>
-               <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Education, Skills and Training")$decile, "</td>
-               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Education, Skills and Training")$rank, format="f", big.mark = ",", digits=0), "</td>
+               <td>", subset(imd(), lsoa11cd == lsoaCode & index_domain == "Education, Skills and Training")$decile, "</td>
+               <td>", formatC(subset(imd(), lsoa11cd == lsoaCode & index_domain == "Education, Skills and Training")$rank, format="f", big.mark = ",", digits=0), "</td>
                </tr>
                <td>", "Health Deprivation and Disability", "</td>
-               <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Health Deprivation and Disability")$decile, "</td>
-               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Health Deprivation and Disability")$rank, format="f", big.mark = ",", digits=0), "</td>
+               <td>", subset(imd(), lsoa11cd == lsoaCode & index_domain == "Health Deprivation and Disability")$decile, "</td>
+               <td>", formatC(subset(imd(), lsoa11cd == lsoaCode & index_domain == "Health Deprivation and Disability")$rank, format="f", big.mark = ",", digits=0), "</td>
                </tr>
                <td>", "Crime", "</td>
-               <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$decile, "</td>
-               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Index of Multiple Deprivation")$rank, format="f", big.mark = ",", digits=0), "</td>
+               <td>", subset(imd(), lsoa11cd == lsoaCode & index_domain == "Crime")$decile, "</td>
+               <td>", formatC(subset(imd(), lsoa11cd == lsoaCode & index_domain == "Crime")$rank, format="f", big.mark = ",", digits=0), "</td>
                </tr>
                <td>", "Barriers to Housing and Services", "</td>
-               <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Crime")$decile, "</td>
-               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Crime")$rank, format="f", big.mark = ",", digits=0), "</td>
+               <td>", subset(imd(), lsoa11cd == lsoaCode & index_domain == "Barriers to Housing and Services")$decile, "</td>
+               <td>", formatC(subset(imd(), lsoa11cd == lsoaCode & index_domain == "Barriers to Housing and Services")$rank, format="f", big.mark = ",", digits=0), "</td>
                </tr>
                <td>", "Living Environment", "</td>
-               <td>", subset(imd, lsoa11cd == lsoaCode & index_domain == "Living Environment")$decile, "</td>
-               <td>", formatC(subset(imd, lsoa11cd == lsoaCode & index_domain == "Living Environment")$rank, format="f", big.mark = ",", digits=0), "</td>
+               <td>", subset(imd(), lsoa11cd == lsoaCode & index_domain == "Living Environment")$decile, "</td>
+               <td>", formatC(subset(imd(), lsoa11cd == lsoaCode & index_domain == "Living Environment")$rank, format="f", big.mark = ",", digits=0), "</td>
                </tr>
                </table>")
           ))

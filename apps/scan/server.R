@@ -256,24 +256,24 @@ server <- function(input, output, session) {
                            ordered = TRUE)
     
     icon <- makeIcon(iconUrl = "icon.jpg", iconWidth = 36, iconHeight = 32, iconAnchorX = 16, iconAnchorY = 16)
-    
-    popup = ~paste0(
-      "<div class='popupContainer'>",
-      "<h5>", jcplus$Name, "</h5>",
-      "<table class='popupLayout'>",
-      "<tr>",
-      "<td>Address</td>",
-      "<td>", jcplus$Address, "</td>",
-      "</tr>",
-      "<tr>",
-      "<td>Postcode</td>",
-      "<td>", jcplus$Postcode, "</td>",
-      "</tr>",
-      "</table>",
-      "</div>"
-    )
 
     if("Greater Manchester" == input$la){
+      popup = ~paste0(
+        "<div class='popupContainer'>",
+        "<h5>", jcplus$name, "</h5>",
+        "<table class='popupLayout'>",
+        "<tr>",
+        "<td>Address</td>",
+        "<td>", jcplus$address, "</td>",
+        "</tr>",
+        "<tr>",
+        "<td>Postcode</td>",
+        "<td>", jcplus$postcode, "</td>",
+        "</tr>",
+        "</table>",
+        "</div>"
+      )
+      
       leafletProxy("map", data = filteredData()) %>%
         clearShapes() %>% clearControls() %>% clearMarkers() %>% 
         addPolygons(data = filteredData(), fillColor = ~factpal(quad_sig), fillOpacity = 0.4, 
@@ -295,6 +295,22 @@ server <- function(input, output, session) {
                   opacity = 0.4,
                   title = input$measure) }
     else {
+      popup = ~paste0(
+        "<div class='popupContainer'>",
+        "<h5>", jcplus[jcplus$area_name == input$la, ]$name, "</h5>",
+        "<table class='popupLayout'>",
+        "<tr>",
+        "<td>Address</td>",
+        "<td>", jcplus[jcplus$area_name == input$la, ]$address, "</td>",
+        "</tr>",
+        "<tr>",
+        "<td>Postcode</td>",
+        "<td>", jcplus[jcplus$area_name == input$la, ]$postcode, "</td>",
+        "</tr>",
+        "</table>",
+        "</div>"
+      )
+      
       bbox <- st_bbox(la[la$lad17nm == input$la, ]) %>% as.vector()
       leafletProxy("map", data = filteredData()) %>%
       clearShapes() %>% clearControls() %>% clearMarkers() %>% 
@@ -307,7 +323,7 @@ server <- function(input, output, session) {
                                                       style = list(
                                                         "color"="white",
                                                         "text-shadow" = "-1px -1px 10px #757575, 1px -1px 10px #757575, 1px 1px 10px #757575, -1px 1px 10px #757575"))) %>%
-        addMarkers(data = jcplus[jcplus$Area.name == input$la, ], popup = popup, icon = icon, group = "Jobcentre Plus", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
+        addMarkers(data = jcplus[jcplus$area_name == input$la, ], popup = popup, icon = icon, group = "Jobcentre Plus", options = markerOptions(riseOnHover = TRUE, opacity = 1)) %>% 
         addLegend(position = "bottomleft", colors = c("#F0F0F0", "#E93F36", "#2144F5", "#9794F8", "#EF9493"),
                 labels = 
                   c(paste0("Not significant (", formatC(sum(filteredData()$quad_sig == "Not significant"), format="f", big.mark = ",", digits=0), ")"),

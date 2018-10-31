@@ -32,4 +32,6 @@ la <- st_read("https://www.traffordDataLab.io/spatial_data/local_authority/2016/
          centroid_lat = map_dbl(geometry, ~st_centroid(.x)[[2]]))
 
 # Jobcentre Plus locations in Greater Manchester
-jcplus <- st_read("https://www.traffordDataLab.io/open_data/jobcentre_plus/gm_jobcentreplus.geojson")
+jcplus <- read_csv("https://www.traffordDataLab.io/open_data/jobcentre_plus/gm_jobcentreplus.csv") %>% 
+  st_as_sf(coords = c("lon", "lat")) %>% 
+  st_set_crs(4326) 

@@ -30,6 +30,6 @@ The source code is available [<span style="color: #e24a90;">here</span>](https:/
 
 ---
 <div>
-    <img src="../eu_flag.png" alt="Flag of the European Union" style="float: left; margin-right: 12px; height: 5em;"/>
+    <img src="../../eu_flag.png" alt="Flag of the European Union" style="float: left; margin-right: 12px; height: 5em;"/>
     <span class="footerText">This project has received funding from the European Union's Horizon 2020 research and innovation programme under grant agreement No 693849.</span>
 </div>

@@ -308,6 +308,7 @@ var app = new LabLeafletMap({
     about: 'Find services relating to worklessness within Greater Manchester.<br /><br /><img src="eu_flag.png" width="50" alt="Flag of the European Union" style="float: left; margin-right: 6px; margin-top: 5px;"/> Developed for the EU funded <a href="http://www.opengovintelligence.eu" target="_blank">opengovintelligence</a> project.'
 });
 app.layerControl.remove();   // remove the layer control as it is not required
+app.baseLayers['Low detail'].addTo(app.map);   // Choose the base/tile layer for the map
 
 
 // Add the Leaflet Control Geocoder by perliedman
@@ -357,7 +358,6 @@ app.geocoder.on('markgeocode', function(result) {
 });
 
 
-
 // Add the reachability plugin
 app.reachabilityControl = labSetupReachabilityPlugin({
     // Common options are taken care of in the function, however the options below are extra
@@ -367,12 +367,12 @@ app.reachabilityControl = labSetupReachabilityPlugin({
 });
 app.reachabilityControl.addTo(app.map);
 
-app.baseLayers['Low detail'].addTo(app.map);   // Choose the base/tile layer for the map
 
 app.datasetGeoJson = null;       // object to store GeoJSON created from datasets loaded from the select list. ***NOTE*** this object is important for the resetting of styles for clusered marker datasets
 app.datasetCluster = null;       // object to store a leaflet.markercluster object - created if the dataset contains point data
 app.datasetLayer = null;         // either a copy of app.datasetGeoJson or app.datasetCluster containing app.datasetGeoJson layers - depends on whether we are clustering point data or not
 app.featureCache = null;         // for caching the currently selected feature
+app.endpoint = 'http://cubiql.gmdatastore.org.uk/graphql?query=';
 
 // Polygon feature styling
 app.poly = {
@@ -517,7 +517,63 @@ labAjax('apps/signpost/datasets.json', function (data) {
 app.objGeographies = {};   // object to hold all the boundary L.geoJSON objects so that we can test in a loop for which layer belongs to which geography
 
 // Add the LA boundaries within GM
-labAjax('https://www.trafforddatalab.io/spatial_data/local_authority/2016/gm_local_authority_full_resolution.geojson', function (data) {
-    app.objGeographies['LA'] = L.geoJSON(data, { attribution: app.attributionOS, style: app.poly, onEachFeature: featureEvents }).addTo(app.map);
-    app.map.fitBounds(app.objGeographies['LA'].getBounds()); // adjust the zoom to fit the boundary to the screen size
+startLabSpinner();
+labAjax('https://www.trafforddatalab.io/spatial_data/local_authority/2016/gm_local_authority_full_resolution.geojson', function (laBoundariesData) {
+    if (laBoundariesData != null) {
+
+        // Prepare the cubiql query
+        var query  = '{';
+            query += '    cubiql {';
+            query += '        dataset_working_age_population {';
+            query += '            observations {';
+            query += '                page(first: 500) {';
+            query += '                    next_page';
+            query += '                    observation {';
+            query += '                        reference_area {';
+            query += '                            label';
+            query += '                        }';
+            query += '                        count';
+            query += '                    }';
+            query += '                }';
+            query += '            }';
+            query += '        }';
+            query += '    }';
+            query += '}';
+
+        // GET cubiql request
+        labAjax(app.endpoint + encodeURIComponent(query), function (dataFromEndpoint) {
+            if (dataFromEndpoint != null) {
+                // Extract the observations array from the JSON
+                var arrCubiqlObs = dataFromEndpoint.data.cubiql.dataset_working_age_population.observations.page.observation;
+
+                // Create a new JSON data structure in the form: { "area_reference": count } to allow easy binding to the geography GeoJSON properties
+                var objObs = {};
+                for (var i = 0; i < arrCubiqlObs.length; i++) {
+                    objObs[arrCubiqlObs[i].reference_area.label] = arrCubiqlObs[i].count;
+                }
+            }
+
+            // Rename the property variables in the GeoJson for clarity
+            // This happens even if we don't get data from the endpoint, however if we have data, bind this also to the properties
+            for (var i = 0; i < laBoundariesData['features'].length; i++) {
+                var newProps = {
+                    'LA code': laBoundariesData['features'][i].properties.area_code,
+                    'LA name': laBoundariesData['features'][i].properties.area_name
+                };
+
+                // If we have the working age population data, format the number with commas and add to the new properties list
+                if (dataFromEndpoint != null) newProps['Working age population'] = objObs[newProps['LA code']].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                laBoundariesData['features'][i].properties = newProps;
+            }
+
+            app.objGeographies['LA'] = L.geoJSON(laBoundariesData, { attribution: app.attributionOS, style: app.poly, onEachFeature: featureEvents }).addTo(app.map);
+            app.map.fitBounds(app.objGeographies['LA'].getBounds()); // adjust the zoom to fit the boundary to the screen size
+
+            stopLabSpinner();
+        });
+    }
+    else {
+        stopLabSpinner();
+    }
 });

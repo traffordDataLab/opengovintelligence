@@ -231,7 +231,7 @@ server <- function(input, output, session) {
                       paste0("Low-High (", sum(filteredData()$quad_sig == "Low-High"), ")"),
                       paste0("High-Low (", sum(filteredData()$quad_sig == "High-Low "), ")")), 
                   opacity = 0.4,
-                  title = paste0(input$measure, " (", format(distinct(filter(df, measure == input$measure), date), format = "%b-%Y"), ")")) }
+                  title = input$measure) }
     else {
       bbox <- st_bbox(la[la$lad17nm == input$la, ]) %>% as.vector()
       leafletProxy("map", data = filteredData()) %>%
@@ -254,7 +254,7 @@ server <- function(input, output, session) {
                     paste0("Low-High (", sum(filteredData()$quad_sig == "Low-High"), ")"),
                     paste0("High-Low (", sum(filteredData()$quad_sig == "High-Low "), ")")), 
                 opacity = 0.4,
-                title = paste0(input$measure, " (", format(distinct(filter(df, measure == input$measure), date), format = "%b-%Y"), ")"))
+                title = input$measure)
   }
     })
   

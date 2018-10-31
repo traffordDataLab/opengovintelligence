@@ -1,7 +1,7 @@
 ## Scan app ##
 
 # load necessary packages ---------------------------
-library(shiny) ; library(tidyverse) ; library(SPARQL) ; library(leaflet) ; library(sf) ; library(spdep) ; library(rgeos)
+library(shiny) ; library(tidyverse) ; library(ghql) ; library(leaflet) ; library(sf) ; library(spdep) ; library(rgeos)
 
 # load Trafford Data Lab's ggplot2 theme ---------------------------
 source("https://www.traffordDataLab.io/assets/theme/ggplot2/theme_lab.R")
@@ -10,20 +10,7 @@ source("https://www.traffordDataLab.io/assets/theme/ggplot2/theme_lab.R")
 source("https://www.traffordDataLab.io/assets/rfunctions/LISA/lisa_stats.R")
 
 # load tabular data using SPARQL queries ---------------------------
-source("sparql/claimant_count.R")
-source("sparql/households_with_lone_parent_not_in_employment.R")
-source("sparql/social_rented_households.R")
-source("sparql/working_age_adults_with_no_qualifications.R")
-
-df <- bind_rows(claimant_count, 
-                households_with_lone_parent_not_in_employment, 
-                social_rented_households, 
-                working_age_adults_with_no_qualifications) %>% 
-  mutate(lsoa11cd = factor(lsoa11cd),
-         lsoa11nm = factor(lsoa11nm),
-         lad17nm = factor(lad17nm),
-         measure = factor(measure),
-         value = as.integer(value))
+source("cubiql/queries.R")
   
 imd <- read_csv("https://www.traffordDataLab.io/open_data/imd_2015/IMD_2015_wide.csv",
                 col_types = cols(lsoa11cd = col_factor(NULL),

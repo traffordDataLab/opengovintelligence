@@ -94,36 +94,12 @@ a:hover
   padding: 0px 20px 20px 20px;
   border-radius: 15px;
   opacity: 0.85;
-  width: 340px;
-  top: 65px;
+  width: 370px;
+  top: 10px;
   right: 10px;
 }
 
 .tab-content
 {
   padding: 5px 5px 5px 15px;
-}
-
-/* header */
-
-#header
-{
-  border-bottom: 1px solid #ccc;
-}
-
-/* footer */
-
-#footer
-{
-  border-top: 1px solid #ccc;
-}
-
-.footer p 
-{
-  margin-top: 20px;
-}
-
-.footer img 
-{
-  margin-top: 20px;
 }

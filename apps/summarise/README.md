@@ -10,7 +10,7 @@ Once the application has loaded you will see information displayed for the Great
 
 A further select list will now be available beneath the map, allowing you to choose a ward within your selected Local Authority. Once you have made your selection the map and time series chart will again update with the new information. You will therefore be able to compare claimant rates for the ward, Local Authority and Greater Manchester. An additional chart will also be displayed beneath the time series chart showing data from the UK business register and employment survey (BRES) 2015. This chart gives an indication of the number of people living in the selected ward who are employed within different industry sectors.
 
-The map and time series chart are interactive. The map allows you to pan and zoom around the currently chosen boundary. Addition information is also displayed, such as the number and location of betting shops once you select an electoral ward. The values for the line chart can be easily read by selecting the individual data points.
+The time series chart and map are interactive. The values for the line chart can be easily read by selecting the individual data points or hovering over them. The map allows you to pan and zoom around the currently chosen boundary. Once you select an electoral ward, addition information can also be displayed including the number and location of General Practices, Dentists, Food Banks, Jobcentre Plus and Probation offices. To view this information on the map, simply select the item of interest from the list presented in the bottom-left corner of the map.
 
 #### Sources
 The following datasets were used in the application:

@@ -305,7 +305,7 @@ function isDatasetLayer(layer) {
 // Set up the basic map environment
 var app = new LabLeafletMap({
     title: 'Signpost',
-    about: 'Find services relating to worklessness within Greater Manchester.<br /><br /><img src="eu_flag.png" width="50" alt="Flag of the European Union" style="float: left; margin-right: 6px; margin-top: 5px;"/> Developed for the EU funded <a href="http://www.opengovintelligence.eu" target="_blank">opengovintelligence</a> project.'
+    about: 'Find services relating to worklessness within Greater Manchester.<br /><br />For guidance on using this app please refer to the <a href="http://www.trafforddatalab.io/opengovintelligence/documentation/signpost_README.html" target="_blank">documentation</a>.<br /><br /><img src="eu_flag.png" width="50" alt="Flag of the European Union" style="float: left; margin-right: 6px; margin-top: 7px;"/> <span class="fundingInfo">Funded by the EU\'s Horizon 2020 programme, grant No 693849.</span><br /><br />Discover more about the <a href="http://www.trafforddatalab.io/opengovintelligence/" target="_blank">Trafford Worklessness Pilot</a>.'
 });
 app.layerControl.remove();   // remove the layer control as it is not required
 app.baseLayers['Low detail'].addTo(app.map);   // Choose the base/tile layer for the map

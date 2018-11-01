@@ -152,6 +152,9 @@
   .popupServ .leaflet-popup-tip-container{
     display:none;
   }
+  .leaflet-popup-close-button{
+    text-decoration: none;
+  }
   #downloadCSV{
     background-color: grey;
     color: white;
@@ -225,7 +228,7 @@
 </head>
 <body>
   <div class="header">
-    <a id="TDLlogo" href="https://www.trafforddatalab.io/index.html"><img src="https://www.trafforddatalab.io/assets/logo/trafforddatalab_logo.svg" alt="Trafford Data Lab" width="93" border="0" class="traffordDataLabLogo"/></a>
+    <a id="TDLlogo" href="https://www.trafforddatalab.io/index.html" target="_blank"><img src="https://www.trafforddatalab.io/assets/logo/trafforddatalab_logo.svg" alt="Trafford Data Lab" width="93" border="0" class="traffordDataLabLogo"/></a>
     <div id="appTitle"><p><span id="appName">Summarise</span> worklessness data at a glance</p></div>
   </div>
   <div id='mainBody'>
@@ -261,7 +264,7 @@
         </svg>
       </div>
       <p>This project has received funding from the European Union's Horizon 2020 research and innovation programme under grant agreement No 693849.</p>
-      <p>Discover more about the <a href="http://www.trafforddatalab.io/opengovintelligence/">Trafford Worklessness Pilot</a>.</p>
+      <p>Discover more about the <a href="http://www.trafforddatalab.io/opengovintelligence/" target="_blank">Trafford Worklessness Pilot</a>.</p>
     </div>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://www.trafforddatalab.io/assets/javascript/labError.js"></script>
@@ -549,7 +552,7 @@
           var bindings = data.results.bindings;
           var tableContent = ""
           if (bindings.length>0){
-            document.getElementById('tableTitle').innerHTML = "Count of employees by broad industry group according to the UK business register and employment survey <a href='https:\//www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/businessregisterandemploymentsurveybresprovisionalresults/2014revisedand2015provisional'>(BRES)</a> 2015 "
+            document.getElementById('tableTitle').innerHTML = "Count of employees by broad industry group according to the UK business register and employment survey <a href='https:\//www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/businessregisterandemploymentsurveybresprovisionalresults/2014revisedand2015provisional' target='_blank'>(BRES)</a> 2015 "
             for (var i = 0; i < bindings.length; i++) {
               var category=bindings[i]["category"]["value"].replace(/(\(.*|^.*:)/g,'')
               tableContent += '<tr><td>' + category + '</td><td>' + bindings[i]["count"]["value"] + '</td></tr>'
@@ -631,7 +634,7 @@
           if (service.website=="NA"){
             circle.bindPopup(service.name,{'className' : 'popupServ'});
           }else{
-            circle.bindPopup('<a href="'+service.website+'">'+service.name+'</a>',{'className' : 'popupServ'});
+            circle.bindPopup('<a href="'+service.website+'" target="_blank">'+service.name+'</a>',{'className' : 'popupServ'});
           }
         }else{
           circle.bindPopup(service.name,{'className' : 'popupServ'});

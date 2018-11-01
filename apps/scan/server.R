@@ -95,13 +95,13 @@ server <- function(input, output, session) {
     } else {
       lsoaCode <- filteredData()$lsoa11cd[values$highlight == GM_lsoa$lsoa11cd]
       return(tags$div(
-        HTML(paste(tags$h4("LSOA: ", lsoaCode))),
-        HTML(paste("in ", tags$span(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$wd17nm), " Ward", sep = "")),
+        HTML(paste0(tags$h4("LSOA: ", lsoaCode))),
+        HTML(paste0("in ", tags$span(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$wd17nm), " Ward")),
         br(), br(),
-        HTML(paste(tags$strong(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$measure), ":", sep = "")),
+        HTML(paste0(tags$strong(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$measure), ":")),
         br(),
-        HTML(paste(tags$span(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$value), 
-                   " (", filteredData()[filteredData()$lsoa11cd == lsoaCode,]$quad, ")", sep = "")),
+        HTML(paste0(tags$span(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$value), 
+                   " (", filteredData()[filteredData()$lsoa11cd == lsoaCode,]$quad, ")")),
         br(), hr(),
         tags$strong("IMD 2015"),
         HTML("<table class='imd' style='width: 100%' callspacing='7'>
@@ -154,13 +154,13 @@ server <- function(input, output, session) {
         lsoa <- GM_lsoa[GM_lsoa@data$lad17nm == input$la, ]
         lsoaCode <- filteredData()$lsoa11cd[values$highlight == lsoa$lsoa11cd]
         return(tags$div(
-          HTML(paste(tags$h4("LSOA: ", lsoaCode))),
-          HTML(paste("in ", tags$span(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$wd17nm), " Ward", sep = "")),
+          HTML(paste0(tags$h4("LSOA: ", lsoaCode))),
+          HTML(paste0("in ", tags$span(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$wd17nm), " Ward")),
           br(), br(),
-          HTML(paste(tags$strong(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$measure), ":", sep = "")),
+          HTML(paste0(tags$strong(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$measure), ":")),
           br(),
-          HTML(paste(tags$span(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$value), 
-                     " (", filteredData()[filteredData()$lsoa11cd == lsoaCode,]$quad, ")", sep = "")),
+          HTML(paste0(tags$span(filteredData()[filteredData()$lsoa11cd == lsoaCode,]$value), 
+                     " (", filteredData()[filteredData()$lsoa11cd == lsoaCode,]$quad, ")")),
           br(), hr(),
           tags$strong("IMD 2015"),
           HTML("<table class='imd' style='width: 100%' callspacing='7'>

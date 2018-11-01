@@ -536,33 +536,57 @@ labAjax('https://www.trafforddatalab.io/spatial_data/local_authority/2016/gm_loc
 
         // Prepare the cubiql query
         var query  = '{';
-            query += '    cubiql {';
-            query += '        dataset_working_age_population {';
-            query += '            observations {';
-            query += '                page(first: 2000) {';
-            query += '                    next_page';
-            query += '                    observation {';
-            query += '                        reference_area {';
-            query += '                            label';
-            query += '                        }';
-            query += '                        count';
-            query += '                    }';
-            query += '                }';
-            query += '            }';
-            query += '        }';
-            query += '    }';
+            query += '   cubiql {';
+            query += '      dataset_working_age_population {';
+            query += '          observations {';
+            query += '              page(first: 2000) {';
+            query += '                  next_page';
+            query += '                  observation {';
+            query += '                      reference_area {';
+            query += '                          label';
+            query += '                      }';
+            query += '                      count';
+            query += '                  }';
+            query += '              }';
+            query += '          }';
+            query += '      },';
+            query += '      dataset_claimant_rate {';
+            query += '          observations(dimensions:{reference_period:{uri:"http://reference.data.gov.uk/id/month/2018-09"}}) {';
+            query += '              page(first: 2000) {';
+            query += '                  next_page';
+            query += '                  observation {';
+            query += '                      reference_area {';
+            query += '                          label';
+            query += '                      }';
+            query += '                      percent';
+            query += '                  }';
+            query += '              }';
+            query += '          }';
+            query += '      }';
+            query += '   }';
             query += '}';
 
         // GET cubiql request
         labAjax(app.endpoint + encodeURIComponent(query), function (dataFromEndpoint) {
             if (dataFromEndpoint != null) {
                 // Extract the observations array from the JSON
-                var arrCubiqlObs = dataFromEndpoint.data.cubiql.dataset_working_age_population.observations.page.observation;
+                var arrWorkAgeObs = dataFromEndpoint.data.cubiql.dataset_working_age_population.observations.page.observation;
+                var arrClaimantRateObs = dataFromEndpoint.data.cubiql.dataset_claimant_rate.observations.page.observation;
 
-                // Create a new JSON data structure in the form: { "area_reference": count } to allow easy binding to the geography GeoJSON properties
-                var objObs = {};
-                for (var i = 0; i < arrCubiqlObs.length; i++) {
-                    objObs[arrCubiqlObs[i].reference_area.label] = arrCubiqlObs[i].count;
+                // Create a new JSON data structure to store the results of the cubiql query in the form: { "area_reference": count } to allow easy binding to the geography GeoJSON properties
+                var objObs = {
+                    'working_age_population': {},
+                    'claimant_rate': {}
+                };
+
+                // Working age population
+                for (var i = 0; i < arrWorkAgeObs.length; i++) {
+                    objObs['working_age_population'][arrWorkAgeObs[i].reference_area.label] = arrWorkAgeObs[i].count;
+                }
+
+                // Claimant rate
+                for (var i = 0; i < arrClaimantRateObs.length; i++) {
+                    objObs['claimant_rate'][arrClaimantRateObs[i].reference_area.label] = arrClaimantRateObs[i].percent;
                 }
             }
 
@@ -575,7 +599,10 @@ labAjax('https://www.trafforddatalab.io/spatial_data/local_authority/2016/gm_loc
                 };
 
                 // If we have the working age population data, format the number with commas and add to the new properties list
-                if (dataFromEndpoint != null) newProps['Working age population'] = objObs[newProps['LA code']].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                if (dataFromEndpoint != null) {
+                    newProps['Working age population'] = objObs['working_age_population'][newProps['LA code']].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    newProps['Claimant rate (%)'] = objObs['claimant_rate'][newProps['LA code']];
+                }
 
                 laBoundariesData['features'][i].properties = newProps;
             }

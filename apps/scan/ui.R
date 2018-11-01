@@ -1,4 +1,4 @@
-## Scan app ##
+## Scan ##
 
 ui <- bootstrapPage(
   tags$head(includeCSS("styles.css"),
@@ -20,8 +20,10 @@ ui <- bootstrapPage(
                                                     selected = "Residents claiming JSA or Universal Credit"),
                                        hr(),
                                        uiOutput("info")),
-                              tabPanel("Help",
+                              tabPanel("About",
                                        br(),
-                                       p("This application uses a technique called 'Local Indicators of Spatial Association' (", a(href = "https://doi.org/10.1111/j.1538-4632.1995.tb00338.x", target = "_blank", "Anselin, 1995"), ") to identify hot and cold spots of worklessness."),
-                                       p("Further information about the app can be found ", a(href = "http://www.trafforddatalab.io/opengovintelligence/documentation/scan_README.html", target = "_blank", "here"), "."))))))
+                                       p("For guidance on using this app please refer to the", a(href = "http://www.trafforddatalab.io/opengovintelligence/documentation/scan_README.html", target = "_blank", "documentation")),
+                                       div(img(src = "https://www.traffordDataLab.io/opengovintelligence/eu_flag.png", width="50", alt="Flag of the European Union", style="float: left; margin-right: 6px; margin-top: 5px;"), "Funded by the EU's Horizon 2020 programme, grant No 693849"),
+                                       br(),
+                                       p("Discover more about the", a(href = "https://www.trafforddatalab.io/opengovintelligence", target = "_blank", "Trafford Worklessness Pilot")))))))
   )

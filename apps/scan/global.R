@@ -1,7 +1,13 @@
-## Scan app ##
+## Scan ##
 
 # load necessary packages ---------------------------
-library(shiny) ; library(tidyverse) ; library(ghql) ; library(leaflet) ; library(sf) ; library(spdep) ; library(rgeos)
+library(shiny)
+library(tidyverse)
+library(ghql)
+library(sf)
+library(spdep)
+library(rgeos)
+library(leaflet) 
 
 # load Trafford Data Lab's ggplot2 theme ---------------------------
 source("https://www.traffordDataLab.io/assets/theme/ggplot2/theme_lab.R")
@@ -9,15 +15,8 @@ source("https://www.traffordDataLab.io/assets/theme/ggplot2/theme_lab.R")
 # load LISA stats ---------------------------
 source("https://www.traffordDataLab.io/assets/rfunctions/LISA/lisa_stats.R")
 
-# load tabular data using SPARQL queries ---------------------------
-source("cubiql/queries.R")
-  
-# imd <- read_csv("https://www.traffordDataLab.io/open_data/imd_2015/IMD_2015_wide.csv",
-#                 col_types = cols(lsoa11cd = col_factor(NULL),
-#                                  index_domain = col_factor(NULL),
-#                                  decile = col_factor(1:10),
-#                                  rank = col_integer(),
-#                                  score = col_double()))
+# load tabular data using CubiQL query ---------------------------
+source("cubiql/query.R")
 
 # load geospatial data ---------------------------
 

@@ -1,4 +1,4 @@
-## Scan app ##
+## Scan ##
 
 server <- function(input, output, session) {
   values <- reactiveValues(highlight = c())
@@ -25,6 +25,7 @@ server <- function(input, output, session) {
     values$highlight <- input$map_shape_click$id
   })
   
+  # dynamic CubiQL query of 2015 Indices of Multiple Deprivation for individual LSOAs
   imd <- reactive({
     client <- GraphqlClient$new(url = "http://cubiql.gmdatastore.org.uk/graphql")
     
@@ -84,7 +85,6 @@ server <- function(input, output, session) {
              index_domain = factor(index_domain),
              decile = factor(decile, levels = 1:10),
              rank = as.integer(rank))
-    print(df)
   })
   
   output$info <- renderUI({
@@ -313,12 +313,12 @@ server <- function(input, output, session) {
       
       bbox <- st_bbox(la[la$lad17nm == input$la, ]) %>% as.vector()
       leafletProxy("map", data = filteredData()) %>%
-      clearShapes() %>% clearControls() %>% clearMarkers() %>% 
-      fitBounds(bbox[1], bbox[2], bbox[3], bbox[4]) %>%  
-      addPolygons(data = filteredData(), fillColor = ~factpal(quad_sig), fillOpacity = 0.4, 
+        clearShapes() %>% clearControls() %>% clearMarkers() %>% 
+        fitBounds(bbox[1], bbox[2], bbox[3], bbox[4]) %>%  
+        addPolygons(data = filteredData(), fillColor = ~factpal(quad_sig), fillOpacity = 0.4, 
                   stroke = TRUE, color = "#212121", weight = 1, layerId = ~lsoa11cd) %>%
-      addPolylines(data = la[la$lad17nm == input$la, ], stroke = TRUE, weight = 2, color = "#212121", opacity = 1) %>% 
-      addLabelOnlyMarkers(data = la[la$lad17nm == input$la, ], lng = ~centroid_lng, lat = ~centroid_lat, label = ~as.character(lad17nm), 
+        addPolylines(data = la[la$lad17nm == input$la, ], stroke = TRUE, weight = 2, color = "#212121", opacity = 1) %>% 
+        addLabelOnlyMarkers(data = la[la$lad17nm == input$la, ], lng = ~centroid_lng, lat = ~centroid_lat, label = ~as.character(lad17nm), 
                           labelOptions = labelOptions(noHide = T, textOnly = T, direction = "bottom",
                                                       style = list(
                                                         "color"="white",

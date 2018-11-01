@@ -1,8 +1,13 @@
-## Work<ness app ##
+## Scan ##
 
 # load necessary packages ---------------------------
-library(shiny) ; library(tidyverse) ; library(leaflet) ; library(sf) ; library(spdep) ; library(rgeos) ; 
-library(ggplot2) ; library(plotly) ; library(DT) ; library(httr) ; library(geojsonio) ; library(jsonlite)
+library(shiny)
+library(tidyverse)
+library(ghql)
+library(sf)
+library(spdep)
+library(rgeos)
+library(leaflet) 
 
 # load Trafford Data Lab's ggplot2 theme ---------------------------
 source("https://www.traffordDataLab.io/assets/theme/ggplot2/theme_lab.R")
@@ -10,30 +15,8 @@ source("https://www.traffordDataLab.io/assets/theme/ggplot2/theme_lab.R")
 # load LISA stats ---------------------------
 source("https://www.traffordDataLab.io/assets/rfunctions/LISA/lisa_stats.R")
 
-# load Leaflet popups ---------------------------
-source("popups.R")
-
-# load tabular data ---------------------------
-
-# latest claimant count data from nomis
-source("data/nomis_api.R")
-
-# 2011 Census data stored as a flat file
-df <- read_csv("data/worklessness_data.csv") %>%
-  bind_rows(ucjsa) %>% 
-  mutate(lsoa11cd = factor(lsoa11cd),
-         lsoa11nm = factor(lsoa11nm),
-         lad17nm = factor(lad17nm),
-         measure = factor(measure),
-         value = as.integer(value))
-
-# IMD 2015 stored as a flat file but generated using SPARQL query
-imd <- read_csv("https://www.traffordDataLab.io/open_data/imd_2015/IMD_2015_wide.csv",
-                col_types = cols(lsoa11cd = col_factor(NULL),
-                                 index_domain = col_factor(NULL),
-                                 decile = col_factor(1:10),
-                                 rank = col_integer(),
-                                 score = col_double()))
+# load tabular data using CubiQL query ---------------------------
+source("cubiql/query.R")
 
 # load geospatial data ---------------------------
 
@@ -48,16 +31,6 @@ la <- st_read("https://www.traffordDataLab.io/spatial_data/local_authority/2016/
          centroid_lat = map_dbl(geometry, ~st_centroid(.x)[[2]]))
 
 # Jobcentre Plus locations in Greater Manchester
-jcplus <- st_read("https://www.traffordDataLab.io/open_data/jobcentre_plus/gm_jobcentreplus.geojson")
-
-# Gambling premises in Greater Manchester
-gambling <- st_read("https://www.traffordDataLab.io/open_data/gambling_premises/gm_gambling_premises.geojson")
-
-# General Practices in Greater Manchester
-gp <- st_read("https://github.com/traffordDataLab/open_data/raw/master/general_practice/gm_general_practices.geojson")
-
-# Food banks in Greater Manchester
-food_bank <- st_read("https://github.com/traffordDataLab/open_data/raw/master/food_banks/gm_food_banks.geojson")
-
-# Probation offices in Greater Manchester
-probation <- st_read("https://github.com/traffordDataLab/open_data/raw/master/probation/gm_probation_offices.geojson")
+jcplus <- read_csv("https://www.traffordDataLab.io/open_data/jobcentre_plus/gm_jobcentreplus.csv") %>% 
+  st_as_sf(coords = c("lon", "lat")) %>% 
+  st_set_crs(4326) 

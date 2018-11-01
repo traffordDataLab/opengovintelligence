@@ -9,11 +9,25 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
   integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
   crossorigin=""/>
+  <link rel="stylesheet" href="https://www.trafforddatalab.io/assets/leaflet//MarkerCluster.TraffordDataLab.css"/>
   <style>
   body{
     font-family: 'Open Sans', sans-serif;
     margin: 0;
     padding: 0;
+  }
+  a{
+    color: #e24a90;
+    text-decoration: none;
+  }
+  a:hover{
+    text-decoration: underline;
+  }
+  h2
+  {
+    font-family: 'Roboto', sans-serif;
+    color: #757575;
+    font-size: 25px;
   }
   #mainBody{
     padding: 0 20px 5em 12px;
@@ -28,9 +42,10 @@
     border-bottom: 1px solid #ccc;
   }
   #appTitle{
+    font-family: 'Roboto', sans-serif;
     display:inline-block;
     vertical-align: bottom;
-    padding: 0px 0px;
+    padding: 0px 10px;
     margin: 0px;
     color:#757575;
     font-size: 15px
@@ -45,18 +60,6 @@
   #TDLlogo{
     color: #e24a90;
   }
-  a{
-    color: #e24a90;
-    text-decoration: none;
-  }
-  a:hover{
-    text-decoration: underline;
-  }
-  h1, h2
-  {
-    font-family: 'Roboto', sans-serif;
-    color: #757575;
-  }
   .double div{
     float: left;
   }
@@ -67,23 +70,17 @@
     clear:both;
     padding-top: 20px;
   }
-  .marker-clusters{
-    background-color: rgba(120,120,120,0.8);
-    width: 20px;
-    height: 20px;
-    text-align: center;
-    border-radius: 5px;
-    border:1px solid black;
-  }
-  .marker-clusters div{
-    font-size: 10px;
-    line-height: 20px;
-    display: inline-block;
-    float:none;
-  }
   #map{
     width:70%;
     height:400px;
+  }
+  .marker-cluster-small div, .marker-cluster-medium div, .marker-cluster-large div
+  {
+    background-color: rgba(226,74,144, 0.8);
+  }
+  .leaflet-oldie .marker-cluster-small div, .leaflet-oldie .marker-cluster-medium div, .leaflet-oldie .marker-cluster-large div
+  {
+    background-color: rgb(226,74,144);
   }
   #countPoints{
     background-color: white;
@@ -92,7 +89,9 @@
     top: 280px;
     left:20px;
     z-index: 1000;
-    padding:0 20px;
+    padding:0 15px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 0px #cccccc;
   }
   #countPoints p{
     font-size: 12px;
@@ -117,10 +116,10 @@
     padding-bottom: 40px;
   }
   .circleLegend{
-    border:1px solid black;
+    border:1px solid #E24A90;
     border-radius: 50%;
-    height: 8px;
-    width: 8px;
+    height: 10px;
+    width: 10px;
     opacity: 0.8;
     margin-right: 5px;
     margin-top: 4px;
@@ -129,16 +128,21 @@
     clear:both;
   }
   .legendItem:hover .circleLegend{
-    background-color: #cccccc;
+    background-color: #E24A90;
   }
   .circleActive{
-    background-color: #cccccc;
+    background-color: #E24A90;
   }
   .legLabelActive{
     color: #e24a90
   }
-  .popupServ{
+  .popupServ a{
+    color: #e24a90;
+    text-decoration: none;
   }
+   .popupServ a:hover{
+     text-decoration: underline;
+   }
   .popupServ .leaflet-popup-tip,
   .popupServ .leaflet-popup-content-wrapper {
     background: white;
@@ -222,17 +226,17 @@
 <body>
   <div class="header">
     <a id="TDLlogo" href="https://www.trafforddatalab.io/index.html"><img src="https://www.trafforddatalab.io/assets/logo/trafforddatalab_logo.svg" alt="Trafford Data Lab" width="93" border="0" class="traffordDataLabLogo"/></a>
-    <div id="appTitle"><p><span id="appName">Summarise</span> worklessness data for areas at a glance</p></div>
+    <div id="appTitle"><p><span id="appName">Summarise</span> worklessness data at a glance</p></div>
   </div>
   <div id='mainBody'>
     <h2 id='titleName'>Greater Manchester</h2>
+    <div class="double padd0">
+       <div id='Local Authority'></div>
+       <div id='Ward'></div>
+     </div>
     <div class="double">
       <div id="map"><div id="countPoints"></div></div>
       <div id="statComm" class="comment">Select an area for information related to unemployment.</div>
-    </div>
-    <div class="double">
-      <div id='Local Authority'></div>
-      <div id='Ward'></div>
     </div>
     <div class="double">
       <div id='timeLine'></div>
@@ -256,8 +260,8 @@
           <rect fill="#039" width="810" height="540"/><g fill="#fc0" transform="scale(30)translate(13.5,9)"><use xlink:href="#s" y="-6"/><use xlink:href="#s" y="6"/><g id="l"><use xlink:href="#s" x="-6"/><use xlink:href="#s" transform="rotate(150)translate(0,6)rotate(66)"/><use xlink:href="#s" transform="rotate(120)translate(0,6)rotate(24)"/><use xlink:href="#s" transform="rotate(60)translate(0,6)rotate(12)"/><use xlink:href="#s" transform="rotate(30)translate(0,6)rotate(42)"/></g><use xlink:href="#l" transform="scale(-1,1)"/></g></g>
         </svg>
       </div>
-      <p></p>
       <p>This project has received funding from the European Union's Horizon 2020 research and innovation programme under grant agreement No 693849.</p>
+      <p>Discover more about the <a href="http://www.trafforddatalab.io/opengovintelligence/">Trafford Worklessness Pilot</a>.</p>
     </div>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://www.trafforddatalab.io/assets/javascript/labError.js"></script>
@@ -281,17 +285,10 @@
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a> Contains National Statistics &amp; OS data <a href="https://www.ons.gov.uk/methodology/geography/licences">&copy; Crown copyright and database right ' + dateNow.getFullYear() + '</a>',
     }).addTo(leafletMap);
     clusters = L.markerClusterGroup({
-      maxClusterRadius: 20,
+      maxClusterRadius: 25,
       spiderfyOnMaxZoom: true,
       showCoverageOnHover: false,
-      zoomToBoundsOnClick: true,
-      iconCreateFunction: function(cluster) {
-        return new L.DivIcon({
-          html: '<div>' + cluster.getChildCount() + '</div>',
-          className: 'marker-clusters',
-          iconSize: new L.Point(20, 20)
-        });
-      }
+      zoomToBoundsOnClick: true
     });
 
     var dataSeries=[]
@@ -348,12 +345,11 @@
         document.getElementById('titleName').innerHTML = area_name;
         //Map
         d3.json("http://gmdatastore.org.uk/boundaries/"+area_code+".json", function(error, geoData) {
-          boundary = L.geoJSON(geoData,{style:{"color":"#e24a90"}})
+          boundary = L.geoJSON(geoData,{style:{"color":"#e24a90",fillOpacity: 0.1}})
           .addTo(leafletMap);
           leafletMap.fitBounds(boundary.getBounds()); // adjust the zoom to fit the boundary to the screen size
           //Table for services
           //
-
           servicesObj["gps"]=[];servicesObj["dentists"]=[];servicesObj["foodBanks"]=[];servicesObj["probationOffices"]=[];
           servicesObj["jobcentrePlus"]=[];
 
@@ -435,8 +431,8 @@
         var flag2=0;
         var stringHtmlArray2=[]
 
-        var query3=encodeURIComponent('{cubiql{dataset_working_age_population {observations(dimensions:{reference_area:"http://statistics.data.gov.uk/id/statistical-geography/'+ area_code +'"}) {page{observation {count}}}}}}')
-        var endpointCubiql = 'http://cubiql.gmdatastore.org.uk/graphql?query='+query3
+        var cbql1=encodeURIComponent('{cubiql{dataset_working_age_population {observations(dimensions:{reference_area:"http://statistics.data.gov.uk/id/statistical-geography/'+ area_code +'"}) {page{observation {count}}}}}}')
+        var endpointCubiql = 'http://cubiql.gmdatastore.org.uk/graphql?query='+cbql1
         labAjax(endpointCubiql,function(d){
           var responsesArray=d["data"]["cubiql"]["dataset_working_age_population"]["observations"]["page"]["observation"]
           if(responsesArray.length>0){
@@ -447,8 +443,8 @@
           }
         });
 
-        var query3=encodeURIComponent('{cubiql{dataset_working_age_adults_with_no_qualifications {observations(dimensions:{reference_area:"http://statistics.data.gov.uk/id/statistical-geography/'+ area_code +'"}) {page{observation {reference_area {label}count}}}}}}')
-        var endpointCubiql = 'http://cubiql.gmdatastore.org.uk/graphql?query='+query3
+        var cbql2=encodeURIComponent('{cubiql{dataset_working_age_adults_with_no_qualifications {observations(dimensions:{reference_area:"http://statistics.data.gov.uk/id/statistical-geography/'+ area_code +'"}) {page{observation {reference_area {label}count}}}}}}')
+        var endpointCubiql = 'http://cubiql.gmdatastore.org.uk/graphql?query='+cbql2
         labAjax(endpointCubiql,function(d){
           var responsesArray=d["data"]["cubiql"]["dataset_working_age_adults_with_no_qualifications"]["observations"]["page"]["observation"]
 
@@ -461,8 +457,8 @@
 
         })
 
-        var query3=encodeURIComponent('{cubiql{dataset_households_with_lone_parent_not_in_employment {observations(dimensions:{reference_area:"http://statistics.data.gov.uk/id/statistical-geography/'+ area_code +'"}) {page{observation {reference_area {label}count}}}}}}')
-        var endpointCubiql = 'http://cubiql.gmdatastore.org.uk/graphql?query='+query3
+        var cbql3=encodeURIComponent('{cubiql{dataset_households_with_lone_parent_not_in_employment {observations(dimensions:{reference_area:"http://statistics.data.gov.uk/id/statistical-geography/'+ area_code +'"}) {page{observation {reference_area {label}count}}}}}}')
+        var endpointCubiql = 'http://cubiql.gmdatastore.org.uk/graphql?query='+cbql3
         labAjax(endpointCubiql,function(d){
           var responsesArray=d["data"]["cubiql"]["dataset_households_with_lone_parent_not_in_employment"]["observations"]["page"]["observation"]
 
@@ -475,8 +471,8 @@
 
         })
 
-        var query3=encodeURIComponent('{cubiql{dataset_social_rented_households {observations(dimensions:{reference_area:"http://statistics.data.gov.uk/id/statistical-geography/'+ area_code +'"}) {page{observation {reference_area {label}count}}}}}}')
-        var endpointCubiql = 'http://cubiql.gmdatastore.org.uk/graphql?query='+query3
+        var cbql4=encodeURIComponent('{cubiql{dataset_social_rented_households {observations(dimensions:{reference_area:"http://statistics.data.gov.uk/id/statistical-geography/'+ area_code +'"}) {page{observation {reference_area {label}count}}}}}}')
+        var endpointCubiql = 'http://cubiql.gmdatastore.org.uk/graphql?query='+cbql4
         labAjax(endpointCubiql,function(d){
           var responsesArray=d["data"]["cubiql"]["dataset_social_rented_households"]["observations"]["page"]["observation"]
 
@@ -521,7 +517,7 @@
             title:"Proportion of people claiming unemployment related benefits ",
             ytitle:"Percent",
             source:"Claimant Count, DWP",
-            palette:['#fbc7d9','#f18db4','#e24a90'],//['#f7a9c6','#ee7dab','#e24a90']
+            palette:['#fbc7d9','#f18db4','#e24a90']//['#f7a9c6','#ee7dab','#e24a90']
           }
           var svg=timeSeries(plotParams)
           //Comment timeseries
@@ -534,8 +530,8 @@
           else if (subs>0) difference="more than"
           else if (subs<0) difference="less than"
           var parseTime = d3.timeParse("%Y-%m");
-          var formatTime = d3.timeFormat("%B, %Y");
-          document.getElementById('chartComm').innerHTML = "On " + formatTime(parseTime(data[data.length-1].date)) + " , " + data[data.length-1].value+ "% of the population was claiming unemployment related benefits in " + data[data.length-1].serie + ".</br> That was "+ subst +" "+ difference +" the percentage of claimants on " + formatTime(parseTime(data[data.length-13].date)) + ". </br></br>Download <span id='downloadCSV' onclick='createCSV()'> CSV</span>"
+          var formatTime = d3.timeFormat("%B %Y");
+          document.getElementById('chartComm').innerHTML = "In " + formatTime(parseTime(data[data.length-1].date)) + ", " + data[data.length-1].value+ "% of the population was claiming unemployment related benefits in " + data[data.length-1].serie + ".</br> That was "+ subst +" "+ difference +" the percentage of claimants in " + formatTime(parseTime(data[data.length-13].date)) + ". </br></br>Download <span id='downloadCSV' onclick='createCSV()'> CSV</span>"
 
           stringCSV="area_code,area_name,date,measure,value"
           for (var a = 0; a<dataSeries.length; a++){
@@ -575,7 +571,7 @@
             //Comment bussiness register employment
             for (var i = 0; i < bindings.length; i++){
               if(bindings[i]["count"]["value"]== max){
-                var industry = bindings[i]["category"]["value"].replace(/(\(.*|^.*:)/g,'')
+                var industry = bindings[i]["category"]["value"].replace(/(\s\(.*|^.*:)/g,'')
                 break;
               }
             }
@@ -620,12 +616,12 @@
       var circles =[]
       //show recent month
       var geojsonMarkerOptions = {
-        color: 'black',
+        color: 'white',
         opacity: 0.8,
         weight: 1,
-        fillColor: '#cccccc',
+        fillColor: '#E24A90',
         fillOpacity: 0.8,
-        radius: 4
+        radius: 6
       };
 
       servicesObj[filterKey].forEach(function(service) {

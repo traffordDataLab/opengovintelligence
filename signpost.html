@@ -16,8 +16,7 @@
         <link rel="stylesheet" href="https://www.trafforddatalab.io/assets/leaflet/MarkerCluster.TraffordDataLab.css"/>
         <link rel="stylesheet" href="https://www.trafforddatalab.io/assets/leaflet/extended_markers/extended_markers_base.css"/>
         <link rel="stylesheet" href="https://www.trafforddatalab.io/assets/leaflet/extended_markers/extended_markers_mixed.css"/>
-        <link rel="stylesheet" href="https://www.trafforddatalab.io/assets/leaflet/leaflet.reachability/leaflet.reachability.css"/>
-        <link rel="stylesheet" href="https://www.trafforddatalab.io/assets/leaflet/leaflet.reachability/leaflet.reachability_lab.css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/trafforddatalab/leaflet.reachability@v1.0.0/leaflet.reachability.min.css"/>
 
         <style>
             .aboutContainer
@@ -125,7 +124,7 @@
                 line-height: 14px;
             }
 
-            /* Overridden styles changing from Lab orange to OGI pink */
+            /* Overridden styles from labLeafletMap.css changing from Lab orange to OGI pink */
             .leaflet-container a, .toggleGadgetHiddenState
             {
                 color: #e24a90;
@@ -141,19 +140,6 @@
                 color: #e24a90;
             }
 
-            .reachability-control-active, .leaflet-touch .reachability-control-active, .reachability-control-active a, .leaflet-touch .reachability-control-active a
-            {
-                border-color: #e24a90;
-                color: #e24a90;
-                box-shadow: 0 1px 5px rgba(226,74,144,0.65);
-            }
-
-            .lab-reachability-marker
-            {
-                color: #212121;
-                border: 2px solid #757575;
-            }
-
             .titleContainer
             {
                 font-weight: normal;
@@ -161,7 +147,6 @@
             }
 
             /* Overidden Lab MarkerCluster styles changing from Lab orange to OGI pink */
-            /* small: 251,199,217, medium: 241,141,180, large: 226,74,144 */
             .marker-cluster-small div
             {
                 background-color: rgba(241,141,180,0.8);
@@ -187,6 +172,49 @@
             {
                 background-color: rgb(203,28,110);
             }
+
+            /* Overridden styles from leaflet.reachability.css to customise the plugin */
+            /* Button to expand the reachability control in a toggleable state state */
+            .reachability-control-expand-button, .leaflet-touch .reachability-control-expand-button
+            {
+                font-size: 24px;
+            }
+
+            /* The container for the reachability control user interface */
+            .reachability-control-settings-container
+            {
+                background: rgba(255, 255, 255, 0.8);
+            }
+
+            /* General class for styling the 'button' controls in the user interface container */
+            .reachability-control-settings-button
+            {
+                font-size: 22px;
+            }
+
+            /* General class for highlighting the selected 'button' controls in the user interface container and the collapsed control if either the draw or delete mode is active */
+            .reachability-control-active, .leaflet-touch .reachability-control-active, .reachability-control-active a, .leaflet-touch .reachability-control-active a
+            {
+                border-color: #e24a90;
+                color: #e24a90;
+                box-shadow: 0 1px 5px rgba(226,74,144,0.65);
+            }
+
+            /* Custom class to style markers at the origin of the isolines */
+            .lab-reachability-marker
+            {
+                width: 10px;
+                height: 10px;
+                color: #212121;
+                text-align: center;
+                font-size: 10px;
+                padding: 3px;
+                border: 2px solid #757575;
+                border-radius: 4px;
+                box-shadow: 0 1px 5px rgba(255,255,255,0.65);
+                background: #fff;
+                background: rgba(255, 255, 255, 0.8);
+            }
         </style>
     </head>
 
@@ -204,8 +232,7 @@
         <script src="https://www.trafforddatalab.io/assets/javascript/labSpinner.js"></script>
         <script src="https://www.trafforddatalab.io/assets/leaflet/labCreateTileLayer.js"></script>
         <script src="https://www.trafforddatalab.io/assets/leaflet/labLeafletMap.js"></script>
-        <script src="https://www.trafforddatalab.io/assets/leaflet/leaflet.reachability/leaflet.reachability_lab_setup.js"></script>
-        <script src="https://www.trafforddatalab.io/assets/leaflet/leaflet.reachability/leaflet.reachability.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/trafforddatalab/leaflet.reachability@v1.0.0/leaflet.reachability.min.js"></script>
         <script src="apps/signpost/signpost.js"></script>
     </body>
 </html>

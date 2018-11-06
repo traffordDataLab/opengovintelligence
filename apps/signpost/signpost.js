@@ -301,6 +301,8 @@ function isDatasetLayer(layer) {
 }
 
 
+
+
 // ######### INITIALISATION #########
 // Set up the basic map environment
 var app = new LabLeafletMap({
@@ -359,16 +361,38 @@ app.geocoder.on('markgeocode', function(result) {
 
 
 // Add the reachability plugin
-app.reachabilityControl = labSetupReachabilityPlugin({
+app.reachabilityControl = L.control.reachability({
     // Common options are taken care of in the function, however the options below are extra
-    styleFn: labStyleIsolines,
+    apiKey: '58d904a497c67e00015b45fc6862cde0265d4fd78ec660aa83220cdb',
+    ajaxRequestFn: labAjax,
+    expandButtonStyleClass: 'reachability-control-expand-button fa fa-bullseye',
+    expandButtonContent: '',
+    collapseButtonContent: '',
+    collapseButtonStyleClass: 'reachability-control-collapse-button fa fa-caret-up',
+    drawButtonContent: '',
+    drawButtonStyleClass: 'fa fa-pencil',
+    deleteButtonContent: '',
+    deleteButtonStyleClass: 'fa fa-trash',
+    distanceButtonContent: '',
+    distanceButtonStyleClass: 'fa fa-road',
+    timeButtonContent: '',
+    timeButtonStyleClass: 'fa fa-clock-o',
+    drivingButtonContent: '',
+    drivingButtonStyleClass: 'fa fa-car',
+    cyclingButtonContent: '',
+    cyclingButtonStyleClass: 'fa fa-bicycle',
+    walkingButtonContent: '',
+    walkingButtonStyleClass: 'fa fa-male',
+    accessibilityButtonContent: '',
+    accessibilityButtonStyleClass: 'fa fa-wheelchair-alt',
+    markerFn: reachabilityMarker,
+    styleFn: styleIsolines,
     clickFn: showLayerProps,
     pane: 'pane_geography_overlay'
-});
-app.reachabilityControl.addTo(app.map);
+}).addTo(app.map);
 
-// Lab styling of the isolines polygons (Overidden from leaflet.reachability_lab_setup.js)
-function labStyleIsolines(feature) {
+// Custom styling of the isolines polygons
+function styleIsolines(feature) {
     return {
         color: '#212121',
         fillColor: '#757575',
@@ -378,6 +402,26 @@ function labStyleIsolines(feature) {
         dashArray: '1,6',
         lineCap: 'square'
     };
+}
+
+// Custom markers to appear at the origin of the isolines
+function reachabilityMarker(latLng, travelMode, measure) {
+    var faClass;
+
+    switch (travelMode) {
+        case 'driving-car':
+            faClass = 'fa fa-car'
+            break;
+        case 'cycling-regular':
+            faClass = 'fa fa-bicycle'
+            break;
+        default:
+            faClass = 'fa fa-male'
+    }
+
+    var customIcon = L.divIcon({ className: faClass + ' lab-reachability-marker', iconAnchor: [12, 12] });
+
+    return L.marker(latLng, { icon: customIcon });
 }
 
 

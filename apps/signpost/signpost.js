@@ -148,13 +148,50 @@ function showLayerProps(e) {
     // build the content for the properties table to be displayed
     if (layer.feature.hasOwnProperty('properties')) {
         var props = layer.feature.properties;
+        var propVal, prefix;
+        var matchIndex = 0;
+        var arrEmail = [];
 
         for (var key in props) {
-            // ensure that the key is a valid property of the GeoJson object and isn't one of the styling options
+            // Ensure that the key is a valid property of the GeoJson object and isn't one of the styling options
             if (props.hasOwnProperty(key) && key != 'stroke' && key != 'stroke-width' && key != 'stroke-opacity' && key != 'fill' && key != 'fill-opacity' && key != 'marker-color' && key != 'marker-size') {
-                propsTable += '<tr><td>' + key + '</td><td>';
-                propsTable += (props[key] == null) ? '' : props[key];
-                propsTable += '</td></tr>';
+                if (props[key] === null || props[key] === undefined || props[key] !== props[key]) {     // The strange test of the property value not equalling itself is for NaN as NaN, uniquely, is never equal to itself
+                    propsVal = '';
+                }
+                else if (isNaN(props[key])) {   // Given that we have screened out the possibility of props[key] being NaN, this test is to check if props[key] is numeric or not. If it is numeric we don't want to perfom regex on it
+                    /*
+                        To enhance usability turn email or web addresses found within the property value into hyperlinks. Works for single or multiple occurrences
+
+                        NOTE:
+                            - For efficiency this is done here each time the user selects a feature, rather than on the whole dataset when it is loaded. It is likely only a few features will be selected by the user.
+                            - Not claiming to match every occurrence, but a high proportion.  There will always be ones that slip through, but this is an enhancement feature rather than a validation so isn't an issue.
+                            - The method of pushing the matching email addresses to an array, substituting an indexed string then replacing with the HTML link is done to prevent the second regex matching the domain parts of email addresses or parts of the href property etc.
+                            - Regex obtained from: https://emailregex.com and http://urlregex.com
+                    */
+
+                    // Find email addresses
+                    propsVal = props[key].replace(/[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*/gi, function (x) {
+                        arrEmail.push('<a href="mailto:' + x + '">' + x + '</a>');
+                        return '@@@EMAIL' + matchIndex++ + '@@@';   // replace with a temporary placeholder to prevent the web address regex matching part of the email addresses as well
+                    });
+
+                    // Find URLs - NOTE: we need to replace the value of propsVal NOT props[key] as we might have properties with a mix of email and web addresses
+                    propsVal = propsVal.replace(/\b(<a href=")?(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?\b/gi, function (x) {
+                        var prefix = (x.indexOf('http://') > -1 || x.indexOf('https://') > -1) ? '' : 'http://';     // if the URL doesn't contain the protocol we'll assume http://
+                        return '<a href="' + prefix + x + '" target="_blank">' + x + '</a>';
+                    });
+
+                    // Finally replace all email addresses found
+                    for (var i = 0; i < arrEmail.length; i++) {
+                        propsVal = propsVal.replace('@@@EMAIL' + i + '@@@', arrEmail[i]);
+                    }
+                }
+                else {
+                    // Value seems to be a number so just display it
+                    propsVal = props[key];
+                }
+
+                propsTable += '<tr><td>' + key + '</td><td>' + propsVal + '</td></tr>';
             }
         }
 
@@ -269,7 +306,7 @@ function toggleClustering() {
     app.datasetLayer.addTo(app.map);
 }
 
-// Determines whether the layer provided is an isoline
+// Determines whether the layer provided is an isoline - created by the reachability plugin
 function isIsolineLayer(layer) {
     if (app.reachabilityControl != null && app.reachabilityControl.isolinesGroup != null) {
         /*

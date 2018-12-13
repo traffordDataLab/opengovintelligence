@@ -19,7 +19,9 @@ The following datasets were used in the application:
 - [<span style="color: #e24a90;">Tenure - Social rented households</span>](https://www.nomisweb.co.uk/census/2011/ks402ew) (March 2011, Census 2011)
 - [<span style="color: #e24a90;">Indices of Multiple Deprivation</span>](https://www.gov.uk/government/statistics/english-indices-of-deprivation-2015) (2015, MHCLG)
 
-Spatial vector boundary layers were provided by the ONS' [<span style="color: #e24a90;">Open Geography Portal</span>](http://geoportal.statistics.gov.uk/).
+All the datasets are published under the [<span style="color: #e24a90;">Open Government Licence v3.0</span>](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
+
+Spatial vector boundary layers were provided by the ONS' [<span style="color: #e24a90;">Open Geography Portal</span>](http://geoportal.statistics.gov.uk/). Contains National Statistics and OS data © Crown copyright and database right 2018.
 
 #### Credits
 For more information about Local Indicators of Spatial Association see Luc Anselin's 1995 [<span style="color: #e24a90;">paper</span>](https://doi.org/10.1111/j.1538-4632.1995.tb00338.x).

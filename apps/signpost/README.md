@@ -38,7 +38,9 @@ The following datasets were used in the application:
 - [<span style="color: #e24a90;">Probation offices</span>](http://www.cgmcrc.co.uk/contact-us/our-offices/) (Cheshire & Greater Manchester CRC)
 - [<span style="color: #e24a90;">Jobcentre Plus</span>](https://www.gov.uk/government/publications/dwp-jobcentre-register) (May 2018, DWP)
 
-Spatial vector boundary layers were provided by the ONS' [<span style="color: #e24a90;">Open Geography Portal</span>](http://geoportal.statistics.gov.uk/).
+All the datasets are published under the [<span style="color: #e24a90;">Open Government Licence v3.0</span>](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
+
+Spatial vector boundary layers were provided by the ONS' [<span style="color: #e24a90;">Open Geography Portal</span>](http://geoportal.statistics.gov.uk/). Contains National Statistics and OS data © Crown copyright and database right 2018.
 
 #### Developers
 The app was developed using javascript and the following libraries:

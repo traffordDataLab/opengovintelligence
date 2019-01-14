@@ -7,6 +7,7 @@ This repository contains RDF data cubes that have been converted from tabular CS
 - [Households with lone parent not in employment](http://gmdatastore.org.uk/data/households-with-lone-parent-not-in-employment)
 - [Social rented households](http://gmdatastore.org.uk/data/social-rented-households)
 - [Working age adults with no qualifications](http://gmdatastore.org.uk/data/working-age-adults-with-no-qualifications)
+- [Employees by broad industry group](http://gmdatastore.org.uk/data/industry-category)
 - [Working age population](http://gmdatastore.org.uk/data/working-age-population)
 
 The linked datasets are licensed under the [Open Government Licence v3.0](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).

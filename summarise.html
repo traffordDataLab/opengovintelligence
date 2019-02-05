@@ -167,6 +167,10 @@
   #tableTitle{
     font-size: 20px;
   }
+  #BRtable tr td:nth-child(2)
+  {
+    text-align: right;
+  }
   .bar{
     background-color: #e24a90;
     height: 15px;
@@ -441,13 +445,13 @@
           if(responsesArray.length>0){
             var numFormat = d3.format(",");
             flag2++
-            stringHtmlArray2.push([1, "Working age population (2015): " + numFormat(responsesArray[0]["count"])]);
+            stringHtmlArray2.push([1, "Working age population (2017): " + numFormat(responsesArray[0]["count"])]);
             if(flag2==4)printStats(stringHtmlArray2)
           }
         });
 
         var cbql2=encodeURIComponent('{cubiql{dataset_working_age_adults_with_no_qualifications {observations(dimensions:{reference_area:"http://statistics.data.gov.uk/id/statistical-geography/'+ area_code +'"}) {page{observation {reference_area {label}count}}}}}}')
-        var endpointCubiql = 'http://cubiql.gmdatastore.org.uk/graphql?query='+cbql2
+        endpointCubiql = 'http://cubiql.gmdatastore.org.uk/graphql?query='+cbql2
         labAjax(endpointCubiql,function(d){
           var responsesArray=d["data"]["cubiql"]["dataset_working_age_adults_with_no_qualifications"]["observations"]["page"]["observation"]
 
@@ -461,7 +465,7 @@
         })
 
         var cbql3=encodeURIComponent('{cubiql{dataset_households_with_lone_parent_not_in_employment {observations(dimensions:{reference_area:"http://statistics.data.gov.uk/id/statistical-geography/'+ area_code +'"}) {page{observation {reference_area {label}count}}}}}}')
-        var endpointCubiql = 'http://cubiql.gmdatastore.org.uk/graphql?query='+cbql3
+        endpointCubiql = 'http://cubiql.gmdatastore.org.uk/graphql?query='+cbql3
         labAjax(endpointCubiql,function(d){
           var responsesArray=d["data"]["cubiql"]["dataset_households_with_lone_parent_not_in_employment"]["observations"]["page"]["observation"]
 
@@ -475,7 +479,7 @@
         })
 
         var cbql4=encodeURIComponent('{cubiql{dataset_social_rented_households {observations(dimensions:{reference_area:"http://statistics.data.gov.uk/id/statistical-geography/'+ area_code +'"}) {page{observation {reference_area {label}count}}}}}}')
-        var endpointCubiql = 'http://cubiql.gmdatastore.org.uk/graphql?query='+cbql4
+        endpointCubiql = 'http://cubiql.gmdatastore.org.uk/graphql?query='+cbql4
         labAjax(endpointCubiql,function(d){
           var responsesArray=d["data"]["cubiql"]["dataset_social_rented_households"]["observations"]["page"]["observation"]
 
@@ -489,13 +493,16 @@
         })
 
         //Time series of Claimant Count
-        var query = 'SELECT ?date ?percent WHERE { ?wardurl <http://www.w3.org/2000/01/rdf-schema#label> "'+ area_code +'" . ?s2 <http://purl.org/linked-data/cube#dataSet> <http://gmdatastore.org.uk/data/claimant-rate> . ?s2 <http://purl.org/linked-data/sdmx/2009/dimension#refArea> ?wardurl . ?s2 <http://gmdatastore.org.uk/def/measure-properties/percent> ?percent . ?s2 <http://purl.org/linked-data/sdmx/2009/dimension#refPeriod> ?refDate . ?refDate <http://www.w3.org/2000/01/rdf-schema#label> ?date . } ORDER BY ?date'
-        postQuery(query,endpoint,function(d){
+        //var query = 'SELECT ?date ?percent WHERE { ?wardurl <http://www.w3.org/2000/01/rdf-schema#label> "'+ area_code +'" . ?s2 <http://purl.org/linked-data/cube#dataSet> <http://gmdatastore.org.uk/data/claimant-rate> . ?s2 <http://purl.org/linked-data/sdmx/2009/dimension#refArea> ?wardurl . ?s2 <http://gmdatastore.org.uk/def/measure-properties/percent> ?percent . ?s2 <http://purl.org/linked-data/sdmx/2009/dimension#refPeriod> ?refDate . ?refDate <http://www.w3.org/2000/01/rdf-schema#label> ?date . } ORDER BY ?date'
+        var cbql5=encodeURIComponent('{cubiql{dataset_claimant_rate {observations(dimensions:{reference_area:"http://statistics.data.gov.uk/id/statistical-geography/'+ area_code +'"}) {page (first:50) {observation {reference_area {label} reference_period {label}percent}}}}}}')
+        endpointCubiql = 'http://cubiql.gmdatastore.org.uk/graphql?query='+cbql5
+        labAjax(endpointCubiql,function(d){
           document.getElementById('timeLine').innerHTML = "";
-          var bindings = d.results.bindings;
+          var responsesArray=d["data"]["cubiql"]["dataset_claimant_rate"]["observations"]["page"]["observation"]
+
           var data=[];
-          for (var i = 0; i < bindings.length; i++) {
-            data.push({serie:area_name, areaCode:area_code, date:bindings[i]["date"]["value"],value:bindings[i]["percent"]["value"]})
+          for (var i = 0; i < responsesArray.length; i++) {
+            data.push({serie:area_name, areaCode:area_code, date:responsesArray[i]["reference_period"]["label"],value:responsesArray[i]["percent"]})
           }
           if (dataSeries.length<=1){
             dataSeries.push(data);
@@ -529,9 +536,9 @@
           if (subs==0.00) subst = ""
           document.getElementById('chartComm').innerHTML = "";
           var difference ="";
-          if (subs==0) difference="equal to"
-          else if (subs>0) difference="more than"
-          else if (subs<0) difference="less than"
+          if (subs==0) difference="equal to";
+          else if (subs>0) difference="more than";
+          else if (subs<0) difference="less than";
           var parseTime = d3.timeParse("%Y-%m");
           var formatTime = d3.timeFormat("%B %Y");
           document.getElementById('chartComm').innerHTML = "In " + formatTime(parseTime(data[data.length-1].date)) + ", " + data[data.length-1].value+ "% of the population was claiming unemployment related benefits in " + data[data.length-1].serie + ".</br> That was "+ subst +" "+ difference +" the percentage of claimants in " + formatTime(parseTime(data[data.length-13].date)) + ". </br></br>Download <span id='downloadCSV' onclick='createCSV()'> CSV</span>"
@@ -542,39 +549,66 @@
               stringCSV+="\n"+dataSeries[a][b]["areaCode"]+","+dataSeries[a][b]["serie"]+","+dataSeries[a][b]["date"]+",Proportion of residents claiming JSA or Universal Credit,"+dataSeries[a][b]["value"];
             }
           }
+        //  */
         });
 
-        var query2 = 'SELECT DISTINCT ?category ?count WHERE { ?wardurl <http://www.w3.org/2000/01/rdf-schema#label> "'+ area_code +'" . ?s2 <http://purl.org/linked-data/sdmx/2009/dimension#refArea> ?wardurl . ?s2 <http://purl.org/linked-data/cube#dataSet> <http://gmdatastore.org.uk/data/business-register-employment-survey> . ?s2 <http://gmdatastore.org.uk/def/dimension/industry-category> ?urlcategory . ?urlcategory <http://www.w3.org/2000/01/rdf-schema#label> ?category . ?s2 <http://gmdatastore.org.uk/def/measure-properties/count> ?count . }'
-        postQuery(query2,endpoint,function(data){
+        //var query2 = 'SELECT DISTINCT ?category ?count WHERE { ?wardurl <http://www.w3.org/2000/01/rdf-schema#label> "'+ area_code +'" . ?s2 <http://purl.org/linked-data/sdmx/2009/dimension#refArea> ?wardurl . ?s2 <http://purl.org/linked-data/cube#dataSet> <http://gmdatastore.org.uk/data/business-register-employment-survey> . ?s2 <http://gmdatastore.org.uk/def/dimension/industry-category> ?urlcategory . ?urlcategory <http://www.w3.org/2000/01/rdf-schema#label> ?category . ?s2 <http://gmdatastore.org.uk/def/measure-properties/count> ?count . }'
+        //postQuery(query2,endpoint,function(data){
+        var cbql6=encodeURIComponent('{cubiql{dataset_industry_category {observations(dimensions:{reference_area:"http://statistics.data.gov.uk/id/statistical-geography/'+ area_code +'"}) {page (first:50) {observation {reference_area {label}industry_category percent}}}}}}')
+        endpointCubiql = 'http://cubiql.gmdatastore.org.uk/graphql?query='+cbql6
+          labAjax(endpointCubiql,function(d){
           document.getElementById("BRtable").innerHTML = "";
           document.getElementById("tableTitle").innerHTML = "";
           document.getElementById('bussinessComm').innerHTML ="";
-          var bindings = data.results.bindings;
+
+          var lookup={"A_18_ARTS_ENTERTAINMENT_RECREATION_OTHER_SERVICES_R_S_T_AND_U":"Arts, entertainment, recreation & other services",
+          "A_4_CONSTRUCTION_F":"Construction",
+          "A_15_PUBLIC_ADMINISTRATION_DEFENCE_O":"Public administration & defence",
+          "A_9_ACCOMMODATION_FOOD_SERVICES_I":"Accommodation & food services",
+          "A_14_BUSINESS_ADMINISTRATION_SUPPORT_SERVICES_N":"Business administration & support services",
+          "A_16_EDUCATION_P":"Education",
+          "A_11_FINANCIAL_INSURANCE_K":"Financial & insurance",
+          "A_1_AGRICULTURE_FORESTRY_FISHING_A":"Agriculture, forestry & fishing",
+          "A_17_HEALTH_Q":"Health",
+          "A_7_RETAIL_PART_G":"Retail",
+          "A_12_PROPERTY_L":"Property",
+          "A_6_WHOLESALE_PART_G":"Wholesale",
+          "A_10_INFORMATION_COMMUNICATION_J":"Information & communication",
+          "A_2_MINING_QUARRYING_UTILITIES_B_D_AND_E":"Mining, quarrying & utilities",
+          "A_3_MANUFACTURING_C":"Manufacturing",
+          "A_5_MOTOR_TRADES_PART_G":"Motor trade",
+          "A_8_TRANSPORT_STORAGE_INC_POSTAL_H":"Transport & storage",
+          "A_13_PROFESSIONAL_SCIENTIFIC_TECHNICAL_M":"Professional, scientific & technical"}
+
+          var responsesArray=d["data"]["cubiql"]["dataset_industry_category"]["observations"]["page"]["observation"]
+          responsesArray.sort(function(a, b){
+            return b.percent - a.percent;
+          })
+
           var tableContent = ""
-          if (bindings.length>0){
-            document.getElementById('tableTitle').innerHTML = "Count of employees by broad industry group according to the UK business register and employment survey <a href='https:\//www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/businessregisterandemploymentsurveybresprovisionalresults/2014revisedand2015provisional' target='_blank'>(BRES)</a> 2015 "
-            for (var i = 0; i < bindings.length; i++) {
-              var category=bindings[i]["category"]["value"].replace(/(\(.*|^.*:)/g,'')
-              tableContent += '<tr><td>' + category + '</td><td>' + bindings[i]["count"]["value"] + '</td></tr>'
+          if (responsesArray.length>0){
+            document.getElementById('tableTitle').innerHTML = "Percent of the count of employees by broad industry group according to the UK business register and employment survey <a href='https:\//www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/bulletins/businessregisterandemploymentsurveybresprovisionalresults/provisionalresults2017revisedresults2016' target='_blank'>(BRES)</a> 2017 "
+            for (var i = 0; i < responsesArray.length; i++) {
+              tableContent += '<tr><td>' + lookup[responsesArray[i]["industry_category"]] + '</td><td>' + responsesArray[i]["percent"].toFixed(1) + '</td></tr>'
             }
             document.getElementById('BRtable').innerHTML = tableContent;
             var width = document.getElementById('tableDiv').offsetWidth-document.getElementById('BRtable').offsetWidth-20//.getElementsByTagName('tr');
-            var max = d3.max(bindings, function (d) {
-              return + d["count"]["value"];
+            var max = d3.max(responsesArray, function (d) {
+              return + d["percent"];
             })
             var barScale = d3.scaleLinear()
             .range([0, width])
             .domain([0, max]);
             var trs = document.getElementById('BRtable').getElementsByTagName('tr')
-            for (var i = 0; i < bindings.length; i++) {
+            for (var i = 0; i < responsesArray.length; i++) {
               var tdB = document.createElement("td");
-              tdB.innerHTML = '<td><div class="bar" style="width:' + barScale(bindings[i]["count"]["value"])+'px"></div></tr>';
+              tdB.innerHTML = '<td><div class="bar" style="width:' + barScale(responsesArray[i]["percent"])+'px"></div></tr>';
               trs[i].appendChild(tdB)
             }
             //Comment bussiness register employment
-            for (var i = 0; i < bindings.length; i++){
-              if(bindings[i]["count"]["value"]== max){
-                var industry = bindings[i]["category"]["value"].replace(/(\s\(.*|^.*:)/g,'')
+            for (var i = 0; i < responsesArray.length; i++){
+              if(responsesArray[i]["percent"]== max){
+                var industry = lookup[responsesArray[i]["industry_category"]]
                 break;
               }
             }
@@ -583,6 +617,7 @@
           }else{
             document.getElementById('bussinessComm').style.borderColor = "white";
           }
+
         });
 
       }
@@ -602,7 +637,7 @@
     }
 
     function showServices(e,filterKey){
-      var legLabels=document.getElementById("countPoints").getElementsByClassName("legLabel")//style.color="red"
+      var legLabels=document.getElementById("countPoints").getElementsByClassName("legLabel")
       var circleLegends=document.getElementById("countPoints").getElementsByClassName("circleLegend")
       for (i=0;i<legLabels.length;i++) {
         legLabels[i].className="legLabel";
@@ -642,9 +677,7 @@
         circles.push(circle)
       })
 
-
-      //services = L.layerGroup(circles).addTo(leafletMap);
-      services = L.layerGroup(circles).addTo(clusters)//.addTo(leafletMap);
+      services = L.layerGroup(circles).addTo(clusters)
       leafletMap.addLayer(clusters);
 
     }

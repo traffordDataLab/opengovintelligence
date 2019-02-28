@@ -2,8 +2,7 @@
 
 # Source: https://docs.rstudio.com/shinyapps.io/metrics.html
 
-# Usage metrics show that the app has been accessed 232 times 
-# between November 2018 and January 2019.
+# Usage metrics show that the app has been accessed 232 times between November 2018 and January 2019.
 
 library(rsconnect) ; library(tidyverse) ; library(lubridate)
 

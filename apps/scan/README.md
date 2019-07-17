@@ -28,7 +28,7 @@ For more information about Local Indicators of Spatial Association see Luc Ansel
 
 #### Developers
 The app was developed using [<span style="color: #e24a90;">Shiny</span>](https://cran.r-project.org/web/packages/shiny/index.html) and the following [<span style="color: #e24a90;">R</span>](https://cran.r-project.org/) packages:
-- [<span style="color: #e24a90;">gqlr</span>](https://cran.r-project.org/web/packages/gqlr/README.html)
+- [<span style="color: #e24a90;">ghql</span>](https://docs.ropensci.org/ghql/)
 - [<span style="color: #e24a90;">leaflet</span>](https://cran.r-project.org/web/packages/leaflet/index.html)
 - [<span style="color: #e24a90;">sf</span>](https://cran.r-project.org/web/packages/sf/index.html)
 - [<span style="color: #e24a90;">spdep</span>](https://cran.r-project.org/web/packages/spdep/index.html)

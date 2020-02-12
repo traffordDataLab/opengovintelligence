@@ -1,0 +1,132 @@
+---
+title: "OpenGovIntelligence - Trafford pilot activity log"
+runtime: shiny
+output: 
+  flexdashboard::flex_dashboard:
+    theme: readable
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard) ; library(shiny) ;  library(tidyverse) ; library(lubridate) ; library(classInt) ; library(shinycssloaders) ; library(ggiraph)
+
+log <- read_csv("activity_log.csv",
+                col_types = cols(
+                  date = col_date(NULL),
+                  participant = col_factor(NULL),
+                  git = col_integer(),
+                  document = col_integer(),
+                  blog = col_integer(),
+                  wiki = col_integer(),
+                  meeting = col_integer(),
+                  telco = col_integer(),
+                  email = col_integer(),
+                  slack = col_integer(),
+                  asana = col_integer(),
+                  twitter = col_integer()))
+```
+
+```{r, reactive}
+selection <- reactive({
+  
+  participant_log <- log %>% 
+    filter(participant == input$participant) %>% 
+    mutate(contributions = rowSums(.[3:12], na.rm = TRUE) * ifelse(rowSums(is.na(.[3:12])) == ncol(.[3:12]), NA, 1),
+           contributions = as.integer(contributions),
+           tooltip = case_when(
+             is.na(contributions) ~ paste0("<strong>No contributions</strong> on ", format(as.Date(date), "%b %d, %Y")), TRUE ~ paste0("<strong>", contributions, " contributions </strong> on ", format(as.Date(date), "%b %d, %Y"))))
+  
+  activity <- tibble(
+    date = seq(as.Date("2016-02-01"), as.Date("2019-01-31"), by = "day"),
+    year = format(date, "%Y"),
+    week = as.integer(format(date, "%W")) + 1,
+    day = factor(weekdays(date, T), 
+                 levels = rev(c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")))) %>%
+    left_join(participant_log, by = "date") %>% 
+    mutate(class = cut(contributions, classIntervals(contributions, n = 4, style = "equal")$brks, include.lowest = T))
+  
+  })
+```
+
+###
+
+```{r}
+fillCol(height = 600, flex = c(NA, 1), 
+  inputPanel(
+    selectInput("participant",
+                  label = tags$b("Select a participant"),
+                  choices = levels(unique(log$participant)),
+                  selected = "All participants")),
+  withSpinner(
+    ggiraphOutput("plot", height = "100%"))
+)
+
+output$plot <- renderGirafe({ 
+  
+  gg <- ggplot(selection(), aes(x = week, y = day, fill = class)) +
+  scale_fill_manual(values = c("#C6E48B", "#7BC96F", "#239A3B", "#196127"), breaks = c(levels(selection()$class)[1:4]), na.value = ifelse(!is.na(selection()$participant), "#EBEDF0", "#FFFFFF"), drop = FALSE) +
+  geom_tile_interactive(aes(tooltip = tooltip, data_id = date), colour = "#FFFFFF", size = 1.2) +
+    facet_grid(year ~ .) +
+    scale_x_continuous(
+      expand = c(0, 0),
+      breaks = seq(1, 52, length = 12),
+      labels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"),
+      position = "top") +
+  scale_y_discrete(labels = c("", "", "Fri", "", "Wed", "", "Mon")) +
+  labs(x = NULL, y = NULL, fill = "less",
+       title = paste0(sum(selection()$contributions, na.rm = TRUE), " contributions by ", input$participant)) +
+  theme(
+    plot.margin = unit(rep(0.5, 4), "cm"),
+    panel.grid = element_blank(),
+    panel.background = element_rect(fill = "#FFFFFF"),
+    plot.title = element_text(colour = "#24292E", size = 16, hjust = 0, vjust = 4),
+    strip.text = element_text(face = "bold", size = 12),
+    strip.background = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text.x = element_text(hjust = 0.5, color = "#212121", size = 9),
+    axis.text.y = element_text(color = "#83898F", size = 10),
+    legend.position = c(0.9, 0),
+    legend.justification = "bottom",
+    legend.key = element_blank(),
+    legend.key.size = unit(24, "pt"),
+    legend.text = element_blank(),
+    legend.spacing.x = unit(0.05, "cm")
+  ) +
+  guides(fill = guide_legend(nrow = 1,
+                             title.position = "left",
+                             title.theme = element_text(color = "#83898F", size = 12),
+                             override.aes = list(colour = NULL, size = 0.5)))
+  
+  girafe(code = print(gg),
+         width_svg = 20, height_svg = 8,
+         options = list(
+           opts_selection(type = "single", css = "stroke:#000000;"),
+           opts_hover(css = "stroke:#000000;cursor:pointer;")
+       ))
+  
+  })
+```
+
+### {data-height=50}
+```{r}
+tableOutput("table")
+
+output$table <- renderTable({
+  validate(need(input$plot_selected, message = "Please select a date on the calendar heatmap for a detailed breakdown of activity"))
+  
+  df <- selection() %>% 
+    filter(date == as.Date(input$plot_selected)) %>% 
+    select(date, participant, git, document, blog, wiki, meeting, telco, email, slack, asana, twitter) %>% 
+    mutate(date = format(as.Date(date), "%b %d, %Y"))
+  
+  if (!is.na(pull(filter(selection(), date == input$plot_selected), participant))) {
+    df %>% replace(is.na(.), as.integer(0))
+  } else{
+    df
+  }
+  
+  })
+```
+
